@@ -4,7 +4,7 @@ package instagramTP;
 public class PostPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form PostPane
+     * Creates new form PostPanel
      */
     public PostPanel() {
         initComponents();

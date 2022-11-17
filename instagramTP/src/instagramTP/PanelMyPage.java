@@ -1,10 +1,10 @@
 package instagramTP;
 
 
-public class PanelMyPage extends javax.swing.JPanel {
+public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.ActionListener{
 
     /**
-     * Creates new form PanelHomeFeed
+     * Creates new form PanelMyPage
      */
     public PanelMyPage() {
         initComponents();
@@ -64,6 +64,7 @@ public class PanelMyPage extends javax.swing.JPanel {
         followerBtn.setText("follower");
         followerBtn.setBorder(null);
         followerBtn.setBackground(null);
+        followerBtn.addActionListener(this);
         MyDataPanel.add(followerBtn);
 
         followerNumLabel.setText("116");
@@ -72,6 +73,7 @@ public class PanelMyPage extends javax.swing.JPanel {
         followingBtn.setText("following");
         followingBtn.setBorder(null);
         followingBtn.setBackground(null);
+        followingBtn.addActionListener(this);
         MyDataPanel.add(followingBtn);
         
         followingNumLabel.setText("143");
@@ -105,6 +107,32 @@ public class PanelMyPage extends javax.swing.JPanel {
         add(scrollPane);
     }// </editor-fold>                        
 
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent arg0) {
+            // TODO Auto-generated method stub
+    	if(arg0.getSource() == followerBtn){	// ÆÈ·Î¿ö,ÆÈ·ÎÀ× ¹öÆ° ³Ñ±â´Â data ´Ù¸£°Ô
+        	flwWindow = new FollowWindow();
+        	flwWindow.setVisible(true);
+        	java.awt.EventQueue.invokeLater(new Runnable() {
+    	        public void run() {
+    	        	flwWindow.scrollPane.getViewport().setViewPosition(new java.awt.Point(0,0));
+    	        	flwWindow.setModal(true);
+    	        }
+    	    });
+        }
+    	
+        if(arg0.getSource() == followingBtn){
+        	flwWindow = new FollowWindow();
+          	flwWindow.setVisible(true);
+           	java.awt.EventQueue.invokeLater(new Runnable() {
+           		public void run() {
+        	       	flwWindow.scrollPane.getViewport().setViewPosition(new java.awt.Point(0,0));
+        	       	flwWindow.setModal(true);
+                }
+        	});
+        }
+     
+    }
 
     // Variables declaration - do not modify                     
     private javax.swing.JPanel MyDataPanel;
@@ -118,5 +146,6 @@ public class PanelMyPage extends javax.swing.JPanel {
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel postNumLabel;
     private javax.swing.JPanel postNumPanel;
+    private FollowWindow flwWindow;
     // End of variables declaration                   
 }
