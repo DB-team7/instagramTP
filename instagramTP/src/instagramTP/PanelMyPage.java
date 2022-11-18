@@ -1,5 +1,6 @@
 package instagramTP;
 
+import javax.imageio.ImageIO;
 
 public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.ActionListener{
 
@@ -22,6 +23,7 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
         scrollPane = new javax.swing.JScrollPane();
         ScrollBackPane = new javax.swing.JPanel();
         MyDataPanel = new javax.swing.JPanel();
+        imageBtn = new javax.swing.JButton();
         idLabel = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         followerBtn = new javax.swing.JButton();
@@ -53,6 +55,16 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
         //MyDataPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(24, 24, 24, 24));	//내부 여백
         //MyDataPanel.setPreferredSize(new java.awt.Dimension(470, 120));
         MyDataPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        
+        imageBtn.setPreferredSize(new java.awt.Dimension(60, 60));
+        imageBtn.setBackground(new java.awt.Color(255, 255, 255));
+        imageBtn.setBorder(null);
+        imageBtn.addActionListener(this);	
+     
+        javax.swing.ImageIcon profileImg = new javax.swing.ImageIcon("images/basicProfilePhoto.png");
+        imageBtn.setIcon(profileImg);	// 현재 프로필 사진 뜨게 하기
+        
+        MyDataPanel.add(imageBtn);
         
         idLabel.setText("recyan__");
         MyDataPanel.add(idLabel);
@@ -110,6 +122,26 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
     @Override
     public void actionPerformed(java.awt.event.ActionEvent arg0) {
             // TODO Auto-generated method stub
+    	if(arg0.getSource() == imageBtn){	//버튼이자 이미지 보여주는 용도
+    		javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+            fileChooser.setDialogTitle("New profile photo");
+            fileChooser.setMultiSelectionEnabled(false);	// 다중 선택 불가
+            int returnVal = fileChooser.showOpenDialog(this); // show openDialog 
+            
+            if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) { // 파일을 선택하였을 때
+            	// 프사 저장 들어가는 부분
+//                try{
+//                	java.awt.image.BufferedImage img = ImageIO.read(fileChooser.getSelectedFile());
+//                	java.awt.Image resizedImage = 
+//                		    img.getScaledInstance(imageBtn.getWidth(), imageBtn.getHeight(), java.awt.Image.SCALE_SMOOTH);
+//                    
+//                } catch (Exception e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
+            }
+        }
+    	
     	if(arg0.getSource() == followerBtn){	// 팔로워,팔로잉 버튼 넘기는 data 다르게
         	flwWindow = new FollowWindow();
         	flwWindow.setVisible(true);
@@ -136,6 +168,7 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
 
     // Variables declaration - do not modify                     
     private javax.swing.JPanel MyDataPanel;
+    private javax.swing.JButton imageBtn;
     private javax.swing.JPanel ScrollBackPane;
     private javax.swing.JButton followerBtn;
     private javax.swing.JLabel followerNumLabel;

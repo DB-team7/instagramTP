@@ -1,7 +1,7 @@
 package instagramTP;
 
 
-public class PostPanel extends javax.swing.JPanel {
+public class PostPanel extends javax.swing.JPanel implements java.awt.event.ActionListener{
 
     /**
      * Creates new form PostPanel
@@ -19,7 +19,7 @@ public class PostPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        idLabel = new javax.swing.JLabel();
+    	IDBtn = new javax.swing.JButton();
         moreBtn = new javax.swing.JButton();
         imagePane = new javax.swing.JPanel();
         likePane = new javax.swing.JPanel();
@@ -35,13 +35,17 @@ public class PostPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        idLabel.setFont(new java.awt.Font("Yu Gothic UI", 0, 16)); // NOI18N
-        idLabel.setText("recyan__");
+        IDBtn.setFont(new java.awt.Font("Yu Gothic UI", 0, 16)); // NOI18N
+        IDBtn.setText("recyan__");
+        IDBtn.setBorder(null);
+        IDBtn.setBackground(null);
+        IDBtn.addActionListener(this);	// ID 클릭하면 그 사람 페이지로 (OtherPageWindow.java)
 
         moreBtn.setBackground(null);
-        moreBtn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        moreBtn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); 
         moreBtn.setText("...");
         moreBtn.setBorder(null);
+        moreBtn.addActionListener(this);	// 게시글 수정, 삭제 창. 애초에 본인 게시글에만 이 버튼이 떠야 함
 
         imagePane.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -83,6 +87,7 @@ public class PostPanel extends javax.swing.JPanel {
 
         commentWindowBtn.setBackground(null);
         commentWindowBtn.setText("댓");
+        commentWindowBtn.addActionListener(this);
 
         jTextField1.setText("leave a comment...");
 
@@ -119,7 +124,7 @@ public class PostPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(idLabel)
+                .addComponent(IDBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(moreBtn)
                 .addGap(12, 12, 12))
@@ -133,7 +138,7 @@ public class PostPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idLabel)
+                    .addComponent(IDBtn)
                     .addComponent(moreBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(imagePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -145,14 +150,49 @@ public class PostPanel extends javax.swing.JPanel {
                 .addComponent(commentPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-    }// </editor-fold>                        
-
+    }// </editor-fold>    
+    
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent arg0) {
+            // TODO Auto-generated method stub
+            if(arg0.getSource() == IDBtn){
+            	otherWindow = new OtherPageWindow();
+            	otherWindow.setVisible(true);
+            	java.awt.EventQueue.invokeLater(new Runnable() {
+        	        public void run() {
+        	        	otherWindow.scrollPane.getViewport().setViewPosition(new java.awt.Point(0,0));
+        	        	otherWindow.setModal(true);
+        	        }
+        	    });
+            }
+            
+            if(arg0.getSource() == commentWindowBtn){
+            	cmtWindow = new CommentWindow();
+            	cmtWindow.setVisible(true);
+            	java.awt.EventQueue.invokeLater(new Runnable() {
+        	        public void run() {
+        	        	cmtWindow.scrollPane.getViewport().setViewPosition(new java.awt.Point(0,0));
+        	        	cmtWindow.setModal(true);
+        	        }
+        	    });
+            }
+            
+            if(arg0.getSource() == moreBtn){
+            	java.awt.EventQueue.invokeLater(new Runnable() {
+        	        public void run() {
+        	        	mdfyWindow = new ModifyWindow();
+                    	mdfyWindow.setVisible(true);
+        	        	mdfyWindow.setModal(true);
+        	        }
+        	    });
+            }
+    }
 
     // Variables declaration - do not modify                     
     private javax.swing.JPanel commentPane;
     private javax.swing.JButton commentWindowBtn;
     private javax.swing.JLabel createdAtLabel;
-    private javax.swing.JLabel idLabel;
+	private javax.swing.JButton IDBtn;
     private javax.swing.JPanel imagePane;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton likeBtn;
@@ -161,5 +201,8 @@ public class PostPanel extends javax.swing.JPanel {
     private javax.swing.JButton moreBtn;
     private javax.swing.JButton postCommentBtn;
     private javax.swing.JTextArea postTextArea;
+    private OtherPageWindow otherWindow;
+    private CommentWindow cmtWindow;
+    private ModifyWindow mdfyWindow;
     // End of variables declaration                   
 }

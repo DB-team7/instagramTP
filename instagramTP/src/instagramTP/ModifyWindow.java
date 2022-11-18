@@ -2,12 +2,12 @@ package instagramTP;
 
 import javax.imageio.ImageIO;
 
-public class UploadWindow extends javax.swing.JDialog implements java.awt.event.ActionListener {
+public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.ActionListener {
 
     /**
-     * Creates new form UploadWindow
+     * Creates new form ModifyWindow
      */
-    public UploadWindow() {
+    public ModifyWindow() {
         initComponents();
     }
 
@@ -23,7 +23,8 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
     	//jFileChooser1 = new javax.swing.JFileChooser();
         jTextField1 = new javax.swing.JTextField();
         imageBtn = new javax.swing.JButton();
-        uploadBtn = new javax.swing.JButton();
+        modifyBtn = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
     	
     	java.awt.Image nullImg = new javax.swing.ImageIcon("images/nullImage.png").getImage();
         setIconImage(nullImg);	// 프레임바 아이콘 우선 투명으로
@@ -34,35 +35,27 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 	    getContentPane().setBackground(new java.awt.Color(245, 245, 245));
         getContentPane().setLayout(new java.awt.FlowLayout());
         
-       
-//        jFileChooser1.setCurrentDirectory(new java.io.File("C:\\Users"));
-//        jFileChooser1.setPreferredSize(new java.awt.Dimension(400, 400));
-//        getContentPane().add(jFileChooser1);
         
-        imageBtn.setText("upload image");
+        imageBtn.setText("modify image");	// 원래 업로드 되었던 이미지로 setIcon
         imageBtn.setPreferredSize(new java.awt.Dimension(400, 400));
         imageBtn.setBackground(new java.awt.Color(255, 255, 255));
         imageBtn.setBorder(null);
         imageBtn.addActionListener(this);	
 
-        jTextField1.setText("Write anything to post...");
+        jTextField1.setText("원래있던 글~~~ 글내용~~~");	// 원래 업로드 되었던 text로 setText
         jTextField1.setToolTipText("");
         jTextField1.setBorder(null);
         jTextField1.setPreferredSize(new java.awt.Dimension(400, 400));
-//        jTextField1.addMouseListener(new java.awt.event.MouseAdapter()  
-//        {  
-//            public void mouseClicked(java.awt.event.MouseEvent e)  
-//            {  
-//            	jTextField1.setText(null);	// 사용자가 수정 시작하면 안내 텍스트 사라지게 하는 법 찾을 예정
-//            }  
-//        }); 
         
-        uploadBtn.setText("Upload post");
-        uploadBtn.addActionListener(this);
+        modifyBtn.setText("Modify post");	// modify해서 다시 업로드
+        modifyBtn.addActionListener(this);
+        
+        deleteBtn.setText("Delete post");
         
         getContentPane().add(imageBtn);
         getContentPane().add(jTextField1);
-        getContentPane().add(uploadBtn);
+        getContentPane().add(modifyBtn);
+        getContentPane().add(deleteBtn);
 
         pack();
     }// </editor-fold>                        
@@ -96,7 +89,7 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
         	load();
         }
     	
-    	if(arg0.getSource() == uploadBtn){	//업로드
+    	if(arg0.getSource() == modifyBtn){	//수정해서 업로드
         	dispose();	//창닫기
         }
     }
@@ -105,6 +98,8 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
     //private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JButton imageBtn;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JButton uploadBtn;
+    private javax.swing.JButton modifyBtn;
+    private javax.swing.JButton deleteBtn;
     // End of variables declaration                   
 }
+
