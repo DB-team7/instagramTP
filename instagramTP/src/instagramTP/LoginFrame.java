@@ -3,9 +3,12 @@ package instagramTP;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
 
 
-public class LoginFrame extends javax.swing.JFrame {
+public class LoginFrame extends javax.swing.JFrame implements ActionListener{
 
     /**
      * Creates new form LoginFrame
@@ -33,10 +36,12 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        id = new javax.swing.JLabel();
+        pw = new javax.swing.JLabel();
+        idTextField = new javax.swing.JTextField();
+        pwTextField = new javax.swing.JPasswordField();
+        loginBtn = new javax.swing.JButton();
+        joinBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(245, 245, 245));
@@ -56,36 +61,52 @@ public class LoginFrame extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 40, 0);
         jPanel1.add(jLabel1, gridBagConstraints);
+        
+        id.setText("ID");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 40, 0);
+        jPanel1.add(id, gridBagConstraints);
+        
+        pw.setText("PW");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 40, 0);
+        jPanel1.add(pw, gridBagConstraints);
 
-        jTextField1.setFont(new java.awt.Font("¸¼Àº °íµñ", 0, 14)); // NOI18N
-        jTextField1.setText("ID");
-        jTextField1.setPreferredSize(new java.awt.Dimension(200, 30));
+        idTextField.setFont(new java.awt.Font("¸¼Àº °íµñ", 0, 14)); // NOI18N
+        idTextField.setPreferredSize(new java.awt.Dimension(200, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
+        jPanel1.add(idTextField, gridBagConstraints);
+
+        pwTextField.setFont(new java.awt.Font("¸¼Àº °íµñ", 0, 14)); // NOI18N
+        pwTextField.setPreferredSize(new java.awt.Dimension(200, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
+        jPanel1.add(pwTextField, gridBagConstraints);
+
+        loginBtn.setFont(new java.awt.Font("¸¼Àº °íµñ", 0, 14)); // NOI18N
+        loginBtn.setText("Login");
+        loginBtn.setPreferredSize(new java.awt.Dimension(200, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
-        jPanel1.add(jTextField1, gridBagConstraints);
+        loginBtn.addActionListener(this);
+        jPanel1.add(loginBtn, gridBagConstraints);
 
-        jTextField2.setFont(new java.awt.Font("¸¼Àº °íµñ", 0, 14)); // NOI18N
-        jTextField2.setText("PW");
-        jTextField2.setPreferredSize(new java.awt.Dimension(200, 30));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
-        jPanel1.add(jTextField2, gridBagConstraints);
-
-        jButton1.setFont(new java.awt.Font("¸¼Àº °íµñ", 0, 14)); // NOI18N
-        jButton1.setText("Login");
-        jButton1.setPreferredSize(new java.awt.Dimension(200, 30));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
-        jPanel1.add(jButton1, gridBagConstraints);
-
-        jButton2.setText("join");
+        joinBtn.setText("join");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel1.add(jButton2, gridBagConstraints);
+        joinBtn.addActionListener(this);
+        jPanel1.add(joinBtn, gridBagConstraints);
 
         getContentPane().add(jPanel1);
 
@@ -101,22 +122,22 @@ public class LoginFrame extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
 
         /* Create and display the form */
@@ -126,13 +147,67 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
     }
+    
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent arg0) {
+    	
+    	if(arg0.getSource() == joinBtn){	// join button action
+    		JoinFrame join = new JoinFrame();
+    		join.setVisible(true);	 	
+    	}
+    	
+    	if(arg0.getSource() == loginBtn){	// login button action
+    		
+    		String id = idTextField.getText();
+    		String pw = new String(pwTextField.getPassword());
+
+			if(check(id, pw)) // Login successful if ID and password match
+			{
+				JOptionPane.showMessageDialog(null, "welcome!");
+				dispose();	// Login screen off
+				
+				// MainFrameÀ¸·Î ³Ñ¾î°¡±â Àü¿¡, id Á¤º¸´Â ÀúÀåÇÏ°Å³ª È¤Àº MainFrameÀ¸·Î ³Ñ°ÜÁà¾ßÇÔ.
+				MainFrame main = new MainFrame();
+	    		main.setVisible(true);	// go to MainFrame
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "ID or passward is wrong...");	// if ID and password not match
+			}
+    	}	
+    }
+    
+    public boolean check(String id, String pw)
+	{
+		
+		// login check
+//		try{
+//			String s;
+//			String[] array;
+//			BufferedReader bos = new BufferedReader(new FileReader("admin_list.txt"));
+//			while((s=bos.readLine())!=null){
+//				array=s.split("/");
+//				if(id.equals(array[0]) && pw.equals(array[1]))
+//				{
+					return true;
+//				}
+//			}
+//			bos.close();
+//			
+//		}catch (IOException E10){
+//			E10.printStackTrace();
+//		}
+//		return false;
+	}
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton loginBtn;
+    private javax.swing.JButton joinBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel id;
+    private javax.swing.JLabel pw;
+    private javax.swing.JTextField idTextField;
+    private javax.swing.JPasswordField pwTextField;
     // End of variables declaration                   
 }
