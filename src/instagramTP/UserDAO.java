@@ -13,7 +13,7 @@ public class UserDAO { //회원 테이블에 접근할 수 있도록 DAP(데이터 접근 객체) 생
 	
 	public UserDAO() {
 		try {
-			String dbURL="jdbc:mysql://localhost/dm"; //jdbc:mysql://localhost/사용할db이름
+			String dbURL="jdbc:mysql://localhost/dmaster"; //jdbc:mysql://localhost/사용할db이름
 			String dbID="root"; //계정
 			String dbPassword="12345"; //비밀번호
 			Class.forName("com.mysql.jdbc.Driver"); //mysql driver 찾을 수 있도록

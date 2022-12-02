@@ -82,7 +82,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
 	}
 
-	public static void main(String args[]) {
+	public static void main(String args[]) throws SQLException {
 		MainFrame frame = new MainFrame();
 		// frame.pack();//x
 		frame.setVisible(true);

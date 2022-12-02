@@ -5,22 +5,18 @@ import java.io.FileInputStream;
 import java.sql.*;
 
 public class ZinCyan {
-	private static String dburl = "jdbc:mysql://localhost:3306/connectdb1?serverTimezone=Asia/Seoul&useSSL=false";
-	private static String dbUser = "Michael";
-	private static String dbpasswd = "Michael@dbclass";
+	private static String dburl = "jdbc:mysql://localhost/dmaster";
+	private static String dbUser = "root";
+	private static String dbpasswd = "12345";
 
 	public static Post getPostbyPID(int PID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost/mysql";
-			conn = DriverManager.getConnection(url, "root", "12345");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패");
-		} catch (SQLException e) {
-			System.out.println("에러: " + e);
 		}
 
 		PreparedStatement ps = null; // 객체 생성
@@ -90,8 +86,6 @@ public class ZinCyan {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost/mysql";
-			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패");
