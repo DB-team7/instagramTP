@@ -1,14 +1,15 @@
 package instagramTP;
 
+import java.sql.SQLException;
 
 public class PersonPanel extends javax.swing.JPanel implements java.awt.event.ActionListener
 {
 	
-	public PersonPanel() {
-        initComponents();
+	public PersonPanel(String UID) throws SQLException {
+        initComponents(UID);
     }
 	
-	private void initComponents() {
+	private void initComponents(String UID) throws SQLException {
 		
 		setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(200, 200, 200)));
@@ -22,12 +23,12 @@ public class PersonPanel extends javax.swing.JPanel implements java.awt.event.Ac
         profileImgLabel.setIcon(new javax.swing.ImageIcon(profileImg));
         profileImgLabel.setPreferredSize(new java.awt.Dimension(32, 32));
         
-        IDBtn.setText("recyan__");	
+        IDBtn.setText(UID);	
         IDBtn.setBorder(null);
         IDBtn.setBackground(null);
         IDBtn.addActionListener(this);	// ID 클릭하면 그 사람 페이지로 (OtherPageWindow.java)
         
-        nameLabel.setText("김지원");
+        nameLabel.setText(ZinCyan.getUserNameByUID(UID));
         nameLabel.setForeground(new java.awt.Color(153, 153, 153));
         
         // add components

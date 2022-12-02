@@ -1,13 +1,11 @@
 package instagramTP;
 
-import java.sql.Date;
-
 public class Post {
 
 	private Integer PID;
-	private Integer UID;
+	private String UID;
 	private String content;
-	private Date createDate;
+	private java.sql.Timestamp createDate;
 	private Integer cntLike;
 
 	public Integer getPID() {
@@ -18,13 +16,6 @@ public class Post {
 		PID = pID;
 	}
 
-	public Integer getUID() {
-		return UID;
-	}
-
-	public void setUID(Integer uID) {
-		UID = uID;
-	}
 
 	public Integer getCntLike() {
 		return cntLike;
@@ -34,11 +25,11 @@ public class Post {
 		this.cntLike = cntLike;
 	}
 
-	public Date getCreatDate() {
+	public java.sql.Timestamp getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreatDate(Date createDate) {
+	public void setCreateDate(java.sql.Timestamp createDate) {
 		this.createDate = createDate;
 	}
 
@@ -48,6 +39,14 @@ public class Post {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getUID() {
+		return UID;
+	}
+
+	public void setUID(String uID) {
+		UID = uID;
 	}
 
 }
