@@ -14,11 +14,14 @@ import javax.swing.JPanel;
 
 public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
-	public MainFrame() throws SQLException {
-		initComponents();
+	private static String userID = null;
+
+	public MainFrame(String UID) throws SQLException {
+		initComponents(UID);
 	}
 
-	public void initComponents() throws SQLException {
+	public void initComponents(String UID) throws SQLException {
+		userID = UID;
 		setTitle("In*gram");
 		// setResizable(false);
 		setExtendedState(JFrame.MAXIMIZED_BOTH); // 이걸로 전체 화면 대체
@@ -82,18 +85,18 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
 	}
 
-	public static void main(String args[]) throws SQLException {
-		MainFrame frame = new MainFrame();
-		// frame.pack();//x
-		frame.setVisible(true);
-	}
+//	public static void main(String args[]) throws SQLException {
+//		MainFrame frame = new MainFrame();
+//		// frame.pack();//x
+//		frame.setVisible(true);
+//	}
 
 	@Override
 	public void actionPerformed(java.awt.event.ActionEvent arg0) {
 		// TODO Auto-generated method stub
 
 		if (arg0.getSource() == uploadBtn) {
-			uploadWdw = new UploadWindow();
+			uploadWdw = new UploadWindow(userID);
 			uploadWdw.setVisible(true);
 			// uploadWdw.setModal(true); //오류나서 일단 주석
 		}

@@ -5,6 +5,7 @@ import java.sql.Time;
 import java.time.LocalTime;
 
 import javax.imageio.ImageIO;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class UploadWindow extends javax.swing.JDialog implements java.awt.event.ActionListener {
 	private String userID;
@@ -73,12 +74,11 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 		pack();
 	}// </editor-fold>
 
-	void load() {
+	String load() {
 		javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
 		fileChooser.setDialogTitle("파일 불러오기");
 		// fileChooser.getsetDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);//안됨
-		// fileChooser.setFileFilter(new FileNameExtensionFilter("RAW File", "raw")); //
-		// 파일필터
+		fileChooser.setFileFilter(new FileNameExtensionFilter("jpeg", "jpg", "png", "bmp")); // 파일필터
 		fileChooser.setMultiSelectionEnabled(false); // 다중 선택 불가
 		int returnVal = fileChooser.showOpenDialog(this); // show openDialog
 
@@ -89,27 +89,30 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 						java.awt.Image.SCALE_SMOOTH);
 				imageBtn.setIcon(new javax.swing.ImageIcon(resizedImage));
 				imageBtn.setText(null);
+				return fileChooser.getSelectedFile().toString();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		return null;
 	}
 
 	@Override
 	public void actionPerformed(java.awt.event.ActionEvent arg0) {
+		String src = new String();
 		// TODO Auto-generated method stub
 		if (arg0.getSource() == imageBtn) { // 버튼이자 이미지 보여주는 용도
-			load();
+			src=load();
 		}
 
 		if (arg0.getSource() == uploadBtn) { // 업로드
 			Post post = new Post();
 			post.setUID(userID);
 			post.setContent(jTextField1.getText());
-			post.setCreateDate(java.sql.Date.valueOf(java.time.LocalDateTime.now()));
+			post.setCreateDate(java.sql.Timestamp.valueOf(java.time.LocalDateTime.now()));
 			try {
-				ZinCyan.initPost(post);
+				ZinCyan.initPost(post,src);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
