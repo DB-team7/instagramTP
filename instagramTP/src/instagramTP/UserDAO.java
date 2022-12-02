@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
 
 public class UserDAO { //회원 테이블에 접근할 수 있도록 DAP(데이터 접근 객체) 생성
 
@@ -23,8 +26,32 @@ public class UserDAO { //회원 테이블에 접근할 수 있도록 DAP(데이터 접근 객체) 생
 		}
 	}
 	
+	//아이디 중복 체크
+	public boolean findExistID(int cnt_ID) {
+		
+		String SQL="select ID, count(ID) as cnt_id from users group by ID having ? > 1";
+		
+		try {
+			pstmt=conn.prepareStatement(SQL); 
+			pstmt.setInt(1, cnt_ID);
+			rs=pstmt.executeQuery(); 
+			if(rs.next()) {
+				return true; //중복이 있음
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false; //중복이 없음
+	}
+	
+	
 	//회원가입
 	public int join(User user) {
+		
+		UserDAO userDAO = new UserDAO();
+		
+		int result = userDAO.join(user);
+		
 		String SQL="insert into users values (?,?,?,?,?)"; //id, name, phone_num, email, pw
 		try {
 			pstmt=conn.prepareStatement(SQL); //sql 문장을 데이터베이스에 삽입
@@ -34,7 +61,11 @@ public class UserDAO { //회원 테이블에 접근할 수 있도록 DAP(데이터 접근 객체) 생
 			pstmt.setString(1, user.getUserEmail());
 			pstmt.setString(1, user.getUserPassword());
 			
-			return pstmt.executeUpdate();
+			if(findExistID(result)==true) { //중복이면 업데이트 x
+				JOptionPane.showMessageDialog(null, "중복 아이디입니다", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+			}
+			else //중복이 아니면 업데이트
+				return pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
