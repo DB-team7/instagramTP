@@ -3,24 +3,26 @@ package instagramTP;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
+import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static String userID = null;
 
-	public MainFrame(String UID) throws SQLException {
+	public MainFrame(String UID) throws SQLException, IOException {
 		initComponents(UID);
 	}
 
-	public void initComponents(String UID) throws SQLException {
+	public void initComponents(String UID) throws SQLException, IOException {
 		userID = UID;
 		setTitle("In*gram");
 		// setResizable(false);
@@ -41,10 +43,10 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 		starFeedBtn = new JButton();
 		myPageBtn = new JButton();
 
-		homeFeedPane = new PanelHomeFeed();
-		searchPane = new PanelSearch();
-		starFeedPane = new PanelStarFeed();
-		myPagePane = new PanelMyPage();
+		homeFeedPane = new PanelHomeFeed(UID);
+		searchPane = new PanelSearch(UID);
+		starFeedPane = new PanelStarFeed(UID);
+		myPagePane = new PanelMyPage(UID);
 
 		// headerPanel init
 		headerPane.setBackground(Color.WHITE);

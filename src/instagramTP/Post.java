@@ -1,5 +1,7 @@
 package instagramTP;
 
+import java.io.InputStream;
+
 public class Post {
 
 	private Integer PID;
@@ -7,6 +9,7 @@ public class Post {
 	private String content;
 	private java.sql.Timestamp createDate;
 	private Integer cntLike;
+	private InputStream inputStream;
 
 	public Integer getPID() {
 		return PID;
@@ -47,6 +50,14 @@ public class Post {
 
 	public void setUID(String uID) {
 		UID = uID;
+	}
+
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
 	}
 
 }

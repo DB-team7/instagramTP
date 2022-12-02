@@ -2,6 +2,10 @@ package instagramTP;
 
 public class CommentWindow extends javax.swing.JDialog{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public CommentWindow() {
         initComponents();
     }
