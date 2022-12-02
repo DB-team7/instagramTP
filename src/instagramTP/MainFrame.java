@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,11 +14,11 @@ import javax.swing.JPanel;
 
 public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
-	public MainFrame() {
+	public MainFrame() throws SQLException {
 		initComponents();
 	}
 
-	public void initComponents() {
+	public void initComponents() throws SQLException {
 		setTitle("In*gram");
 		// setResizable(false);
 		setExtendedState(JFrame.MAXIMIZED_BOTH); // 이걸로 전체 화면 대체

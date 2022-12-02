@@ -2,7 +2,6 @@ package instagramTP;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.security.PublicKey;
 import java.sql.*;
 
 public class ZinCyan {
@@ -10,7 +9,7 @@ public class ZinCyan {
 	private static String dbUser = "Michael";
 	private static String dbpasswd = "Michael@dbclass";
 
-	public static String getPostbyPID(int PID) throws SQLException {
+	public static Post getPostbyPID(int PID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -26,13 +25,20 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 객체 생성
 
-		String sql = "select cnt_like, user_id , content, created_at from posts where post_id=?";
+		String sql = "select cnt_like, user_id , content, created_at, cnt_like from posts where post_id=?";
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, PID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+		Post list = new Post();
 
 		rs.next();
-		return rs.getInt(1) + " Likes";
+		list.setPID(rs.getInt(1));
+		list.setUID(rs.getInt(2));
+		list.setContent(rs.getString(3));
+		list.setCreatDate(rs.getDate(4));
+		list.setCntLike(rs.getInt(5));
+
+		return list;
 
 	}
 
@@ -55,6 +61,28 @@ public class ZinCyan {
 
 		rs.next();
 		return rs.getInt(1) + " Likes";
+
+	}
+	
+	public static String getUserNamebyPID(int PID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "select name from users where ID = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, PID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+
+		rs.next();
+		return rs.getString(1);
 
 	}
 
