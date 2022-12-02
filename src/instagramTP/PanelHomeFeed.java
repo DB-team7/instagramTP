@@ -40,12 +40,12 @@ public class PanelHomeFeed extends javax.swing.JPanel {
         ScrollBackPane.add(javax.swing.Box.createVerticalStrut(30));  //패널사이세로여백
         
         // 게시글 post
-        PostPanel postPanel = new PostPanel();
+        PostPanel postPanel1 = new PostPanel();
         ScrollBackPane.add(postPanel);
         ScrollBackPane.add(javax.swing.Box.createVerticalStrut(30));  //패널사이세로여백
         //세로여백은 게시글 끝날 때마다 꼭 같이 넣어주기
         
-        PostPanel postPanel2 = new PostPanel();
+        PostPanel postPane2 = new PostPanel();
         ScrollBackPane.add(postPanel2);
         ScrollBackPane.add(javax.swing.Box.createVerticalStrut(30));  //패널사이세로여백
        

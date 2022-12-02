@@ -10,7 +10,7 @@ public class ZinCyan {
 	private static String dbUser = "Michael";
 	private static String dbpasswd = "Michael@dbclass";
 
-	public static int getPost(String[] args) throws SQLException {
+	public static String getPostbyPID(int PID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -26,30 +26,73 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 객체 생성
 
-		String sql = "SELECT description,role_id FROM role WHERE role_id = ?";
+		String sql = "select cnt_like, user_id , content, created_at from posts where post_id=?";
 		ps = conn.prepareStatement(sql);
-		ps.setInt(1, roleId);
-		rs = ps.executeQuery(); // 명렁어 실행
+		ps.setInt(1, PID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+
+		rs.next();
+		return rs.getInt(1) + " Likes";
 
 	}
 
-	public static void insertImage(String[] args) {
+	public static String getLikeNum(int PID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "select count(target_id) as cnt_likes from likes where target_id = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, PID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+
+		rs.next();
+		return rs.getInt(1) + " Likes";
+
+	}
+
+	public static String getTimeBack(int PID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost/mysql";
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "select count(target_id) as cnt_likes from likes where target_id = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, PID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+
+		rs.next();
+		return rs.getInt(1) + " Likes";
+
+	}
+
+	public static void insertImage(int PID) throws SQLException {
 		System.out.println("Insert Image Example!");
 		String driverName = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/";
-		String dbName = "디비명";
-		String userName = "root";
-		String password = "암호";
-		Connection con = null;
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
 			Class.forName(driverName);
-			Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 			Statement st = conn.createStatement();
 			File imgfile = new File("d:\\images.jpg");
 			FileInputStream fin = new FileInputStream(imgfile);
 			PreparedStatement ps = conn.prepareStatement("insert into tbl_test (ID, FILENAME, FILE) VALUES (?, ?, ?)");
-			ps.setInt(1, 5);
-			ps.setString(2, "Durga");
+			ps.setInt(1, PID);
+			ps.setString(2, Integer.toString(PID));
 			ps.setBinaryStream(3, fin, (int) imgfile.length());// Stream형의 파일 업로드
 			ps.executeUpdate();
 			System.out.println("Inserting Successfully!");
@@ -60,4 +103,5 @@ public class ZinCyan {
 		}
 
 	}
+
 }
