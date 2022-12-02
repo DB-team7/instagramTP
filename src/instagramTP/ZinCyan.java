@@ -26,6 +26,8 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, PID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+		ps.close();
+
 		Post list = new Post();
 
 		rs.next();
@@ -34,6 +36,7 @@ public class ZinCyan {
 		list.setContent(rs.getString(3));
 		list.setCreateDate(rs.getTimestamp(4));
 		list.setCntLike(rs.getInt(5));
+		rs.close();
 
 		return list;
 
@@ -55,9 +58,12 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, PID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+		ps.close();
 
 		rs.next();
-		return rs.getInt(1) + " Likes";
+		String tmp = rs.getString(1);
+		rs.close();
+		return tmp + " Likes";
 
 	}
 
@@ -77,9 +83,12 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, PID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+		ps.close();
 
 		rs.next();
-		return rs.getString(1);
+		String tmp = rs.getString(1);
+		rs.close();
+		return tmp;
 
 	}
 
@@ -99,9 +108,12 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+		ps.close();
 
 		rs.next();
-		return rs.getString(1);
+		String tmp = rs.getString(1);
+		rs.close();
+		return tmp;
 
 	}
 
@@ -120,10 +132,11 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, PID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+		ps.close();
 
 		rs.next();
 		long timebackTimestamp = (System.currentTimeMillis() - rs.getTimestamp(1).getTime()) / 1000;
-
+		rs.close();
 		if (timebackTimestamp < 60) {
 			return "few seconds ago";
 		} else if (timebackTimestamp < 3600) {
@@ -157,6 +170,7 @@ public class ZinCyan {
 			ps.setString(5, null);
 			ps.setBinaryStream(6, null);// Stream형의 파일 업로드
 			int rs = ps.executeUpdate(); // 명렁어 실행
+			ps.close();
 			System.out.println("Inserting Successfully!");
 		} else {
 			File imgfile = new File(src);
@@ -172,31 +186,34 @@ public class ZinCyan {
 			ps.setString(5, post.getCreateDate().toString());
 			ps.setBinaryStream(6, fin, (int) imgfile.length());// Stream형의 파일 업로드
 			int rs = ps.executeUpdate(); // 명렁어 실행
+			ps.close();
 			System.out.println("Inserting Successfully!");
 		}
 	}
 
-//	public static void insertImage(String src, Integer PID) throws SQLException {
-//		System.out.println("Insert Image Example!");
-//		String driverName = "com.mysql.jdbc.Driver";
-//		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
-//		try {
-//			Class.forName(driverName);
-//			Statement st = conn.createStatement();
-//			File imgfile = new File(src);
-//			FileInputStream fin = new FileInputStream(imgfile);
-//			PreparedStatement ps = conn.prepareStatement("insert into tbl_test (FILENAME, FILE) VALUES (?, ?)");
-//			ps.setInt(1, PID);
-//			ps.setString(2, Integer.toString(PID));
-//			ps.setBinaryStream(3, fin, (int) imgfile.length());// Stream형의 파일 업로드
-//			ps.executeUpdate();
-//			System.out.println("Inserting Successfully!");
-//			ps.close();
-//			conn.close();
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//		}
-//
-//	}
+	public static Integer getPostNum(String UID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "select count(ID) from posts where id = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, UID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+		ps.close();
+
+		rs.next();
+		Integer postNumInteger = rs.getInt(1);
+		rs.close();
+		return postNumInteger;
+	}
+
 
 }

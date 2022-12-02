@@ -1,5 +1,6 @@
 package instagramTP;
 
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalTime;
@@ -94,6 +95,8 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else {
+			return null;
 		}
 		return null;
 	}
@@ -103,17 +106,25 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 		String src = new String();
 		// TODO Auto-generated method stub
 		if (arg0.getSource() == imageBtn) { // 버튼이자 이미지 보여주는 용도
-			src=load();
+			src = load();
 		}
 
 		if (arg0.getSource() == uploadBtn) { // 업로드
 			Post post = new Post();
 			post.setUID(userID);
 			post.setContent(jTextField1.getText());
-			post.setCreateDate(java.sql.Timestamp.valueOf(java.time.LocalDateTime.now()));
 			try {
-				ZinCyan.initPost(post,src);
+				post.setCreateDate(java.sql.Timestamp.valueOf(java.time.LocalDateTime.now()));
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				ZinCyan.initPost(post, src);
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
