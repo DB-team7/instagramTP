@@ -4,6 +4,10 @@ package instagramTP;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
 
@@ -158,10 +162,10 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener{
     	
     	if(arg0.getSource() == loginBtn){	// login button action
     		
-    		String id = idTextField.getText();
-    		String pw = new String(pwTextField.getPassword());
+    		String userID = idTextField.getText();
+    		String userPassword = new String(pwTextField.getPassword());
 
-			if(check(id, pw)) // Login successful if ID and password match
+			if(Login( userID,  userPassword)==1) // Login successful if ID and password match
 			{
 				JOptionPane.showMessageDialog(null, "welcome!");
 				dispose();	// Login screen off
@@ -177,7 +181,7 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener{
     	}	
     }
     
-    public boolean check(String id, String pw)
+    /*public boolean check(String id, String pw)
 	{
 		
 		// login check
@@ -198,6 +202,33 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener{
 //			E10.printStackTrace();
 //		}
 //		return false;
+	}*/
+    
+    private Connection conn; //데이터베이스에 접근하게 해주는 하나의 객체 
+	private PreparedStatement pstmt;
+	private ResultSet rs; //어떠한 정보를 담을 수 있는 하나의 객체
+
+    String UID;
+    
+	public int Login(String userID, String userPassword) {
+		String SQL="SELECT password FROM users WHERE ID = ?";
+		try {
+			pstmt=conn.prepareStatement(SQL); //sql 문장을 데이터베이스에 삽입
+			pstmt.setString(1, userID);
+			rs=pstmt.executeQuery(); //rs : 결과를 담을 수 있는 하나의 객체. 여기에 실행 결과를 넣어줌
+			if(rs.next()) { //rs.next() : 결과가 존재한다면 해당 if문 실행
+				if(rs.getString(1).equals(userPassword)) {
+					UID=userID; //로그인한 유저의 아이디 기억
+					return 1; //로그인 성공
+				}
+				else
+					return 0; // 비밀번호 불일치
+			}
+			return -1; //아이디 없음
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -2; //데이터베이스 오류
 	}
 
     // Variables declaration - do not modify                     

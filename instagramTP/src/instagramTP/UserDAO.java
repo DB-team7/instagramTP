@@ -72,6 +72,8 @@ public class UserDAO { //회원 테이블에 접근할 수 있도록 DAP(데이터 접근 객체) 생
 		return -1; //데이터베이스 오류
 	}
 	
+	/*
+	//LoginFrame의 public boolean check(String id, String pw)
 	//로그인
 	String UID;
 	public int Login(String userID, String userPassword) {
@@ -94,6 +96,7 @@ public class UserDAO { //회원 테이블에 접근할 수 있도록 DAP(데이터 접근 객체) 생
 		}
 		return -2; //데이터베이스 오류
 	}
+	*/
 	
 	public static void main(String[] args) {
 
