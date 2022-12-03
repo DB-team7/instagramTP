@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 
-public class JoinFrame extends JFrame {
+public class JoinFrame extends JFrame implements ActionListener{
 
 	/**
 	 * 
