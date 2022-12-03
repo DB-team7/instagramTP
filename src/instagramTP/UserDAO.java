@@ -22,17 +22,18 @@ public class UserDAO { //회원 테이블에 접근할 수 있도록 DAP(데이터 접근 객체) 생
 			e.printStackTrace(); //오류 발생시 어떤 오류인지 출력
 		}
 	}
-	
+	/*
+	//JoinFrame에 아이디 중복 체크와 합해서 수정 후 넣음
 	//회원가입
 	public int join(User user) {
 		String SQL="insert into users values (?,?,?,?,?)"; //id, name, phone_num, email, pw
 		try {
 			pstmt=conn.prepareStatement(SQL); //sql 문장을 데이터베이스에 삽입
 			pstmt.setString(1, user.getUserID());
-			pstmt.setString(1, user.getUserName());
-			pstmt.setInt(1, user.getUserPhoneNum());
-			pstmt.setString(1, user.getUserEmail());
-			pstmt.setString(1, user.getUserPassword());
+			pstmt.setString(2, user.getUserName());
+			pstmt.setInt(3, user.getUserPhoneNum());
+			pstmt.setString(4, user.getUserEmail());
+			pstmt.setString(5, user.getUserPassword());
 			
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -40,6 +41,7 @@ public class UserDAO { //회원 테이블에 접근할 수 있도록 DAP(데이터 접근 객체) 생
 		}
 		return -1; //데이터베이스 오류
 	}
+	*/
 	
 	//로그인
 	public int Login(String userID, String userPassword) {
