@@ -1,5 +1,14 @@
 package instagramTP;
 
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.Insets;
+
+import javax.swing.ImageIcon;
+import javax.swing.UIManager;
+
+import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.ui.FlatLineBorder;
 
 public class PostPanel extends javax.swing.JPanel implements java.awt.event.ActionListener{
 
@@ -23,7 +32,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
         moreBtn = new javax.swing.JButton();
         imagePane = new javax.swing.JPanel();
         likePane = new javax.swing.JPanel();
-        likeBtn = new javax.swing.JButton();
+        likeBtn = new javax.swing.JToggleButton();
         likeNumLabel = new javax.swing.JLabel();
         createdAtLabel = new javax.swing.JLabel();
         postTextArea = new javax.swing.JTextArea();
@@ -31,9 +40,23 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
         commentWindowBtn = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         postCommentBtn = new javax.swing.JButton();
+        
+        // load images
+        heart = new ImageIcon("images/heart.png").getImage();
+        heart_f = new ImageIcon("images/heart_filled.png").getImage();
+//        heart_h = new ImageIcon("images/heart_hovered.png").getImage();
+        heart_p = new ImageIcon("images/heart_hovered2.png").getImage();
+        heart_fp = new ImageIcon("images/heart_pressed.png").getImage();
+        
+        // image to imageIcon
+        heartI = new ImageIcon(heart.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        heartI_f = new ImageIcon(heart_f.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+//        heartI_h = new ImageIcon(heart_h.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        heartI_p = new ImageIcon(heart_p.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        heartI_fp = new ImageIcon(heart_fp.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        putClientProperty( FlatClientProperties.STYLE, "arc: 30" );
 
         IDBtn.setFont(new java.awt.Font("Yu Gothic UI", 0, 16)); // NOI18N
         IDBtn.setText("recyan__");
@@ -65,9 +88,26 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
         likePane.setLayout(new java.awt.BorderLayout());
 
         likeBtn.setBackground(null);
-        likeBtn.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        likeBtn.setText("하트");
         likeBtn.setBorder(null);
+//        likeBtn.setRolloverIcon(heartI_h);
+        likeBtn.setPressedIcon(heartI_fp);
+        likeBtn.setIcon(heartI);	// 기본 설정: 이 글을 좋아요했으면 heartI_f(꽉찬하트), 아니면 heartI(빈하트)로 setIcon
+        likeBtn.setSelected(false);	// 기본 설정: 이 글을 좋아요했으면 true, 아니면 false
+        likeBtn.addItemListener(new java.awt.event.ItemListener() {
+            @Override
+            public void itemStateChanged(java.awt.event.ItemEvent e) {
+              if(likeBtn.isSelected())
+              {
+            	  likeBtn.setIcon(heartI_f);	// 좋아요 누른 상태
+            	  likeBtn.setPressedIcon(heartI_p);
+              }
+              else
+              {
+            	  likeBtn.setIcon(heartI);	// 좋아요 안한 상태
+            	  likeBtn.setPressedIcon(heartI_fp);
+              }
+            }
+          });
         likePane.add(likeBtn, java.awt.BorderLayout.CENTER);
 
         likeNumLabel.setText("nnn people liked");
@@ -195,7 +235,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 	private javax.swing.JButton IDBtn;
     private javax.swing.JPanel imagePane;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JButton likeBtn;
+    private javax.swing.JToggleButton likeBtn;
     private javax.swing.JLabel likeNumLabel;
     private javax.swing.JPanel likePane;
     private javax.swing.JButton moreBtn;
@@ -204,5 +244,8 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
     private OtherPageWindow otherWindow;
     private CommentWindow cmtWindow;
     private ModifyWindow mdfyWindow;
+    
+    Image heart; Image heart_f; Image heart_h; Image heart_p; Image heart_fp;
+    ImageIcon heartI; ImageIcon heartI_f; ImageIcon heartI_h; ImageIcon heartI_p; ImageIcon heartI_fp;
     // End of variables declaration                   
 }

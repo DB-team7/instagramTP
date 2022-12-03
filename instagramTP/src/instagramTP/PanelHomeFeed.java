@@ -1,5 +1,9 @@
 package instagramTP;
 
+import java.awt.Color;
+import java.awt.Insets;
+
+import com.formdev.flatlaf.ui.FlatLineBorder;
 
 public class PanelHomeFeed extends javax.swing.JPanel {
 
@@ -41,11 +45,14 @@ public class PanelHomeFeed extends javax.swing.JPanel {
         
         // 게시글 post
         PostPanel postPanel = new PostPanel();
+        // postPanel border는 PostPanel.java 말고 PanelHomeFeed 여기에 직접.
+        postPanel.setBorder( new FlatLineBorder( new Insets( 0, 0, 0, 0 ), Color.LIGHT_GRAY, 1, 30 ) );
         ScrollBackPane.add(postPanel);
         ScrollBackPane.add(javax.swing.Box.createVerticalStrut(30));  //패널사이세로여백
         //세로여백은 게시글 끝날 때마다 꼭 같이 넣어주기
         
         PostPanel postPanel2 = new PostPanel();
+        postPanel2.setBorder( new FlatLineBorder( new Insets( 0, 0, 0, 0 ), Color.LIGHT_GRAY, 1, 30 ) );
         ScrollBackPane.add(postPanel2);
         ScrollBackPane.add(javax.swing.Box.createVerticalStrut(30));  //패널사이세로여백
        
