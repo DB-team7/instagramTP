@@ -121,17 +121,36 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		likeBtn.setBorder(null);
 //      likeBtn.setRolloverIcon(heartI_h);
 		likeBtn.setPressedIcon(heartI_fp);
-		likeBtn.setIcon(heartI); // 기본 설정: 이 글을 좋아요했으면 heartI_f(꽉찬하트), 아니면 heartI(빈하트)로 setIcon
-		likeBtn.setSelected(false); // 기본 설정: 이 글을 좋아요했으면 true, 아니면 false
+		if (ZinCyan.isLike(userID, PID)) {
+			likeBtn.setIcon(heartI_f); // 기본 설정: 이 글을 좋아요했으면 heartI_f(꽉찬하트), 아니면 heartI(빈하트)로 setIcon
+			likeBtn.setSelected(true); // 기본 설정: 이 글을 좋아요했으면 true, 아니면 false
+		} else {
+			likeBtn.setIcon(heartI); // 기본 설정: 이 글을 좋아요했으면 heartI_f(꽉찬하트), 아니면 heartI(빈하트)로 setIcon
+			likeBtn.setSelected(false); // 기본 설정: 이 글을 좋아요했으면 true, 아니면 false
+		}
+		
 		likeBtn.addItemListener(new java.awt.event.ItemListener() {
 			@Override
 			public void itemStateChanged(java.awt.event.ItemEvent e) {
 				if (likeBtn.isSelected()) {
 					likeBtn.setIcon(heartI_f); // 좋아요 누른 상태
 					likeBtn.setPressedIcon(heartI_p);
+					try {
+						ZinCyan.like(userID, PID);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 				} else {
 					likeBtn.setIcon(heartI); // 좋아요 안한 상태
 					likeBtn.setPressedIcon(heartI_fp);
+					try {
+						ZinCyan.unLike(userID, PID);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});

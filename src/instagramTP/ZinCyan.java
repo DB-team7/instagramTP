@@ -595,4 +595,72 @@ public class ZinCyan {
 
 	}
 
+	public static Boolean isLike(String UID, Integer PID) throws SQLException {
+			Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				System.out.println("연결 성공");
+
+			} catch (ClassNotFoundException e) {
+				System.out.println("드라이버 로딩 실패");
+			}
+
+			PreparedStatement ps = null; // 객체 생성
+
+			String sql = "select count(ID) from likes where user_id=? and target_id=?;";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, UID);
+			ps.setInt(2, PID);
+			ResultSet rs = ps.executeQuery(); // 명렁어 실행
+			ps.close();
+
+			rs.next();
+			Integer tmp = rs.getInt(1);
+			rs.close();
+			if (tmp == 0) {
+				return false;
+			}
+			return true;
+		}
+	
+	public static void like(String UID, Integer PID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "insert into like values (?,?);";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, UID);
+		ps.setInt(2, PID);
+		ps.executeUpdate(); // 명렁어 실행
+		ps.close();
+	}
+
+	public static void unLike(String UID, Integer PID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "delete * from like where  user_id=? and target_id=?;";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, UID);
+		ps.setInt(2, PID);
+		ps.executeUpdate(); // 명렁어 실행
+		ps.close();
+
+	}
 }
