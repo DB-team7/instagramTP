@@ -7,11 +7,11 @@ import javax.swing.ImageIcon;
 public class CommentPanel extends javax.swing.JPanel implements java.awt.event.ActionListener{
 
 	private static final long serialVersionUID = 1L;
-	public CommentPanel() {
-        initComponents();
+	public CommentPanel(Integer PID) {
+        initComponents(PID);
     }
 	
-	private void initComponents() {
+	private void initComponents(Integer PID) {
 		
 		setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(200, 200, 200)));
@@ -103,7 +103,7 @@ public class CommentPanel extends javax.swing.JPanel implements java.awt.event.A
     public void actionPerformed(java.awt.event.ActionEvent arg0) {
             // TODO Auto-generated method stub
             if(arg0.getSource() == IDBtn){
-            	otherWindow = new OtherPageWindow();
+            	otherWindow = new OtherPageWindow(ZinCyan.getPIDsByUID(TOOL_TIP_TEXT_KEY));
             	otherWindow.setVisible(true);
             	java.awt.EventQueue.invokeLater(new Runnable() {
         	        public void run() {
