@@ -31,11 +31,8 @@ public class OtherPageWindow extends javax.swing.JDialog implements java.awt.eve
 		followToggleBtn = new javax.swing.JToggleButton();
 		blockToggleBtn = new javax.swing.JToggleButton();
 
-		java.awt.Image nullImg = new javax.swing.ImageIcon("images/nullImage.png").getImage();
-		setIconImage(nullImg); // 프레임바 아이콘 우선 투명으로
 		setSize(1000, 600);
 		setLocationRelativeTo(null);
-		// setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE); //절대안됨
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
 		getContentPane().setBackground(new java.awt.Color(245, 245, 245));

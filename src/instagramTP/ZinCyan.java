@@ -515,4 +515,84 @@ public class ZinCyan {
 		return tmp;
 	}
 
+	public static Boolean isUser(String UID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "select count(ID) from users where ID=?;";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, UID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+		ps.close();
+
+		rs.next();
+		Integer tmp = rs.getInt(1);
+		rs.close();
+		if (tmp == 0) {
+			return false;
+		}
+		return true;
+	}
+
+	public static Boolean validPW(String UID, String PW) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "SELECT password FROM users WHERE ID = ?;";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, UID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+		ps.close();
+
+		rs.next();
+		String tmp = rs.getString(1);
+		rs.close();
+
+		if (PW == tmp) {
+			return true;
+		}
+		return false;
+
+	}
+
+	public static void initUser(User user) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "insert into users values (?,?,?,?,?); ";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, user.getUserID());
+		ps.setString(2, user.getUserName());
+		ps.setInt(3, user.getUserPhoneNum());
+		ps.setString(4, user.getUserEmail());
+		ps.executeUpdate(); // 명렁어 실행
+		ps.close();
+		System.out.println("Inserting Successfully!");
+
+	}
+
 }

@@ -1,5 +1,8 @@
 package instagramTP;
 
+import java.awt.Color;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import javax.imageio.ImageIO;
@@ -56,15 +59,27 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 
 		jTextField1.setText("Write anything to post...");
 		jTextField1.setToolTipText("");
+		jTextField1.setForeground(Color.GRAY);
+		jTextField1.addFocusListener(new FocusListener() { // when start typing, guide disappear
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (jTextField1.getText().equals("")) {
+					jTextField1.setText("Write anything to post...");
+					jTextField1.setForeground(Color.GRAY);
+				}
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (jTextField1.getText().equals("Write anything to post...")) {
+					jTextField1.setText("");
+					jTextField1.setForeground(Color.BLACK);
+				}
+			}
+		});
 		jTextField1.setBorder(null);
 		jTextField1.setPreferredSize(new java.awt.Dimension(400, 400));
-//        jTextField1.addMouseListener(new java.awt.event.MouseAdapter()  
-//        {  
-//            public void mouseClicked(java.awt.event.MouseEvent e)  
-//            {  
-//            	jTextField1.setText(null);	// 사용자가 수정 시작하면 안내 텍스트 사라지게 하는 법 찾을 예정
-//            }  
-//        }); 
+
 
 		uploadBtn.setText("Upload post");
 		uploadBtn.addActionListener(this);
@@ -74,7 +89,7 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 		getContentPane().add(uploadBtn);
 
 		pack();
-	}// </editor-fold>
+	}
 
 	String load() {
 		javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
@@ -130,7 +145,7 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 		}
 	}
 
-	// Variables declaration - do not modify
+	// Variables declaration
 	// private javax.swing.JFileChooser jFileChooser1;
 	private javax.swing.JButton imageBtn;
 	private javax.swing.JTextField jTextField1;
