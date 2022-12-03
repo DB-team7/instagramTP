@@ -44,14 +44,12 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
         // load images
         heart = new ImageIcon("images/heart.png").getImage();
         heart_f = new ImageIcon("images/heart_filled.png").getImage();
-//        heart_h = new ImageIcon("images/heart_hovered.png").getImage();
-        heart_p = new ImageIcon("images/heart_hovered2.png").getImage();
-        heart_fp = new ImageIcon("images/heart_pressed.png").getImage();
+        heart_p = new ImageIcon("images/heart_pressed1.png").getImage();
+        heart_fp = new ImageIcon("images/heart_pressed2.png").getImage();
         
         // image to imageIcon
         heartI = new ImageIcon(heart.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         heartI_f = new ImageIcon(heart_f.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-//        heartI_h = new ImageIcon(heart_h.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         heartI_p = new ImageIcon(heart_p.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         heartI_fp = new ImageIcon(heart_fp.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 
@@ -245,7 +243,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
     private CommentWindow cmtWindow;
     private ModifyWindow mdfyWindow;
     
-    Image heart; Image heart_f; Image heart_h; Image heart_p; Image heart_fp;
-    ImageIcon heartI; ImageIcon heartI_f; ImageIcon heartI_h; ImageIcon heartI_p; ImageIcon heartI_fp;
+    Image heart; Image heart_f; Image heart_p; Image heart_fp;
+    ImageIcon heartI; ImageIcon heartI_f; ImageIcon heartI_p; ImageIcon heartI_fp;
     // End of variables declaration                   
 }

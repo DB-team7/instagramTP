@@ -3,8 +3,6 @@ package instagramTP;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -14,7 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLightLaf;
 
 
@@ -62,11 +59,11 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener{
         star_f = new ImageIcon("images/star_filled.png").getImage();
         mypage_f = new ImageIcon("images/mypage_filled.png").getImage();
         
-        upload_h = new ImageIcon("images/upload_hovered2.png").getImage();
-        home_h = new ImageIcon("images/home_hovered2.png").getImage();
-        search_h = new ImageIcon("images/search_hovered2.png").getImage();
-        star_h = new ImageIcon("images/star_hovered2.png").getImage();
-        mypage_h = new ImageIcon("images/mypage_hovered2.png").getImage();
+        upload_h = new ImageIcon("images/upload_hovered.png").getImage();
+        home_h = new ImageIcon("images/home_hovered.png").getImage();
+        search_h = new ImageIcon("images/search_hovered.png").getImage();
+        star_h = new ImageIcon("images/star_hovered.png").getImage();
+        mypage_h = new ImageIcon("images/mypage_hovered.png").getImage();
         
         // image to imageIcon
         uploadI = new ImageIcon(upload.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
@@ -167,7 +164,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener{
     	
     	if(arg0.getSource() == homeFeedBtn){
         	getContentPane().removeAll();
-       	getContentPane().add(headerPane, BorderLayout.NORTH);	// 버튼 icon 바뀌는 것도 추가 예정
+       	getContentPane().add(headerPane, BorderLayout.NORTH);
         getContentPane().add(homeFeedPane, BorderLayout.CENTER);
         getContentPane().setVisible(false);
         homeFeedBtn.setIcon(homeI_f);
@@ -179,7 +176,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener{
     	
     	if(arg0.getSource() == searchBtn){
         	getContentPane().removeAll();
-       	getContentPane().add(headerPane, BorderLayout.NORTH);	// 버튼 icon 바뀌는 것도 추가 예정
+       	getContentPane().add(headerPane, BorderLayout.NORTH);
         getContentPane().add(searchPane, BorderLayout.CENTER);
         getContentPane().setVisible(false);
         homeFeedBtn.setIcon(homeI);
@@ -191,7 +188,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener{
     	
     	if(arg0.getSource() == starFeedBtn){
         	getContentPane().removeAll();
-       	getContentPane().add(headerPane, BorderLayout.NORTH);	// 버튼 icon 바뀌는 것도 추가 예정
+       	getContentPane().add(headerPane, BorderLayout.NORTH);
         getContentPane().add(starFeedPane, BorderLayout.CENTER);
         getContentPane().setVisible(false);
         homeFeedBtn.setIcon(homeI);
@@ -203,7 +200,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener{
     	
     	if(arg0.getSource() == myPageBtn){
         	getContentPane().removeAll();
-       	getContentPane().add(headerPane, BorderLayout.NORTH);	// 버튼 icon 바뀌는 것도 추가 예정
+       	getContentPane().add(headerPane, BorderLayout.NORTH);
         getContentPane().add(myPagePane, BorderLayout.CENTER);
         getContentPane().setVisible(false);
         homeFeedBtn.setIcon(homeI);
