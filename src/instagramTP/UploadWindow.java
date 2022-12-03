@@ -3,15 +3,16 @@ package instagramTP;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import javax.imageio.ImageIO;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class UploadWindow extends javax.swing.JDialog implements java.awt.event.ActionListener {
 	/**
 	 * 
 	 */
+	private String src = null;
 	private static final long serialVersionUID = 1L;
 	private String userID;
 //	Post post=new Post();
@@ -94,34 +95,38 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 		javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
 		fileChooser.setDialogTitle("파일 불러오기");
 		// fileChooser.getsetDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);//안됨
-		fileChooser.setFileFilter(new FileNameExtensionFilter("jpg", "png", "jpeg", "bmp")); // 파일필터
+//		fileChooser.setFileFilter(new FileNameExtensionFilter("jpg", "png", "jpeg", "bmp")); // 파일필터
 		fileChooser.setMultiSelectionEnabled(false); // 다중 선택 불가
 		int returnVal = fileChooser.showOpenDialog(this); // show openDialog
 
 		if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) { // 파일을 선택하였을 때
 			try {
-				java.awt.image.BufferedImage img = ImageIO.read(fileChooser.getSelectedFile());
+				BufferedImage img = ImageIO.read(fileChooser.getSelectedFile());
 				java.awt.Image resizedImage = img.getScaledInstance(imageBtn.getWidth(), imageBtn.getHeight(),
 						java.awt.Image.SCALE_SMOOTH);
 				imageBtn.setIcon(new javax.swing.ImageIcon(resizedImage));
 				imageBtn.setText(null);
+				System.out.println(fileChooser.getSelectedFile().toString());
 				return fileChooser.getSelectedFile().toString();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
+			System.out.println("img not selected");
 			return null;
+
 		}
 		return null;
 	}
 
 	@Override
 	public void actionPerformed(java.awt.event.ActionEvent arg0) {
-		String src = null;
+		
 		// TODO Auto-generated method stub
 		if (arg0.getSource() == imageBtn) { // 버튼이자 이미지 보여주는 용도
 			src = load();
+			System.out.println(src);
 		}
 
 		if (arg0.getSource() == uploadBtn) { // 업로드
@@ -135,6 +140,7 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 				e1.printStackTrace();
 			}
 			try {
+				System.out.println(src);
 				ZinCyan.initPost(post, src);
 			} catch (FileNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block

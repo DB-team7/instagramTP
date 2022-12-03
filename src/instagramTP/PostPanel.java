@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
@@ -51,7 +52,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 
 		IDBtn = new javax.swing.JButton();
 		moreBtn = new javax.swing.JButton();
-		imagePane = new javax.swing.JPanel();
+//		imagePane = new javax.swing.JPanel();
 		likePane = new javax.swing.JPanel();
 		likeBtn = new javax.swing.JToggleButton();
 		likeNumLabel = new javax.swing.JLabel();
@@ -86,7 +87,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		IDBtn.addActionListener(this); // ID 클릭하면 그 사람 페이지로 (OtherPageWindow.java)
 
 		// 본인 계정에서만 뜨게 세팅
-		if (userID == myUID) {
+		if (userID.equals(myUID)) {
 			moreBtn.setBackground(null);
 			moreBtn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
 			moreBtn.setText("...");
@@ -99,11 +100,12 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		if (post.getInputStream() != null) {
 			File tempFile = File.createTempFile(String.valueOf(post.getInputStream().hashCode()), ".tmp");
 			tempFile.deleteOnExit();
-			Files.copy(post.getInputStream(), tempFile.toPath());
+			Files.copy(post.getInputStream(), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			Path tempPath = tempFile.toPath();
 
 			nullImg = new javax.swing.ImageIcon(tempPath.toString()).getImage();
 		}
+		imagePane = new ImagePanel(nullImg);
 
 		imagePane.setBackground(new java.awt.Color(255, 255, 255));
 		javax.swing.GroupLayout imagePaneLayout = new javax.swing.GroupLayout(imagePane);
@@ -320,7 +322,8 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 	private javax.swing.JButton commentWindowBtn;
 	private javax.swing.JLabel createdAtLabel;
 	private javax.swing.JButton IDBtn;
-	private javax.swing.JPanel imagePane;
+//	private javax.swing.JPanel imagePane;
+	private ImagePanel imagePane;
 	private javax.swing.JTextField jTextField1;
 	private javax.swing.JToggleButton likeBtn;
 	private javax.swing.JLabel likeNumLabel;

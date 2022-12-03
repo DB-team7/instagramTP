@@ -30,6 +30,7 @@ public class PanelHomeFeed extends javax.swing.JPanel {
 		scrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setPreferredSize(new java.awt.Dimension(470, 620));
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16); // 스크롤 속도 증가
+		scrollPane.getVerticalScrollBar().setAlignmentY(TOP_ALIGNMENT);
 		scrollPane.getVerticalScrollBar().setPreferredSize(new java.awt.Dimension(0, 0)); // 스크롤바 숨기기
 
 		ScrollBackPane.setBackground(new java.awt.Color(245, 245, 245));

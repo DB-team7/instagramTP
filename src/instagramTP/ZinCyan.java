@@ -162,6 +162,9 @@ public class ZinCyan {
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패");
 		}
+		
+
+		System.out.println(src);
 
 		if (src == null) {
 			PreparedStatement ps = null; // 객체 생성
@@ -182,7 +185,7 @@ public class ZinCyan {
 			FileInputStream fin = new FileInputStream(imgfile);
 			PreparedStatement ps = null; // 객체 생성
 
-			String sql = "insert into posts values (?,?,?,?,?,?); ";
+			String sql = "insert into posts(user_id, content, created_at, cnt_like, FILENAME, FILE) values (?,?,?,?,?,?); ";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, post.getUID());
 			ps.setString(2, post.getContent());
