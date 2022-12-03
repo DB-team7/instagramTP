@@ -4,64 +4,71 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class UserDAO { //È¸¿ø Å×ÀÌºí¿¡ Á¢±ÙÇÒ ¼ö ÀÖµµ·Ï DAP(µ¥ÀÌÅÍ Á¢±Ù °´Ã¼) »ý¼º
+import javax.swing.JOptionPane;
 
-	private Connection conn; //µ¥ÀÌÅÍº£ÀÌ½º¿¡ Á¢±ÙÇÏ°Ô ÇØÁÖ´Â ÇÏ³ªÀÇ °´Ã¼ 
+public class UserDAO { //È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ DAP(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼) ï¿½ï¿½ï¿½ï¿½
+
+	private Connection conn; //ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ 
 	private PreparedStatement pstmt;
-	private ResultSet rs; //¾î¶°ÇÑ Á¤º¸¸¦ ´ãÀ» ¼ö ÀÖ´Â ÇÏ³ªÀÇ °´Ã¼
+	private ResultSet rs; //ï¿½î¶°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
 	
 	public UserDAO() {
 		try {
-			String dbURL="jdbc:mysql://localhost/dmaster"; //jdbc:mysql://localhost/»ç¿ëÇÒdbÀÌ¸§
-			String dbID="root"; //°èÁ¤
-			String dbPassword="12345"; //ºñ¹Ð¹øÈ£
-			Class.forName("com.mysql.jdbc.Driver"); //mysql driver Ã£À» ¼ö ÀÖµµ·Ï
-			conn=DriverManager.getConnection(dbURL,dbID,dbPassword); //Á¢¼ÓÀÌ ¿Ï·áµÇ¸é conn °´Ã¼ ¾È¿¡ Á¤º¸°¡ ´ã±â°Ô µÊ
+			String dbURL="jdbc:mysql://localhost/dmaster"; //jdbc:mysql://localhost/ï¿½ï¿½ï¿½ï¿½ï¿½dbï¿½Ì¸ï¿½
+			String dbID="root"; //ï¿½ï¿½ï¿½ï¿½
+			String dbPassword="12345"; //ï¿½ï¿½Ð¹ï¿½È£
+			Class.forName("com.mysql.jdbc.Driver"); //mysql driver Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½
+			conn=DriverManager.getConnection(dbURL,dbID,dbPassword); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¸ï¿½ conn ï¿½ï¿½Ã¼ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		}catch(Exception e) {
-			e.printStackTrace(); //¿À·ù ¹ß»ý½Ã ¾î¶² ¿À·ùÀÎÁö Ãâ·Â
+			e.printStackTrace(); //ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½î¶² ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		}
 	}
 	
-	//È¸¿ø°¡ÀÔ
+	//ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½ Ã¼Å©
+	public boolean findExistID(int cnt_ID) {
+		
+		String SQL="select ID, count(ID) as cnt_id from users group by ID having ? > 1";
+		
+		try {
+			pstmt=conn.prepareStatement(SQL); 
+			pstmt.setInt(1, cnt_ID);
+			rs=pstmt.executeQuery(); 
+			if(rs.next()) {
+				return true; //ï¿½ßºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false; //ï¿½ßºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	}
+	
+	
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public int join(User user) {
+		
+		UserDAO userDAO = new UserDAO();
+		
+		int result = userDAO.join(user);
+		
 		String SQL="insert into users values (?,?,?,?,?)"; //id, name, phone_num, email, pw
 		try {
-			pstmt=conn.prepareStatement(SQL); //sql ¹®ÀåÀ» µ¥ÀÌÅÍº£ÀÌ½º¿¡ »ðÀÔ
+			pstmt=conn.prepareStatement(SQL); //sql ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			pstmt.setString(1, user.getUserID());
 			pstmt.setString(1, user.getUserName());
 			pstmt.setInt(1, user.getUserPhoneNum());
 			pstmt.setString(1, user.getUserEmail());
 			pstmt.setString(1, user.getUserPassword());
 			
-			return pstmt.executeUpdate();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return -1; //µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
-	}
-	
-	//·Î±×ÀÎ
-	public int Login(String userID, String userPassword) {
-		String SQL="SELECT password FROM users WHERE ID = ?";
-		try {
-			pstmt=conn.prepareStatement(SQL); //sql ¹®ÀåÀ» µ¥ÀÌÅÍº£ÀÌ½º¿¡ »ðÀÔ
-			pstmt.setString(1, userID);
-			rs=pstmt.executeQuery(); //rs : °á°ú¸¦ ´ãÀ» ¼ö ÀÖ´Â ÇÏ³ªÀÇ °´Ã¼. ¿©±â¿¡ ½ÇÇà °á°ú¸¦ ³Ö¾îÁÜ
-			if(rs.next()) { //rs.next() : °á°ú°¡ Á¸ÀçÇÑ´Ù¸é ÇØ´ç if¹® ½ÇÇà
-				if(rs.getString(1).equals(userPassword))
-					return 1; //·Î±×ÀÎ ¼º°ø
-				else
-					return 0; // ºñ¹Ð¹øÈ£ ºÒÀÏÄ¡
+			if(findExistID(result)==true) { //ï¿½ßºï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® x
+				JOptionPane.showMessageDialog(null, "ï¿½ßºï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½Ô´Ï´ï¿½", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
 			}
-			return -1; //¾ÆÀÌµð ¾øÀ½
+			else //ï¿½ßºï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+				return pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return -2; //µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+		return -1; //ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
-
 }
-
-//Reference
-//https://green333.tistory.com/28
