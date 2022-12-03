@@ -141,22 +141,6 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
 	}
 
-//	  public static void main(String args[]) {
-//	    	FlatLightLaf.registerCustomDefaultsSource("style");
-//	    	try {
-//	    		UIManager.setLookAndFeel( new FlatLightLaf() );
-//	    	} catch( Exception ex ) {
-//	    		System.err.println( "Failed to initialize flatlaf" );
-//	    	}
-//
-//	    	java.awt.EventQueue.invokeLater(new Runnable() {
-//	    		public void run() {
-//	    			MainFrame frame = new MainFrame();
-//	    			frame.setVisible(true);
-//	    		}
-//	    	});
-//	    }
-
 	@Override
 	public void actionPerformed(java.awt.event.ActionEvent arg0) {
 		// TODO Auto-generated method stub

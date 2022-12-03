@@ -1,6 +1,8 @@
 package instagramTP;
 
 import java.awt.Color;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.sql.SQLException;
@@ -23,24 +25,24 @@ public class PanelSearch extends javax.swing.JPanel {
 		scrollPane = new javax.swing.JScrollPane();
 		scrollBackPane = new javax.swing.JPanel();
 
+		// load imageIcon
+		search = new ImageIcon("images/search_hovered.png").getImage();
+		searchI = new ImageIcon(search.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+
 		setBackground(new java.awt.Color(245, 245, 245));
-		setPreferredSize(new java.awt.Dimension(1000, 600));
-		setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 30));
 
 		jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 		jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-		jPanel1.setPreferredSize(new java.awt.Dimension(470, 610));
 		jPanel1.setLayout(new java.awt.BorderLayout());
 
 		jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 		jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(153, 153, 153)));
-		jPanel2.setPreferredSize(new java.awt.Dimension(10, 90));
 		jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 30));
 
 		jTextField1.setBackground(new java.awt.Color(229, 229, 229));
-        jTextField1.setText("Search friends...");
-        jTextField1.setForeground(Color.GRAY);
-        jTextField1.addFocusListener(new FocusListener() {	// when start typing, guide disappear
+		jTextField1.setText("Search friends...");
+		jTextField1.setForeground(Color.GRAY);
+		jTextField1.addFocusListener(new FocusListener() {	// when start typing, guide disappear
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (jTextField1.getText().equals("")) {
@@ -56,12 +58,12 @@ public class PanelSearch extends javax.swing.JPanel {
 				}
 			}
 		});
-        jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
-        jTextField1.setPreferredSize(new java.awt.Dimension(400, 30));
-        jPanel2.add(jTextField1);
+		jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
+		jTextField1.setPreferredSize(new java.awt.Dimension(400, 30));
+		jPanel2.add(jTextField1);
 
 		jButton1.setBackground(new java.awt.Color(229, 229, 229));
-		jButton1.setText("!");
+		jButton1.setIcon(searchI);
 		jButton1.setBorder(null);
 		jButton1.setPreferredSize(new java.awt.Dimension(30, 30));
 		jPanel2.add(jButton1);
@@ -72,7 +74,6 @@ public class PanelSearch extends javax.swing.JPanel {
 		scrollPane.setBorder(null);
 		scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setPreferredSize(new java.awt.Dimension(470, 620));
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16); // 스크롤 속도 증가
 		scrollPane.getVerticalScrollBar().setPreferredSize(new java.awt.Dimension(0, 0)); // 스크롤바 숨기기
 
@@ -84,32 +85,24 @@ public class PanelSearch extends javax.swing.JPanel {
 		PersonPanel personPanel = new PersonPanel(UID,UID);
 		scrollBackPane.add(personPanel);
 
-		// 추가 예시
-//		PersonPanel personPanel2 = new PersonPanel();
-//		scrollBackPane.add(personPanel2);
-//		PersonPanel personPanel3 = new PersonPanel();
-//		scrollBackPane.add(personPanel3);
-//		PersonPanel personPanel4 = new PersonPanel();
-//		scrollBackPane.add(personPanel4);
-//		PersonPanel personPanel5 = new PersonPanel();
-//		scrollBackPane.add(personPanel5);
-//		PersonPanel personPanel6 = new PersonPanel();
-//		scrollBackPane.add(personPanel6);
-//		PersonPanel personPanel7 = new PersonPanel();
-//		scrollBackPane.add(personPanel7);
-//		PersonPanel personPanel8 = new PersonPanel();
-//		scrollBackPane.add(personPanel8);
-//		PersonPanel personPanel9 = new PersonPanel();
-//		scrollBackPane.add(personPanel9);
-//		PersonPanel personPanel10 = new PersonPanel();
-//		scrollBackPane.add(personPanel10);
-//		PersonPanel personPanel11 = new PersonPanel();
-//		scrollBackPane.add(personPanel11);
-//		PersonPanel personPanel12 = new PersonPanel();
-//		scrollBackPane.add(personPanel12);
-
 		jPanel1.add(scrollPane, java.awt.BorderLayout.CENTER);
-		add(jPanel1);
+
+		// add jPanel1 in center
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		this.setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createSequentialGroup()
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(jPanel1, 470, 470, 470)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				);
+		layout.setVerticalGroup(
+				layout.createSequentialGroup()
+				.addGap(10)
+				.addComponent(jPanel1)
+				);
 	}
 
 	// Variables declaration
@@ -119,5 +112,8 @@ public class PanelSearch extends javax.swing.JPanel {
 	private javax.swing.JPanel scrollBackPane;
 	private javax.swing.JScrollPane scrollPane;
 	private javax.swing.JTextField jTextField1;
+
+	Image search; 
+	ImageIcon searchI;
 	// End of variables declaration
 }

@@ -28,13 +28,11 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
 		postNumLabel = new javax.swing.JLabel();
 
 		setBackground(new java.awt.Color(245, 245, 245));
-		setPreferredSize(new java.awt.Dimension(1000, 600));
 		setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
 
 		scrollPane.setBorder(null);
 		scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setPreferredSize(new java.awt.Dimension(470, 620));
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16); // 스크롤 속도 증가
 		scrollPane.getVerticalScrollBar().setPreferredSize(new java.awt.Dimension(0, 0)); // 스크롤바 숨기기
 
@@ -46,9 +44,6 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
 
 		// 내 정보란
 		MyDataPanel.setBackground(new java.awt.Color(255, 255, 255));
-		// MyDataPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(24, 24, 24,
-		// 24)); //내부 여백
-		// MyDataPanel.setPreferredSize(new java.awt.Dimension(470, 120));
 		MyDataPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
 		imageBtn.setPreferredSize(new java.awt.Dimension(60, 60));
@@ -109,16 +104,26 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
 			postPanel[i] = new PostPanel(posts[i], myUID);
 			ScrollBackPane.add(postPanel[i]);
 			ScrollBackPane.add(javax.swing.Box.createVerticalStrut(30)); // 패널사이세로여백
-			// 세로여백은 게시글 끝날 때마다 꼭 같이 넣어주기
 		}
-
-//		PostPanel postPanel2 = new PostPanel();
-//		ScrollBackPane.add(postPanel2);
-//		ScrollBackPane.add(javax.swing.Box.createVerticalStrut(30)); // 패널사이세로여백
 
 		scrollPane.setViewportView(ScrollBackPane);
 
-		add(scrollPane);
+		// add scrollPane in center
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		this.setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createSequentialGroup()
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(scrollPane, 470, 470, 470)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(scrollPane)
+				);
+
 	}
 
 	@Override
@@ -132,15 +137,15 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
 
 			if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) { // 파일을 선택하였을 때
 				// 프사 저장 들어가는 부분
-//                try{
-//                	java.awt.image.BufferedImage img = ImageIO.read(fileChooser.getSelectedFile());
-//                	java.awt.Image resizedImage = 
-//                		    img.getScaledInstance(imageBtn.getWidth(), imageBtn.getHeight(), java.awt.Image.SCALE_SMOOTH);
-//                    
-//                } catch (Exception e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
+				//                try{
+				//                	java.awt.image.BufferedImage img = ImageIO.read(fileChooser.getSelectedFile());
+				//                	java.awt.Image resizedImage = 
+				//                		    img.getScaledInstance(imageBtn.getWidth(), imageBtn.getHeight(), java.awt.Image.SCALE_SMOOTH);
+				//                    
+				//                } catch (Exception e) {
+				//                    // TODO Auto-generated catch block
+				//                    e.printStackTrace();
+				//                }
 			}
 		}
 

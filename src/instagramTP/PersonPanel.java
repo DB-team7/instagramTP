@@ -19,7 +19,6 @@ public class PersonPanel extends javax.swing.JPanel implements java.awt.event.Ac
 
 		setBackground(new java.awt.Color(255, 255, 255));
 		setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(200, 200, 200)));
-		// setPreferredSize(new java.awt.Dimension(100, 100));
 
 		profileImgLabel = new javax.swing.JLabel();
 		IDBtn = new javax.swing.JButton();

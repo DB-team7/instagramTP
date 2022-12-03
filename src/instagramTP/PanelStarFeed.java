@@ -20,13 +20,10 @@ public class PanelStarFeed extends javax.swing.JPanel {
 		starLabel = new javax.swing.JLabel();
 
 		setBackground(new java.awt.Color(245, 245, 245));
-		setPreferredSize(new java.awt.Dimension(1000, 600));
-		setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
 
 		scrollPane.setBorder(null);
 		scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setPreferredSize(new java.awt.Dimension(470, 620));
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16); // 스크롤 속도 증가
 		scrollPane.getVerticalScrollBar().setPreferredSize(new java.awt.Dimension(0, 0)); // 스크롤바 숨기기
 
@@ -39,8 +36,10 @@ public class PanelStarFeed extends javax.swing.JPanel {
 		// 인기글 피드임을 알려주는 패널
 		starPane.setBackground(new java.awt.Color(245, 245, 245));
 		starPane.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+		starPane.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
 
 		starLabel.setText("Star feed");
+		starLabel.setPreferredSize(new java.awt.Dimension(70, 30));
 		starPane.add(starLabel);
 
 		ScrollBackPane.add(starPane);
@@ -63,7 +62,21 @@ public class PanelStarFeed extends javax.swing.JPanel {
 
 		scrollPane.setViewportView(ScrollBackPane);
 
-		add(scrollPane);
+		// add scrollPane in center
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		this.setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createSequentialGroup()
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(scrollPane, 470, 470, 470)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(scrollPane)
+				);
 	}
 
 	// Variables declaration
