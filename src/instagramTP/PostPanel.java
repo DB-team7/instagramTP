@@ -160,8 +160,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		// postTextArea
 		postTextArea.setEditable(false);
 		postTextArea.setBackground(null);
-		postTextArea.setColumns(20);
-		postTextArea.setRows(5);
+		postTextArea.setLineWrap(true);
 		postTextArea.setMargin(null);
 		postTextArea.setText(post.getContent());
 
