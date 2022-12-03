@@ -1,6 +1,7 @@
 package instagramTP;
 
 import java.awt.Color;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.sql.SQLException;
@@ -36,7 +37,7 @@ public class JoinFrame extends JFrame {
 		jTextField3 = new javax.swing.JTextField();
 		jTextField4 = new javax.swing.JTextField();
 		jTextField5 = new javax.swing.JTextField();
-		jButton1 = new javax.swing.JButton();
+		joinButton = new javax.swing.JButton();
 
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -191,13 +192,14 @@ public class JoinFrame extends JFrame {
 		gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
 		jPanel1.add(jTextField5, gridBagConstraints);
 
-		jButton1.setFont(new java.awt.Font("∏º¿∫ ∞ÌµÒ", 0, 14)); // NOI18N
-		jButton1.setText("Join");
-		jButton1.setPreferredSize(new java.awt.Dimension(200, 30));
+		joinButton.setFont(new java.awt.Font("∏º¿∫ ∞ÌµÒ", 0, 14)); // NOI18N
+		joinButton.setText("Join");
+		joinButton.setPreferredSize(new java.awt.Dimension(200, 30));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
-		jPanel1.add(jButton1, gridBagConstraints);
+		joinButton.addActionListener(this);
+		jPanel1.add(joinButton, gridBagConstraints);
 
 		getContentPane().add(jPanel1);
 
@@ -208,7 +210,7 @@ public class JoinFrame extends JFrame {
 	public void actionPerformed(java.awt.event.ActionEvent arg0) {
 
 		// »∏ø¯∞°¿‘
-		if (arg0.getSource() == jButton1) { // join button action
+		if (arg0.getSource() == joinButton) { // join button action
 			try {
 				if (ZinCyan.isUser(jTextField4.getText())) {
 					// ¡ﬂ∫π¿Ã ¿÷¿Ω
@@ -239,7 +241,7 @@ public class JoinFrame extends JFrame {
 	}
 
 	// Variables declaration - do not modify
-	private javax.swing.JButton jButton1;
+	private javax.swing.JButton joinButton;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JTextField jTextField1;

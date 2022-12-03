@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.sql.*;
 
 public class ZinCyan {
-	private static String dburl = "jdbc:mysql://localhost/dmaster";
+	private static String dburl = "jdbc:mysql://localhost:3306/dmaster";
 	private static String dbUser = "root";
 	private static String dbpasswd = "12345";
 
