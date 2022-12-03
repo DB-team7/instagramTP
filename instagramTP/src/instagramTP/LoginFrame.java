@@ -187,7 +187,7 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener{
 	}
 
 
-	// Variables declaration - do not modify                     
+	// Variables declaration                 
 	private javax.swing.JButton loginBtn;
 	private javax.swing.JButton joinBtn;
 	private javax.swing.JLabel jLabel1;
