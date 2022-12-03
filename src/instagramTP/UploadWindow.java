@@ -119,7 +119,7 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 
 	@Override
 	public void actionPerformed(java.awt.event.ActionEvent arg0) {
-		String src = new String();
+		String src = null;
 		// TODO Auto-generated method stub
 		if (arg0.getSource() == imageBtn) { // 버튼이자 이미지 보여주는 용도
 			src = load();

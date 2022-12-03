@@ -1,7 +1,7 @@
 create database dmaster;
 use dmaster;
 
-/*유저 테이블*/
+/*유저follow 테이블*/
 CREATE TABLE users (
     ID VARCHAR(20),
     name VARCHAR(20),
@@ -18,12 +18,12 @@ CREATE TABLE posts (
     content VARCHAR(500),
     created_at DATETIME,
     cnt_like INT,
-    FILENAME VARCHAR(50) NOT NULL,
-    FILE MEDIUMBLOB NOT NULL,
+    FILENAME VARCHAR(50),
+    FILE MEDIUMBLOB,
     PRIMARY KEY (ID),
     FOREIGN KEY (user_id)
         REFERENCES users (ID)
-)  AUTO_INCREMENT=1;
+);
 
 /*팔로우 테이블*/
 CREATE TABLE follow (

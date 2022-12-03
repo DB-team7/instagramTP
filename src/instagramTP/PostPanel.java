@@ -257,7 +257,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		// TODO Auto-generated method stub
 		if (arg0.getSource() == IDBtn) {
 			try {
-				if (userID == myUserID) {
+				if (userID.equals(myUserID)) {
 					myPage = new PanelMyPage(myUserID);
 				} else {
 					otherWindow = new OtherPageWindow(userID, myUserID);
@@ -265,7 +265,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 			} catch (SQLException | IOException e) {
 				e.printStackTrace();
 			}
-			if (userID == myUserID) {
+			if (userID.equals(myUserID)) {
 				myPage.setVisible(true);
 			} else {
 				otherWindow.setVisible(true);
@@ -273,7 +273,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 
 			java.awt.EventQueue.invokeLater(new Runnable() {
 				public void run() {
-					if (userID == myUserID) {
+					if (userID.equals(myUserID)) {
 						myPage.scrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));
 					} else {
 						otherWindow.scrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));

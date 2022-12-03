@@ -2,6 +2,7 @@ package instagramTP;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 public class PanelStarFeed extends javax.swing.JPanel {
 
@@ -45,10 +46,10 @@ public class PanelStarFeed extends javax.swing.JPanel {
 		ScrollBackPane.add(starPane);
 		ScrollBackPane.add(javax.swing.Box.createVerticalStrut(30)); // 패널사이세로여백
 
-		PostPanel[] postPanel = new PostPanel[10];
-		Integer[] posts = new Integer[10];
-		posts = ZinCyan.getStarPost();
-		for (Integer i = 0; i < 10; i++) {
+		PostPanel[] postPanel = new PostPanel[ZinCyan.getStarPostNum()];
+		Integer[] posts =  ZinCyan.getStarPost().clone();
+		System.out.println(Arrays.toString(posts));
+		for (Integer i = 0; i < ZinCyan.getStarPostNum(); i++) {
 			// 게시글 post
 			try {
 				postPanel[i] = new PostPanel(posts[i], UID);

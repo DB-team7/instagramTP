@@ -5,15 +5,17 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
+
 public class ZinCyan {
-	private static String dburl = "jdbc:mysql://localhost:3306/dmaster";
+	private static String dburl = "jdbc:mysql://localhost/dmaster";
 	private static String dbUser = "root";
 	private static String dbpasswd = "12345";
 
 	public static Post getPostbyPID(int PID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -22,11 +24,10 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 객체 생성
 
-		String sql = "select cnt_like, user_id , content, created_at, cnt_like, file from posts where post_id=?;";
+		String sql = "select cnt_like, user_id , content, created_at, cnt_like, file from posts where ID=?;";
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, PID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
 		Post list = new Post();
 
@@ -38,6 +39,7 @@ public class ZinCyan {
 		list.setCntLike(rs.getInt(5));
 		list.setInputStream(rs.getBinaryStream(6));
 		rs.close();
+		ps.close();
 
 		return list;
 
@@ -46,7 +48,7 @@ public class ZinCyan {
 	public static String getLikeNum(int PID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -59,11 +61,11 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, PID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
 		rs.next();
 		String tmp = rs.getString(1);
 		rs.close();
+		ps.close();
 		return tmp + " Likes";
 
 	}
@@ -71,7 +73,7 @@ public class ZinCyan {
 	public static String getUserNamebyPID(int PID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -84,11 +86,11 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, PID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
 		rs.next();
 		String tmp = rs.getString(1);
 		rs.close();
+		ps.close();
 		return tmp;
 
 	}
@@ -96,7 +98,7 @@ public class ZinCyan {
 	public static String getUserNameByUID(String UID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -109,11 +111,11 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
 		rs.next();
 		String tmp = rs.getString(1);
 		rs.close();
+		ps.close();
 		return tmp;
 
 	}
@@ -121,7 +123,7 @@ public class ZinCyan {
 	public static String getTimeBack(int PID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패");
@@ -133,11 +135,11 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, PID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
 		rs.next();
 		long timebackTimestamp = (System.currentTimeMillis() - rs.getTimestamp(1).getTime()) / 1000;
 		rs.close();
+		ps.close();
 		if (timebackTimestamp < 60) {
 			return "few seconds ago";
 		} else if (timebackTimestamp < 3600) {
@@ -152,7 +154,7 @@ public class ZinCyan {
 	public static void initPost(Post post, String src) throws SQLException, FileNotFoundException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -162,7 +164,7 @@ public class ZinCyan {
 		if (src == null) {
 			PreparedStatement ps = null; // 객체 생성
 
-			String sql = "insert into posts(user_id) values (?,?,?,?,?,?); ";
+			String sql = "insert into posts(user_id, content, created_at, cnt_like, FILENAME, FILE) values (?,?,?,?,?,?); ";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, post.getUID());
 			ps.setString(2, post.getContent());
@@ -178,7 +180,7 @@ public class ZinCyan {
 			FileInputStream fin = new FileInputStream(imgfile);
 			PreparedStatement ps = null; // 객체 생성
 
-			String sql = "insert into posts(user_id) values (?,?,?,?,?,?); ";
+			String sql = "insert into posts values (?,?,?,?,?,?); ";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, post.getUID());
 			ps.setString(2, post.getContent());
@@ -195,7 +197,7 @@ public class ZinCyan {
 	public static void modPost(Post post, String src) throws SQLException, FileNotFoundException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -231,7 +233,7 @@ public class ZinCyan {
 	public static Integer getPostNum(String UID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -244,18 +246,18 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
 		rs.next();
 		Integer postNumInteger = rs.getInt(1);
 		rs.close();
+		ps.close();
 		return postNumInteger;
 	}
 
 	public static User getUserByUID(String UID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -268,7 +270,6 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
 		User list = new User();
 
@@ -278,6 +279,7 @@ public class ZinCyan {
 		list.setUserPhoneNum(rs.getInt(3));
 		list.setUserEmail(rs.getString(4));
 		rs.close();
+		ps.close();
 
 		return list;
 
@@ -286,7 +288,7 @@ public class ZinCyan {
 	public static Integer getFolloweeNum(String UID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -299,18 +301,18 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
 		rs.next();
 		Integer postNumInteger = rs.getInt(1);
 		rs.close();
+		ps.close();
 		return postNumInteger;
 	}
 
 	public static Integer getFollowerNum(String UID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -323,18 +325,18 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
 		rs.next();
 		Integer postNumInteger = rs.getInt(1);
 		rs.close();
+		ps.close();
 		return postNumInteger;
 	}
 
 	public static Integer[] getPIDsByUID(String UID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -347,7 +349,6 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
 		Integer numPost = ZinCyan.getPostNum(UID);
 		Integer[] tmp = new Integer[numPost];
@@ -356,6 +357,7 @@ public class ZinCyan {
 			tmp[i] = rs.getInt(1);
 		}
 		rs.close();
+		ps.close();
 
 		return tmp;
 
@@ -364,7 +366,7 @@ public class ZinCyan {
 	public static Boolean isFollow(String followee, String follower) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -378,11 +380,11 @@ public class ZinCyan {
 		ps.setString(1, follower);
 		ps.setString(2, followee);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
 		rs.next();
 		Integer tmp = rs.getInt(1);
 		rs.close();
+		ps.close();
 		if (tmp == 0) {
 			return false;
 		}
@@ -392,7 +394,7 @@ public class ZinCyan {
 	public static void follow(String followee, String follower) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -412,7 +414,7 @@ public class ZinCyan {
 	public static void unFollow(String followee, String follower) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -433,7 +435,7 @@ public class ZinCyan {
 	public static Integer[] getStarPost() throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -442,27 +444,55 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 객체 생성
 
-		String sql = "select ID from posts where created_at between date_add(now(), interval -1 week) and now() order by cnt_like desc; ";
+		String sql = "select ID, count(ID) from posts where created_at between date_add(now(), interval -1 week) and now() order by cnt_like desc; ";
 		ps = conn.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
-		Integer numPost = 10;
+		Integer numPost = ZinCyan.getStarPostNum();
 		Integer[] tmp = new Integer[numPost];
-		for (int i = 0; i < numPost; i++) {
-			rs.next();
-			tmp[i] = rs.getInt(1);
+		for (int i = 0; i < numPost - 1; i++) {
+			if (rs.next()) {
+				tmp[i] = rs.getInt(1);
+			}
 		}
 		rs.close();
+		ps.close();
 
 		return tmp;
+
+	}
+
+	public static Integer getStarPostNum() throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "select count(ID) from posts where created_at between date_add(now(), interval -1 week) and now() order by cnt_like desc; ";
+		ps = conn.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+		rs.next();
+		Integer numPost = rs.getInt(1);
+
+		rs.close();
+		ps.close();
+
+		System.out.println(numPost);
+
+		return numPost;
 
 	}
 
 	public static String[] getFollowers(String UID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -475,7 +505,6 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
 		Integer followerNum = ZinCyan.getFollowerNum(UID);
 		String[] tmp = new String[followerNum];
@@ -484,13 +513,14 @@ public class ZinCyan {
 			tmp[i] = rs.getString(1);
 		}
 		rs.close();
+		ps.close();
 		return tmp;
 	}
 
 	public static String[] getFollowees(String UID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -503,7 +533,6 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
 		Integer followeeNum = ZinCyan.getFolloweeNum(UID);
 		String[] tmp = new String[followeeNum];
@@ -512,13 +541,14 @@ public class ZinCyan {
 			tmp[i] = rs.getString(1);
 		}
 		rs.close();
+		ps.close();
 		return tmp;
 	}
 
 	public static Boolean isUser(String UID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -531,11 +561,12 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
 		rs.next();
 		Integer tmp = rs.getInt(1);
+
 		rs.close();
+		ps.close();
 		if (tmp == 0) {
 			return false;
 		}
@@ -545,7 +576,7 @@ public class ZinCyan {
 	public static Boolean validPW(String UID, String PW) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -558,13 +589,12 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-		ps.close();
 
 		rs.next();
 		String tmp = rs.getString(1);
 		rs.close();
-
-		if (PW == tmp) {
+		ps.close();
+		if (PW.equals(tmp)) {
 			return true;
 		}
 		return false;
@@ -574,7 +604,7 @@ public class ZinCyan {
 	public static void initUser(User user) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -589,6 +619,7 @@ public class ZinCyan {
 		ps.setString(2, user.getUserName());
 		ps.setInt(3, user.getUserPhoneNum());
 		ps.setString(4, user.getUserEmail());
+		ps.setString(5, user.getUserPassword());
 		ps.executeUpdate(); // 명렁어 실행
 		ps.close();
 		System.out.println("Inserting Successfully!");
@@ -596,37 +627,37 @@ public class ZinCyan {
 	}
 
 	public static Boolean isLike(String UID, Integer PID) throws SQLException {
-			Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				System.out.println("연결 성공");
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("연결 성공");
 
-			} catch (ClassNotFoundException e) {
-				System.out.println("드라이버 로딩 실패");
-			}
-
-			PreparedStatement ps = null; // 객체 생성
-
-			String sql = "select count(ID) from likes where user_id=? and target_id=?;";
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, UID);
-			ps.setInt(2, PID);
-			ResultSet rs = ps.executeQuery(); // 명렁어 실행
-			ps.close();
-
-			rs.next();
-			Integer tmp = rs.getInt(1);
-			rs.close();
-			if (tmp == 0) {
-				return false;
-			}
-			return true;
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
 		}
-	
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "select count(ID) from likes where user_id=? and target_id=?;";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, UID);
+		ps.setInt(2, PID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+
+		rs.next();
+		Integer tmp = rs.getInt(1);
+		rs.close();
+		ps.close();
+		if (tmp == 0) {
+			return false;
+		}
+		return true;
+	}
+
 	public static void like(String UID, Integer PID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
@@ -646,7 +677,7 @@ public class ZinCyan {
 	public static void unLike(String UID, Integer PID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("연결 성공");
 
 		} catch (ClassNotFoundException e) {
