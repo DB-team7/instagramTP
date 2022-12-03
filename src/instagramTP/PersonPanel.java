@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class PersonPanel extends javax.swing.JPanel implements java.awt.event.ActionListener {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static String UserID = null;
 	private static String myUserID = null;

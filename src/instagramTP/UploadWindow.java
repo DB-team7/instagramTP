@@ -80,7 +80,6 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 		jTextField1.setBorder(null);
 		jTextField1.setPreferredSize(new java.awt.Dimension(400, 400));
 
-
 		uploadBtn.setText("Upload post");
 		uploadBtn.addActionListener(this);
 
@@ -95,7 +94,7 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 		javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
 		fileChooser.setDialogTitle("파일 불러오기");
 		// fileChooser.getsetDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);//안됨
-		fileChooser.setFileFilter(new FileNameExtensionFilter("jpeg", "jpg", "png", "bmp")); // 파일필터
+		fileChooser.setFileFilter(new FileNameExtensionFilter("jpg", "png", "jpeg", "bmp")); // 파일필터
 		fileChooser.setMultiSelectionEnabled(false); // 다중 선택 불가
 		int returnVal = fileChooser.showOpenDialog(this); // show openDialog
 

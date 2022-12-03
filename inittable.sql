@@ -67,9 +67,7 @@ CREATE TABLE likes (
     FOREIGN KEY (user_id)
         REFERENCES users (ID),
     FOREIGN KEY (target_id)
-        REFERENCES posts (ID),
-    FOREIGN KEY (target_id)
-        REFERENCES comment (ID)
+        REFERENCES posts (ID)
 );
 
 

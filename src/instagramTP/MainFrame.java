@@ -168,6 +168,10 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
 		if (arg0.getSource() == homeFeedBtn) {
 			getContentPane().removeAll();
+			headerPane.revalidate();
+			headerPane.repaint();
+			homeFeedPane.revalidate();
+			homeFeedPane.repaint();
 			getContentPane().add(headerPane, BorderLayout.NORTH); // 버튼 icon 바뀌는 것도 추가 예정
 			getContentPane().add(homeFeedPane, BorderLayout.CENTER);
 			getContentPane().setVisible(false);
@@ -180,6 +184,10 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
 		if (arg0.getSource() == searchBtn) {
 			getContentPane().removeAll();
+			headerPane.revalidate();
+			headerPane.repaint();
+			searchPane.revalidate();
+			searchPane.repaint();
 			getContentPane().add(headerPane, BorderLayout.NORTH); // 버튼 icon 바뀌는 것도 추가 예정
 			getContentPane().add(searchPane, BorderLayout.CENTER);
 			getContentPane().setVisible(false);
@@ -192,6 +200,10 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
 		if (arg0.getSource() == starFeedBtn) {
 			getContentPane().removeAll();
+			headerPane.revalidate();
+			headerPane.repaint();
+			starFeedPane.revalidate();
+			starFeedPane.repaint();
 			getContentPane().add(headerPane, BorderLayout.NORTH); // 버튼 icon 바뀌는 것도 추가 예정
 			getContentPane().add(starFeedPane, BorderLayout.CENTER);
 			getContentPane().setVisible(false);
@@ -204,6 +216,10 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
 		if (arg0.getSource() == myPageBtn) {
 			getContentPane().removeAll();
+			headerPane.revalidate();
+			headerPane.repaint();
+			myPagePane.revalidate();
+			myPagePane.repaint();
 			getContentPane().add(headerPane, BorderLayout.NORTH); // 버튼 icon 바뀌는 것도 추가 예정
 			getContentPane().add(myPagePane, BorderLayout.CENTER);
 			getContentPane().setVisible(false);

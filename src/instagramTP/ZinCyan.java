@@ -24,7 +24,7 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 按眉 积己
 
-		String sql = "select cnt_like, user_id , content, created_at, cnt_like, file from posts where ID=?;";
+		String sql = "select ID, user_id , content, created_at, cnt_like, file from posts where ID=?;";
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, PID);
 		ResultSet rs = ps.executeQuery(); // 疙贩绢 角青
@@ -87,8 +87,10 @@ public class ZinCyan {
 		ps.setInt(1, PID);
 		ResultSet rs = ps.executeQuery(); // 疙贩绢 角青
 
+		System.out.println(PID);
 		rs.next();
 		String tmp = rs.getString(1);
+		System.out.println(tmp);
 		rs.close();
 		ps.close();
 		return tmp;
@@ -242,13 +244,14 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 按眉 积己
 
-		String sql = "select count(ID) from posts where id = ?;";
+		String sql = "select count(ID) from posts where user_id = ?;";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 疙贩绢 角青
 
 		rs.next();
 		Integer postNumInteger = rs.getInt(1);
+		System.out.println(postNumInteger);
 		rs.close();
 		ps.close();
 		return postNumInteger;
@@ -345,7 +348,7 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 按眉 积己
 
-		String sql = "select * from posts where user_id = ?;";
+		String sql = "SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC;";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 疙贩绢 角青
@@ -423,7 +426,7 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 按眉 积己
 
-		String sql = "delete * from follow where follower = ? and followee = ?;";
+		String sql = "delete from follow where follower = ? and followee = ?;";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, follower);
 		ps.setString(2, followee);
@@ -444,16 +447,16 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 按眉 积己
 
-		String sql = "select ID, count(ID) from posts where created_at between date_add(now(), interval -1 week) and now() order by cnt_like desc; ";
+		String sql = "select ID from posts where created_at between date_add(now(), interval -1 week) and now() order by cnt_like desc; ";
+		
 		ps = conn.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery(); // 疙贩绢 角青
 
 		Integer numPost = ZinCyan.getStarPostNum();
 		Integer[] tmp = new Integer[numPost];
-		for (int i = 0; i < numPost - 1; i++) {
-			if (rs.next()) {
-				tmp[i] = rs.getInt(1);
-			}
+		for (int i = 0; i < numPost; i++) {
+			rs.next();
+			tmp[i] = rs.getInt(1);
 		}
 		rs.close();
 		ps.close();
@@ -638,7 +641,7 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 按眉 积己
 
-		String sql = "select count(ID) from likes where user_id=? and target_id=?;";
+		String sql = "select count(user_id) from likes where user_id=? and target_id=?;";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ps.setInt(2, PID);
@@ -666,10 +669,10 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 按眉 积己
 
-		String sql = "insert into like values (?,?);";
+		String sql = "insert into likes values (?,?);";
 		ps = conn.prepareStatement(sql);
-		ps.setString(1, UID);
-		ps.setInt(2, PID);
+		ps.setInt(1, PID);
+		ps.setString(2, UID);
 		ps.executeUpdate(); // 疙贩绢 角青
 		ps.close();
 	}
@@ -686,7 +689,7 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 按眉 积己
 
-		String sql = "delete * from like where  user_id=? and target_id=?;";
+		String sql = "delete from likes where  user_id=? and target_id=?;";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ps.setInt(2, PID);
