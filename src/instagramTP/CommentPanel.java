@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 
 public class CommentPanel extends javax.swing.JPanel implements java.awt.event.ActionListener{
 
+	private static final long serialVersionUID = 1L;
 	public CommentPanel() {
         initComponents();
     }

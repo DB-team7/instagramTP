@@ -1,8 +1,12 @@
 package instagramTP;
 
-public class FollowWindow extends javax.swing.JDialog{
-
-	public FollowWindow() {
+public class CommentWindow extends javax.swing.JDialog{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public CommentWindow() {
         initComponents();
     }
 
@@ -35,45 +39,24 @@ public class FollowWindow extends javax.swing.JDialog{
         // 여백으로 시작
         scrollBackPane.add(javax.swing.Box.createVerticalStrut(10));  //패널사이세로여백
         
-        // 어떤 버튼을 눌러서 뜬 창인지에 따라 팔로우/팔로잉 표시가 달라야 함
+        // 댓글창임을 알려주는 라벨,패널
         infoPanel.setBackground(new java.awt.Color(245, 245, 245));
         infoPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
-        infoLabel.setText("116 people are following recyan__");	//팔로우
-        //infoLabel.setText("recyan__ is following 143 people");	//팔로잉
+        infoLabel.setText("4 comments");	//댓글 수 반영?
+        //infoLabel.setText("Comments");	//아니면 그냥 이렇게
         infoPanel.add(infoLabel);
 
         scrollBackPane.add(infoPanel);
         scrollBackPane.add(javax.swing.Box.createVerticalStrut(10));  //패널사이세로여백
         
-        // 팔로우/팔로잉 정보
-        PersonPanel personPanel = new PersonPanel();
-        scrollBackPane.add(personPanel);
+        // 댓글 리스트 쫙
+        CommentPanel cmtPanel = new CommentPanel();
+        scrollBackPane.add(cmtPanel);
         
-        // 추가 예시
-        PersonPanel personPanel2 = new PersonPanel();
-        scrollBackPane.add(personPanel2);
-        PersonPanel personPanel3 = new PersonPanel();
-        scrollBackPane.add(personPanel3);
-        PersonPanel personPanel4 = new PersonPanel();
-        scrollBackPane.add(personPanel4);
-        PersonPanel personPanel5 = new PersonPanel();
-        scrollBackPane.add(personPanel5);
-        PersonPanel personPanel6 = new PersonPanel();
-        scrollBackPane.add(personPanel6);
-        PersonPanel personPanel7 = new PersonPanel();
-        scrollBackPane.add(personPanel7);
-        PersonPanel personPanel8 = new PersonPanel();
-        scrollBackPane.add(personPanel8);
-        PersonPanel personPanel9 = new PersonPanel();
-        scrollBackPane.add(personPanel9);
-        PersonPanel personPanel10 = new PersonPanel();
-        scrollBackPane.add(personPanel10);
-        PersonPanel personPanel11 = new PersonPanel();
-        scrollBackPane.add(personPanel11);
-        PersonPanel personPanel12 = new PersonPanel();
-        scrollBackPane.add(personPanel12);
 
+        // 스크롤팬에 컨텐츠가 부족할 때 이상해보이는 거 고칠 예정
+        scrollBackPane.add(javax.swing.Box.createVerticalStrut(500));  //우선은 여백만으로 해결
        
         scrollPane.setViewportView(scrollBackPane);
 	    getContentPane().add(scrollPane);
