@@ -172,7 +172,7 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener {
 					JOptionPane.showMessageDialog(null, "ID or passward is wrong..."); // if ID and password not match
 				}
 			} catch (HeadlessException | SQLException e) {
-				JOptionPane.showMessageDialog(null, "Inpur ID and Password"); // if ID and password not match
+				JOptionPane.showMessageDialog(null, "Input ID and Password"); // if ID and password not match
 				e.printStackTrace();
 			}
 		}

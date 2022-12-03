@@ -188,6 +188,8 @@ public class JoinFrame extends JFrame {
 		jTextField5.setPreferredSize(new java.awt.Dimension(200, 30));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
+		gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
+		jPanel1.add(jTextField5, gridBagConstraints);
 
 		jButton1.setFont(new java.awt.Font("¸¼Àº °íµñ", 0, 14)); // NOI18N
 		jButton1.setText("Join");
