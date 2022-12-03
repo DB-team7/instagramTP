@@ -23,7 +23,7 @@ public class UserDAO { //회원 테이블에 접근할 수 있도록 DAP(데이터 접근 객체) 생
 		}
 	}
 	/*
-	//JoinFrame에 아이디 중복 체크와 합해서 수정 후 넣음
+	//JoinFrame에 아이디 중복 체크와 합해서 수정 후 옮김
 	//회원가입
 	public int join(User user) {
 		String SQL="insert into users values (?,?,?,?,?)"; //id, name, phone_num, email, pw
