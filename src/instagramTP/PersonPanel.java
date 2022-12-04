@@ -31,7 +31,7 @@ public class PersonPanel extends javax.swing.JPanel implements java.awt.event.Ac
 		IDBtn = new javax.swing.JButton();
 		nameLabel = new javax.swing.JLabel();
 
-		User thisUser = ZinCyan.getUserByUID(myUID);
+		User thisUser = ZinCyan.getUserByUID(UID);
 
 		Image img = new ImageIcon("images/basicProfilePhoto.png").getImage();
 		if (thisUser.getInputStream() != null) {

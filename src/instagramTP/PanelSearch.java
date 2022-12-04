@@ -1,5 +1,6 @@
 package instagramTP;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 public class PanelSearch extends javax.swing.JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
+	private static String myUserID;
 	private static String quote = null;
 
 	public PanelSearch(String UID) throws SQLException, IOException {
@@ -21,6 +23,7 @@ public class PanelSearch extends javax.swing.JPanel implements ActionListener {
 
 	private void initComponents(String UID) throws SQLException, IOException {
 
+		myUserID = UID;
 		jPanel1 = new javax.swing.JPanel();
 		jPanel2 = new javax.swing.JPanel();
 		jTextField1 = new javax.swing.JTextField();
@@ -85,17 +88,6 @@ public class PanelSearch extends javax.swing.JPanel implements ActionListener {
 		scrollBackPane.setBackground(new java.awt.Color(255, 255, 255));
 		scrollBackPane.setLayout(new javax.swing.BoxLayout(scrollBackPane, javax.swing.BoxLayout.Y_AXIS));
 
-		// TODO: 검색 결과 구현 (다른 사람 정보)
-		PersonPanel[] personPanel = new PersonPanel[ZinCyan.getSearchUserNum(quote)];
-		String[] persons = new String[ZinCyan.getSearchUserNum(quote)];
-		persons = ZinCyan.getSearchUID(quote);
-		for (Integer i = 0; i < ZinCyan.getSearchUserNum(quote); i++) {
-			// 게시글 post
-			personPanel[i] = new PersonPanel(persons[i], UID);
-			scrollBackPane.add(personPanel[i]);
-
-		}
-
 		scrollPane.setViewportView(scrollBackPane);
 		
 		jPanel1.add(scrollPane, java.awt.BorderLayout.CENTER);
@@ -113,7 +105,28 @@ public class PanelSearch extends javax.swing.JPanel implements ActionListener {
 
 	public void actionPerformed(java.awt.event.ActionEvent arg0) {
 		if (arg0.getSource() == jButton1) {
+			scrollBackPane.removeAll();
 			
+			// search results
+			PersonPanel[] personPanel;
+			try {
+				personPanel = new PersonPanel[ZinCyan.getSearchUserNum(jTextField1.getText())];
+				String[] persons = new String[ZinCyan.getSearchUserNum(jTextField1.getText())];
+				persons = ZinCyan.getSearchUID(jTextField1.getText());
+				for (Integer i = 0; i < ZinCyan.getSearchUserNum(jTextField1.getText()); i++) {
+					personPanel[i] = new PersonPanel(persons[i], myUserID);
+					scrollBackPane.add(personPanel[i]);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			scrollBackPane.setVisible(false);
+			scrollBackPane.setVisible(true);
 		}
 	}
 
