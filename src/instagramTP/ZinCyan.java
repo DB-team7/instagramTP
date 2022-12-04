@@ -654,7 +654,7 @@ public class ZinCyan {
 
 	}
 
-	public static Boolean isLike(String UID, Integer CID) throws SQLException {
+	public static Boolean isLike(String UID, Integer PID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -666,10 +666,10 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 按眉 积己
 
-		String sql = "select count(user_id) from likes_comment where user_id=? and target_id=?;";
+		String sql = "select count(user_id) from likes where user_id=? and target_id=?;";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
-		ps.setInt(2, CID);
+		ps.setInt(2, PID);
 		ResultSet rs = ps.executeQuery(); // 疙贩绢 角青
 
 		rs.next();

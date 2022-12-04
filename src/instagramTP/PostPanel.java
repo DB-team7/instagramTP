@@ -128,8 +128,9 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 					likeBtn.setPressedIcon(heartI_p);
 					likeNumLabel.revalidate();
 					likeNumLabel.repaint();
+					likeBtn.setSelected(true);
 					try {
-						ZinCyan.unLike(myUID, PID);
+						ZinCyan.like(myUID, PID);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -140,8 +141,9 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 					likeBtn.setPressedIcon(heartI_fp);
 					likeNumLabel.revalidate();
 					likeNumLabel.repaint();
+					likeBtn.setSelected(false);
 					try {
-						ZinCyan.like(myUID, PID);
+						ZinCyan.unLike(myUID, PID);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

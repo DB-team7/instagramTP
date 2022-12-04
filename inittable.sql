@@ -71,6 +71,7 @@ CREATE TABLE likes (
     FOREIGN KEY (target_id)
         REFERENCES posts (ID)
 );
+
 /*댓글　좋아요　테이블*/
 CREATE TABLE likes_comment (
     target_id INT,
