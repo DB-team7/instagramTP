@@ -15,9 +15,6 @@ import javax.swing.JPanel;
 
 public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static String userID = null;
 
@@ -45,11 +42,6 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 		searchBtn = new JButton();
 		starFeedBtn = new JButton();
 		myPageBtn = new JButton();
-
-		homeFeedPane = new PanelHomeFeed(UID);
-		searchPane = new PanelSearch(UID);
-		starFeedPane = new PanelStarFeed(UID);
-		myPagePane = new PanelMyPage(UID);
 
 		// load images
 		upload = new ImageIcon("images/upload.png").getImage();
@@ -134,6 +126,8 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
 		// add to MainFrame. 헤더 버튼에 따라 다르게 뜨게. 기본은 homeFeedPane(PanelHomeFeed)
 		getContentPane().add(headerPane, BorderLayout.NORTH);
+		
+		homeFeedPane = new PanelHomeFeed(UID);
 		getContentPane().add(homeFeedPane, BorderLayout.CENTER);
 
 	}
@@ -149,11 +143,16 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
 		if (arg0.getSource() == homeFeedBtn) {
 			getContentPane().removeAll();
-			headerPane.revalidate();
-			headerPane.repaint();
-			homeFeedPane.revalidate();
-			homeFeedPane.repaint();
-			getContentPane().add(headerPane, BorderLayout.NORTH); // 버튼 icon 바뀌는 것도 추가 예정
+			getContentPane().add(headerPane, BorderLayout.NORTH);
+			try {
+				homeFeedPane = new PanelHomeFeed(userID);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			getContentPane().add(homeFeedPane, BorderLayout.CENTER);
 			getContentPane().setVisible(false);
 			homeFeedBtn.setIcon(homeI_f);
@@ -165,11 +164,16 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
 		if (arg0.getSource() == searchBtn) {
 			getContentPane().removeAll();
-			headerPane.revalidate();
-			headerPane.repaint();
-			searchPane.revalidate();
-			searchPane.repaint();
-			getContentPane().add(headerPane, BorderLayout.NORTH); // 버튼 icon 바뀌는 것도 추가 예정
+			getContentPane().add(headerPane, BorderLayout.NORTH);
+			try {
+				searchPane = new PanelSearch(userID);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			getContentPane().add(searchPane, BorderLayout.CENTER);
 			getContentPane().setVisible(false);
 			homeFeedBtn.setIcon(homeI);
@@ -181,11 +185,16 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
 		if (arg0.getSource() == starFeedBtn) {
 			getContentPane().removeAll();
-			headerPane.revalidate();
-			headerPane.repaint();
-			starFeedPane.revalidate();
-			starFeedPane.repaint();
-			getContentPane().add(headerPane, BorderLayout.NORTH); // 버튼 icon 바뀌는 것도 추가 예정
+			getContentPane().add(headerPane, BorderLayout.NORTH);
+			try {
+				starFeedPane = new PanelStarFeed(userID);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+			}
 			getContentPane().add(starFeedPane, BorderLayout.CENTER);
 			getContentPane().setVisible(false);
 			homeFeedBtn.setIcon(homeI);
@@ -197,11 +206,16 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
 		if (arg0.getSource() == myPageBtn) {
 			getContentPane().removeAll();
-			headerPane.revalidate();
-			headerPane.repaint();
-			myPagePane.revalidate();
-			myPagePane.repaint();
-			getContentPane().add(headerPane, BorderLayout.NORTH); // 버튼 icon 바뀌는 것도 추가 예정
+			getContentPane().add(headerPane, BorderLayout.NORTH);
+			try {
+				myPagePane = new PanelMyPage(userID);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			getContentPane().add(myPagePane, BorderLayout.CENTER);
 			getContentPane().setVisible(false);
 			homeFeedBtn.setIcon(homeI);

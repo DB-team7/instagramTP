@@ -1,5 +1,6 @@
 package instagramTP;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class FollowerWindow extends javax.swing.JDialog {
@@ -19,8 +20,6 @@ public class FollowerWindow extends javax.swing.JDialog {
 		infoPanel = new javax.swing.JPanel();
 		infoLabel = new javax.swing.JLabel();
 
-		java.awt.Image nullImg = new javax.swing.ImageIcon("images/nullImage.png").getImage();
-		setIconImage(nullImg); // 프레임바 아이콘 우선 투명으로
 		setSize(600, 600);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -58,12 +57,31 @@ public class FollowerWindow extends javax.swing.JDialog {
 		PersonPanel[] personPanel = new PersonPanel[followerNum];
 		for (int i = 0; i < followerNum; i++) {
 			// 팔로우/팔로잉 정보
-			personPanel[i] = new PersonPanel(followers[i], UID);
+			try {
+				personPanel[i] = new PersonPanel(followers[i], UID);
+			} catch (SQLException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			scrollBackPane.add(personPanel[i]);
 		}
+		scrollBackPane.add(javax.swing.Box.createVerticalStrut(1000)); // default blank
 
 		scrollPane.setViewportView(scrollBackPane);
-		getContentPane().add(scrollPane);
+
+		// add scrollPane in center
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(layout.createSequentialGroup()
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(scrollPane, 470, 470, 470)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(scrollPane)
+				);
 
 	}
 

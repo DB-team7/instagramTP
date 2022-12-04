@@ -1,18 +1,25 @@
 package instagramTP;
 
+import java.awt.Image;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
+
+import javax.swing.ImageIcon;
 
 public class PersonPanel extends javax.swing.JPanel implements java.awt.event.ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static String UserID = null;
 	private static String myUserID = null;
 
-	public PersonPanel(String UID, String myUID) throws SQLException {
+	public PersonPanel(String UID, String myUID) throws SQLException, IOException {
 		initComponents(UID, myUID);
 	}
 
-	private void initComponents(String UID, String myUID) throws SQLException {
+	private void initComponents(String UID, String myUID) throws SQLException, IOException {
 
 		UserID = UID;
 		myUserID = myUID;
@@ -23,10 +30,21 @@ public class PersonPanel extends javax.swing.JPanel implements java.awt.event.Ac
 		profileImgLabel = new javax.swing.JLabel();
 		IDBtn = new javax.swing.JButton();
 		nameLabel = new javax.swing.JLabel();
-		profileImg = new javax.swing.ImageIcon("images/basicProfilePhoto.png").getImage();
 
-		profileImgLabel.setIcon(new javax.swing.ImageIcon(profileImg));
-		profileImgLabel.setPreferredSize(new java.awt.Dimension(32, 32));
+		User thisUser = ZinCyan.getUserByUID(myUID);
+
+		Image img = new ImageIcon("images/basicProfilePhoto.png").getImage();
+		if (thisUser.getInputStream() != null) {
+			File tempFile = File.createTempFile(String.valueOf(thisUser.getInputStream().hashCode()), ".tmp");
+			tempFile.deleteOnExit();
+			Files.copy(thisUser.getInputStream(), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			Path tempPath = tempFile.toPath();
+
+			img = new ImageIcon(tempPath.toString()).getImage();
+		}
+
+		ImageIcon profileImg = new ImageIcon(img.getScaledInstance(32, 32, Image.SCALE_SMOOTH));
+		profileImgLabel.setIcon(profileImg); // 현재 프로필 사진 뜨게 하기
 
 		IDBtn.setText(UID);
 		IDBtn.setBorder(null);
@@ -34,20 +52,27 @@ public class PersonPanel extends javax.swing.JPanel implements java.awt.event.Ac
 		IDBtn.addActionListener(this); // ID 클릭하면 그 사람 페이지로 (OtherPageWindow.java)
 
 		nameLabel.setText(ZinCyan.getUserNameByUID(UID));
-		nameLabel.setForeground(new java.awt.Color(153, 153, 153));
+		nameLabel.setForeground(java.awt.Color.GRAY);
 
 		// add components
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup().addGap(15, 15, 15).addComponent(profileImgLabel)
-						.addGap(10, 10, 10).addComponent(IDBtn).addGap(10, 10, 10).addComponent(nameLabel)
+				.addGroup(layout.createSequentialGroup()
+						.addGap(15, 15, 15).
+						addComponent(profileImgLabel, 32, 32, 32)
+						.addGap(10, 10, 10)
+						.addComponent(IDBtn)
+						.addGap(10, 10, 10)
+						.addComponent(nameLabel)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
 								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup().addGap(10, 10, 10)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-								.addComponent(profileImgLabel).addComponent(IDBtn).addComponent(nameLabel))
+								.addComponent(profileImgLabel, 32, 32, 32)
+								.addComponent(IDBtn)
+								.addComponent(nameLabel))
 						.addGap(10, 10, 10)));
 
 	}

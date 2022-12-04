@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class PanelSearch extends javax.swing.JPanel implements ActionListener {
@@ -14,11 +15,11 @@ public class PanelSearch extends javax.swing.JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static String quote = null;
 
-	public PanelSearch(String UID) throws SQLException {
+	public PanelSearch(String UID) throws SQLException, IOException {
 		initComponents(UID);
 	}
 
-	private void initComponents(String UID) throws SQLException {
+	private void initComponents(String UID) throws SQLException, IOException {
 
 		jPanel1 = new javax.swing.JPanel();
 		jPanel2 = new javax.swing.JPanel();
@@ -83,7 +84,6 @@ public class PanelSearch extends javax.swing.JPanel implements ActionListener {
 
 		scrollBackPane.setBackground(new java.awt.Color(255, 255, 255));
 		scrollBackPane.setLayout(new javax.swing.BoxLayout(scrollBackPane, javax.swing.BoxLayout.Y_AXIS));
-		scrollPane.setViewportView(scrollBackPane);
 
 		// TODO: 검색 결과 구현 (다른 사람 정보)
 		PersonPanel[] personPanel = new PersonPanel[ZinCyan.getSearchUserNum(quote)];
@@ -96,6 +96,8 @@ public class PanelSearch extends javax.swing.JPanel implements ActionListener {
 
 		}
 
+		scrollPane.setViewportView(scrollBackPane);
+		
 		jPanel1.add(scrollPane, java.awt.BorderLayout.CENTER);
 		// add jPanel1 in center
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

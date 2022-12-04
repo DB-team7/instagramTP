@@ -1,13 +1,14 @@
 package instagramTP;
 
+import java.awt.Color;
+import java.awt.Insets;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import com.formdev.flatlaf.ui.FlatLineBorder;
+
 public class OtherPageWindow extends javax.swing.JDialog implements java.awt.event.ActionListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static String userID = null;
 	public OtherPageWindow(String UID, String myUID) throws SQLException, IOException {
@@ -35,35 +36,33 @@ public class OtherPageWindow extends javax.swing.JDialog implements java.awt.eve
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-		getContentPane().setBackground(new java.awt.Color(245, 245, 245));
+		getContentPane().setBackground(new Color(245, 245, 245));
 		getContentPane().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
 
 		scrollPane.setBorder(null);
 		scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setPreferredSize(new java.awt.Dimension(470, 560));
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16); // 스크롤 속도 증가
 		scrollPane.getVerticalScrollBar().setPreferredSize(new java.awt.Dimension(0, 0)); // 스크롤바 숨기기
 
-		scrollBackPane.setBackground(new java.awt.Color(245, 245, 245));
+		scrollBackPane.setBackground(new Color(245, 245, 245));
 		scrollBackPane.setLayout(new javax.swing.BoxLayout(scrollBackPane, javax.swing.BoxLayout.Y_AXIS));
 
 		// 여백으로 시작
 		scrollBackPane.add(javax.swing.Box.createVerticalStrut(30)); // 패널사이세로여백
 
 		// 다른 사람 정보란
-		otherDataPanel.setBackground(new java.awt.Color(255, 255, 255));
+		otherDataPanel.setBackground(new Color(255, 255, 255));
 		// otherDataPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(24, 24,
 		// 24, 24)); //내부 여백
-		// otherDataPanel.setPreferredSize(new java.awt.Dimension(470, 120));
-		otherDataPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+		otherDataPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.GRAY));
 
 		User thisUser = ZinCyan.getUserByUID(UID);
 
 		idLabel.setText(thisUser.getUserID());
 		otherDataPanel.add(idLabel);
 
-		nameLabel.setForeground(new java.awt.Color(142, 142, 142));
+		nameLabel.setForeground(Color.GRAY);
 		nameLabel.setText(thisUser.getUserName());
 		otherDataPanel.add(nameLabel);
 
@@ -142,8 +141,8 @@ public class OtherPageWindow extends javax.swing.JDialog implements java.awt.eve
 		scrollBackPane.add(javax.swing.Box.createVerticalStrut(30)); // 패널사이세로여백
 
 		// 게시글 수
-		postNumPanel.setBackground(new java.awt.Color(245, 245, 245));
-		postNumPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+		postNumPanel.setBackground(new Color(245, 245, 245));
+		postNumPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0, 0, 0)));
 
 		postNumLabel.setText(Integer.toString(ZinCyan.getPostNum(UID)) + " Posts by " + UID);
 		postNumPanel.add(postNumLabel);
@@ -157,31 +156,29 @@ public class OtherPageWindow extends javax.swing.JDialog implements java.awt.eve
 		for (Integer i = 0; i < ZinCyan.getPostNum(UID); i++) {
 			// 게시글 post
 			postPanel[i] = new PostPanel(posts[i], myUID);
+			postPanel[i].setBorder(new FlatLineBorder(new Insets(0, 0, 0, 0), Color.LIGHT_GRAY, 1, 30));
 			scrollBackPane.add(postPanel[i]);
 			scrollBackPane.add(javax.swing.Box.createVerticalStrut(30)); // 패널사이세로여백
 		}
-//        //세로여백은 게시글 끝날 때마다 꼭 같이 넣어주기
-//        
-//        PostPanel postPanel2 = new PostPanel();
-//        scrollBackPane.add(postPanel2);
-//        scrollBackPane.add(javax.swing.Box.createVerticalStrut(30));  //패널사이세로여백
-
+		scrollBackPane.add(javax.swing.Box.createVerticalStrut(1000)); // 패널사이세로여백
+		
 		scrollPane.setViewportView(scrollBackPane);
-		getContentPane().add(scrollPane);
+
+		// add scrollPane in center
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(layout.createSequentialGroup()
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(scrollPane, 470, 470, 470)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(scrollPane)
+				);
 
 	}
-
-//	public static void main(String args[]) {
-//		
-//		OtherPageWindow window = new OtherPageWindow();
-//		window.setVisible(true);
-//	        
-////	    java.awt.EventQueue.invokeLater(new Runnable() {
-////	        public void run() {
-////	        	
-////	        }
-////	    });
-//	}
 
 	@Override
 	public void actionPerformed(java.awt.event.ActionEvent arg0) {
@@ -205,7 +202,7 @@ public class OtherPageWindow extends javax.swing.JDialog implements java.awt.eve
 		if (arg0.getSource() == followingBtn) {
 			try {
 				fleWindow = new FolloweeWindow(userID);
-			} catch (SQLException e) {
+			} catch (SQLException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
