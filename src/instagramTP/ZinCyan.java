@@ -862,7 +862,7 @@ public class ZinCyan {
 		PreparedStatement ps = null; // 按眉 积己
 
 		// TODO: 孽府 涝仿
-		String sql = "select count(followee) from follow natural join users where followee = users.ID = ?;";
+		String sql = "SELECT count(ID) FROM posts WHERE user_id = (SELECT followee FROM follow WHERE followee = ?)";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 疙贩绢 角青
@@ -887,7 +887,7 @@ public class ZinCyan {
 		PreparedStatement ps = null; // 按眉 积己
 
 		// TODO: 孽府 涝仿
-		String sql = "SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC;";
+		String sql = "SELECT ID FROM posts WHERE user_id = (SELECT followee FROM follow WHERE followee = ?)";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 疙贩绢 角青
