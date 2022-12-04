@@ -9,7 +9,6 @@ import java.nio.file.Path;
 import java.sql.SQLException;
 
 import javax.imageio.ImageIO;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.ActionListener {
 	private static final long serialVersionUID = 1L;

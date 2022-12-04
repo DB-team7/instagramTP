@@ -12,9 +12,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-
-import com.formdev.flatlaf.FlatLightLaf;
 
 public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 

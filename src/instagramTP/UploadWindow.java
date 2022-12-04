@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import javax.imageio.ImageIO;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class UploadWindow extends javax.swing.JDialog implements java.awt.event.ActionListener {
 	

@@ -11,11 +11,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
+
 import javax.swing.ImageIcon;
-import javax.swing.UIManager;
-import com.formdev.flatlaf.ui.FlatLineBorder;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.ui.FlatLineBorder;
 
 public class PostPanel extends javax.swing.JPanel implements java.awt.event.ActionListener {
 

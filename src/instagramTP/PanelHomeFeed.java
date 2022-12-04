@@ -1,11 +1,7 @@
 package instagramTP;
 
-import java.awt.Color;
-import java.awt.Insets;
 import java.io.IOException;
 import java.sql.SQLException;
-
-import com.formdev.flatlaf.ui.FlatLineBorder;
 
 public class PanelHomeFeed extends javax.swing.JPanel {
 
