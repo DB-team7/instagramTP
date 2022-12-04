@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 
 import javax.imageio.ImageIO;
@@ -32,7 +33,7 @@ public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.
 		if (thisPost.getInputStream() != null) {
 			File tempFile = File.createTempFile(String.valueOf(thisPost.getInputStream().hashCode()), ".tmp");
 			tempFile.deleteOnExit();
-			Files.copy(thisPost.getInputStream(), tempFile.toPath());
+			Files.copy(thisPost.getInputStream(), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			Path tempPath = tempFile.toPath();
 
 			nullImg = new javax.swing.ImageIcon(tempPath.toString()).getImage();

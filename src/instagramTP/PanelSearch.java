@@ -3,14 +3,16 @@ package instagramTP;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.sql.SQLException;
 
-public class PanelSearch extends javax.swing.JPanel {
-
+public class PanelSearch extends javax.swing.JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
+	private static String quote = null;
 
 	public PanelSearch(String UID) throws SQLException {
 		initComponents(UID);
@@ -42,7 +44,7 @@ public class PanelSearch extends javax.swing.JPanel {
 		jTextField1.setBackground(new java.awt.Color(229, 229, 229));
 		jTextField1.setText("Search friends...");
 		jTextField1.setForeground(Color.GRAY);
-		jTextField1.addFocusListener(new FocusListener() {	// when start typing, guide disappear
+		jTextField1.addFocusListener(new FocusListener() { // when start typing, guide disappear
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (jTextField1.getText().equals("")) {
@@ -50,6 +52,7 @@ public class PanelSearch extends javax.swing.JPanel {
 					jTextField1.setForeground(Color.GRAY);
 				}
 			}
+
 			@Override
 			public void focusGained(FocusEvent e) {
 				if (jTextField1.getText().equals("Search friends...")) {
@@ -66,6 +69,7 @@ public class PanelSearch extends javax.swing.JPanel {
 		jButton1.setIcon(searchI);
 		jButton1.setBorder(null);
 		jButton1.setPreferredSize(new java.awt.Dimension(30, 30));
+		jButton1.addActionListener(this);
 		jPanel2.add(jButton1);
 
 		jPanel1.add(jPanel2, java.awt.BorderLayout.PAGE_START);
@@ -82,27 +86,33 @@ public class PanelSearch extends javax.swing.JPanel {
 		scrollPane.setViewportView(scrollBackPane);
 
 		// TODO: 검색 결과 구현 (다른 사람 정보)
-		PersonPanel personPanel = new PersonPanel(UID,UID);
-		scrollBackPane.add(personPanel);
+		PersonPanel[] personPanel = new PersonPanel[ZinCyan.getSearchUserNum(quote)];
+		String[] persons = new String[ZinCyan.getSearchUserNum(quote)];
+		persons = ZinCyan.getSearchUID(quote);
+		for (Integer i = 0; i < ZinCyan.getSearchUserNum(quote); i++) {
+			// 게시글 post
+			personPanel[i] = new PersonPanel(persons[i], UID);
+			scrollBackPane.add(personPanel[i]);
+
+		}
 
 		jPanel1.add(scrollPane, java.awt.BorderLayout.CENTER);
-
 		// add jPanel1 in center
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createSequentialGroup()
+		layout.setHorizontalGroup(layout.createSequentialGroup()
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
 						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 				.addComponent(jPanel1, 470, 470, 470)
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				);
-		layout.setVerticalGroup(
-				layout.createSequentialGroup()
-				.addGap(10)
-				.addComponent(jPanel1)
-				);
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		layout.setVerticalGroup(layout.createSequentialGroup().addGap(10).addComponent(jPanel1));
+	}
+
+	public void actionPerformed(java.awt.event.ActionEvent arg0) {
+		if (arg0.getSource() == jButton1) {
+			
+		}
 	}
 
 	// Variables declaration
@@ -113,7 +123,7 @@ public class PanelSearch extends javax.swing.JPanel {
 	private javax.swing.JScrollPane scrollPane;
 	private javax.swing.JTextField jTextField1;
 
-	Image search; 
+	Image search;
 	ImageIcon searchI;
 	// End of variables declaration
 }

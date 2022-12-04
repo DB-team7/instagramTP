@@ -808,7 +808,7 @@ public class ZinCyan {
 			System.out.println("드라이버 로딩 실패");
 		}
 		if (src != null) {
-			
+
 			File imgfile = new File(src);
 			FileInputStream fin = new FileInputStream(imgfile);
 			PreparedStatement ps = null; // 객체 생성
@@ -823,4 +823,140 @@ public class ZinCyan {
 			System.out.println("Inserting Successfully!");
 		}
 	}
+
+	public static int getFolloweePostNum(String UID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		// TODO: 쿼리 입력
+		String sql = "select count(followee) from follow natural join users where followee = users.ID = ?;";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, UID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+
+		rs.next();
+		Integer postNumInteger = rs.getInt(1);
+		rs.close();
+		ps.close();
+		return postNumInteger;
+	}
+
+	public static Integer[] getFolloweePID(String UID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		// TODO: 쿼리 입력
+		String sql = "SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC;";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, UID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+
+		Integer numPost = ZinCyan.getFolloweePostNum(UID);
+		Integer[] tmp = new Integer[numPost];
+		for (int i = 0; i < numPost; i++) {
+			rs.next();
+			tmp[i] = rs.getInt(1);
+		}
+		rs.close();
+		ps.close();
+
+		return tmp;
+	}
+
+	public static int getSearchUserNum(String text) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "SELECT count(ID) FROM users WHERE ID LIKE CONCAT ('%' , ? , '%');";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, text);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+
+		rs.next();
+		Integer postNumInteger = rs.getInt(1);
+		rs.close();
+		ps.close();
+		return postNumInteger;
+	}
+
+	public static String[] getSearchUID(String quote) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "SELECT ID FROM users WHERE ID LIKE CONCAT ('%' , ? , '%');";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, quote);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+
+		Integer userNum = ZinCyan.getSearchUserNum(quote);
+		String[] tmp = new String[userNum];
+		for (int i = 0; i < userNum; i++) {
+			rs.next();
+			tmp[i] = rs.getString(1);
+		}
+		rs.close();
+		ps.close();
+		return tmp;
+	}
+
+	public static Integer getCommentNumByPID(Integer PID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "SELECT count(ID) FROM comment WHERE post_id = ?;";
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, PID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+
+		Integer tmp = null;
+		rs.next();
+		tmp = rs.getInt(1);
+
+		rs.close();
+		ps.close();
+
+		return tmp;
+	}
+	
+	
 }

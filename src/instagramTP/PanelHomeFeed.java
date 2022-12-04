@@ -30,9 +30,9 @@ public class PanelHomeFeed extends javax.swing.JPanel {
 		// 여백으로 시작
 		ScrollBackPane.add(javax.swing.Box.createVerticalStrut(30)); // 패널사이세로여백
 
-		PostPanel[] postPanel = new PostPanel[ZinCyan.getPostNum(UID)];
-		Integer[] posts = new Integer[ZinCyan.getPostNum(UID)];
-		posts = ZinCyan.getPIDsByUID(UID);
+		PostPanel[] postPanel = new PostPanel[ZinCyan.getFolloweePostNum(UID)];
+		Integer[] posts = new Integer[ZinCyan.getFolloweePostNum(UID)];
+		posts = ZinCyan.getFolloweePID(UID);
 		for (Integer i = 0; i < ZinCyan.getPostNum(UID); i++) {
 			// 게시글 post
 			postPanel[i] = new PostPanel(posts[i], UID);

@@ -1,17 +1,15 @@
 package instagramTP;
 
+import java.sql.SQLException;
+
 public class CommentWindow extends javax.swing.JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private static Integer postID = null;
-
-	public CommentWindow(Integer PID, String myUID) {
+	public CommentWindow(Integer PID, String myUID) throws SQLException {
 		initComponents(PID, myUID);
 	}
 
-	public void initComponents(Integer PID, String myUID) {
-		postID = PID;
-
+	public void initComponents(Integer PID, String myUID) throws SQLException {
 		scrollPane = new javax.swing.JScrollPane();
 		scrollBackPane = new javax.swing.JPanel();
 		infoPanel = new javax.swing.JPanel();
@@ -43,7 +41,7 @@ public class CommentWindow extends javax.swing.JDialog {
 		infoPanel.setBackground(new java.awt.Color(245, 245, 245));
 		infoPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
-		infoLabel.setText("4 comments"); // 댓글 수 반영?
+		infoLabel.setText(Integer.toString(ZinCyan.getCommentNumByPID(PID)) + " comments"); // 댓글 수 반영
 		// infoLabel.setText("Comments"); //아니면 그냥 이렇게
 		infoPanel.add(infoLabel);
 
@@ -51,8 +49,15 @@ public class CommentWindow extends javax.swing.JDialog {
 		scrollBackPane.add(javax.swing.Box.createVerticalStrut(10)); // 패널사이세로여백
 
 		// 댓글 리스트 쫙
-		CommentPanel cmtPanel = new CommentPanel(CID,myUID);
-		scrollBackPane.add(cmtPanel);
+
+		CommentPanel[] cmtPanel = new CommentPanel[ZinCyan.getCommentNumByPID(PID)];
+		Integer[] comments = new Integer[ZinCyan.getCommentNumByPID(PID)];
+		comments = ZinCyan.getPIDsByUID(myUID);
+		for (Integer i = 0; i < ZinCyan.getPostNum(myUID); i++) {
+			// 게시글 post
+			cmtPanel[i] = new CommentPanel(comments[i], myUID);
+			scrollBackPane.add(cmtPanel[i]);
+		}
 
 		// 스크롤팬에 컨텐츠가 부족할 때 이상해보이는 거 고칠 예정
 		scrollBackPane.add(javax.swing.Box.createVerticalStrut(500)); // 우선은 여백만으로 해결

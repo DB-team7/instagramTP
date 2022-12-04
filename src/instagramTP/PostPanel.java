@@ -305,7 +305,12 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		}
 
 		if (arg0.getSource() == commentWindowBtn) {
-			cmtWindow = new CommentWindow(postID, myUserID);
+			try {
+				cmtWindow = new CommentWindow(postID, myUserID);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			cmtWindow.setVisible(true);
 			java.awt.EventQueue.invokeLater(new Runnable() {
 				public void run() {
