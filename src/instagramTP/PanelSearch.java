@@ -99,6 +99,7 @@ public class PanelSearch extends javax.swing.JPanel implements ActionListener {
 		scrollPane.setViewportView(scrollBackPane);
 		
 		jPanel1.add(scrollPane, java.awt.BorderLayout.CENTER);
+		
 		// add jPanel1 in center
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);

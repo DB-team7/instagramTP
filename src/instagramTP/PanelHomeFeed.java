@@ -37,7 +37,7 @@ public class PanelHomeFeed extends javax.swing.JPanel {
 		PostPanel[] postPanel = new PostPanel[ZinCyan.getFolloweePostNum(UID)];
 		Integer[] posts = new Integer[ZinCyan.getFolloweePostNum(UID)];
 		posts = ZinCyan.getFolloweePID(UID);
-		for (Integer i = 0; i < ZinCyan.getPostNum(UID); i++) {
+		for (Integer i = 0; i < ZinCyan.getFolloweePostNum(UID); i++) {
 			// °Ô½Ã±Û post
 			postPanel[i] = new PostPanel(posts[i], UID);
 			postPanel[i].setBorder(new FlatLineBorder(new Insets(0, 0, 0, 0), Color.LIGHT_GRAY, 1, 30));

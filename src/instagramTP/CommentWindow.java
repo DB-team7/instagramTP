@@ -59,8 +59,7 @@ public class CommentWindow extends javax.swing.JDialog {
 			scrollBackPane.add(cmtPanel[i]);
 		}
 
-		// 스크롤팬에 컨텐츠가 부족할 때 이상해보이는 거 고칠 예정
-		scrollBackPane.add(javax.swing.Box.createVerticalStrut(500)); // 우선은 여백만으로 해결
+		scrollBackPane.add(javax.swing.Box.createVerticalStrut(500)); // default blank
 
 		scrollPane.setViewportView(scrollBackPane);
 		getContentPane().add(scrollPane);

@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -65,7 +66,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		Post post = ZinCyan.getPostbyPID(PID);
 		postOwnerID = ZinCyan.getUserNamebyPID(PID);
 		User postOwner = ZinCyan.getUserByUID(postOwnerID);
-		
+
 		Image img = new ImageIcon("images/basicProfilePhoto.png").getImage();
 		if (postOwner.getInputStream() != null) {
 			File tempFile = File.createTempFile(String.valueOf(postOwner.getInputStream().hashCode()), ".tmp");
@@ -76,8 +77,8 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 			img = (new ImageIcon(tempPath.toString()).getImage()).getScaledInstance(32, 32, Image.SCALE_SMOOTH);
 		}
 		profileImg = new ImagePanel(img);
-//		profileImg.putClientProperty(FlatClientProperties.STYLE, "arc: 999");	// µ¿±×¶þ°Ô ¸¸µé±â ½ÇÆÐ...
-		
+		//		profileImg.putClientProperty(FlatClientProperties.STYLE, "arc: 999");	// µ¿±×¶þ°Ô ¸¸µé±â ½ÇÆÐ...
+
 		IDBtn.setText(postOwnerID);
 		IDBtn.setBorder(null);
 		IDBtn.setBackground(null);
@@ -211,6 +212,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		postCommentBtn.setBackground(null);
 		postCommentBtn.setText("comment");
 		postCommentBtn.setForeground(new Color(141, 196, 177));
+		postCommentBtn.addActionListener(this);
 
 		javax.swing.GroupLayout commentPaneLayout = new javax.swing.GroupLayout(commentPane);
 		commentPane.setLayout(commentPaneLayout);
@@ -320,18 +322,20 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 
 		if (arg0.getSource() == commentWindowBtn) {
 			try {
-				cmtWindow = new CommentWindow(postID, myUserID);
+				if (ZinCyan.getCommentNumByPID(postID) != 0) {
+					cmtWindow = new CommentWindow(postID, myUserID);
+					cmtWindow.setVisible(true);
+					java.awt.EventQueue.invokeLater(new Runnable() {
+						public void run() {
+							cmtWindow.scrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));
+							cmtWindow.setModal(true);
+						}
+					});
+				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			cmtWindow.setVisible(true);
-			java.awt.EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					cmtWindow.scrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));
-					cmtWindow.setModal(true);
-				}
-			});
 		}
 
 		if (arg0.getSource() == moreBtn) {
@@ -347,6 +351,28 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 				}
 			});
 		}
+
+		if (arg0.getSource() == postCommentBtn) {
+			System.out.println("´ñ±Û¿Ö¾ÈµÊ");
+			Comment comment = new Comment();
+			comment.setUID(myUserID);
+			comment.setPID(postID);
+			comment.setContent(jTextField1.getText());
+			try {
+				comment.setCreateDate(java.sql.Timestamp.valueOf(java.time.LocalDateTime.now()));
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				System.out.println("´ñ±Û");
+				ZinCyan.initComment(comment);
+			} catch (FileNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	// Variables declaration
@@ -372,7 +398,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 	ImageIcon heartI; ImageIcon heartI_f; ImageIcon heartI_p; ImageIcon heartI_fp;
 	Image comment; Image comment_h;
 	ImageIcon commentI; ImageIcon commentI_h;
-	
+
 	final int GAP = 12;
 	final int H_GAP = 18;
 	final int W_GAP = 15;

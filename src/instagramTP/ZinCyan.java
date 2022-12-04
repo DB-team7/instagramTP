@@ -719,6 +719,30 @@ public class ZinCyan {
 		ps.close();
 
 	}
+	
+	public static void initComment(Comment comment) throws SQLException, FileNotFoundException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("댓글 연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "insert into comment(user_id, post_id, content, created_at, like_cnt) values (?,?,?,?,?); ";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, comment.getUID());
+		ps.setInt(2, comment.getPID());
+		ps.setString(3, comment.getContent());
+		ps.setTimestamp(4, comment.getCreateDate());
+		ps.setInt(5, 0);
+		ps.executeUpdate(); // 명렁어 실행
+		ps.close();
+		System.out.println("Inserting Successfully!");
+	}
 
 	public static String getUIDByCommentID(Integer postID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
@@ -760,7 +784,7 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 객체 생성
 
-		String sql = "select user_id , content, created_at, cnt_like from comment where ID=?;";
+		String sql = "select user_id , content, created_at, like_cnt from comment where ID=?;";
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, CID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
