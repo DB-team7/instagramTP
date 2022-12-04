@@ -9,7 +9,6 @@ import com.formdev.flatlaf.ui.FlatLineBorder;
 
 public class PanelHomeFeed extends javax.swing.JPanel {
 
-
 	private static final long serialVersionUID = 1L;
 
 	public PanelHomeFeed(String UID) throws SQLException, IOException {
@@ -44,29 +43,24 @@ public class PanelHomeFeed extends javax.swing.JPanel {
 			ScrollBackPane.add(postPanel[i]);
 			ScrollBackPane.add(javax.swing.Box.createVerticalStrut(30)); // 패널사이세로여백
 		}
-		
+
 		scrollPane.setViewportView(ScrollBackPane);
 
 		// add scrollPane in center
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createSequentialGroup()
+		layout.setHorizontalGroup(layout.createSequentialGroup()
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
 						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 				.addComponent(scrollPane, 470, 470, 470)
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				);
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(scrollPane)
-				);
-	}                
-}
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(scrollPane));
+	}
 
 // Variables declaration
-private javax.swing.JPanel ScrollBackPane;
-private javax.swing.JScrollPane scrollPane;
+	private javax.swing.JPanel ScrollBackPane;
+	private javax.swing.JScrollPane scrollPane;
 // End of variables declaration
 }
