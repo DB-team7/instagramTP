@@ -98,7 +98,6 @@ public class PersonPanel extends javax.swing.JPanel implements java.awt.event.Ac
 	}
 
 	private javax.swing.JLabel profileImgLabel;
-	private java.awt.Image profileImg;
 	private javax.swing.JButton IDBtn;
 	private javax.swing.JLabel nameLabel;
 	private OtherPageWindow otherWindow;

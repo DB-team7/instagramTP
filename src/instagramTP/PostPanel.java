@@ -256,16 +256,13 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 			try {
 				if (postOwnerID.equals(myUserID)) {
 					myPage = new PanelMyPage(myUserID);
+					myPage.setVisible(true);
 				} else {
 					otherWindow = new OtherPageWindow(postOwnerID, myUserID);
+					otherWindow.setVisible(true);
 				}
 			} catch (SQLException | IOException e) {
 				e.printStackTrace();
-			}
-			if (postOwnerID.equals(myUserID)) {
-				myPage.setVisible(true);
-			} else {
-				otherWindow.setVisible(true);
 			}
 
 			java.awt.EventQueue.invokeLater(new Runnable() {

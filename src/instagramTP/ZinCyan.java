@@ -396,6 +396,7 @@ public class ZinCyan {
 		return true;
 	}
 
+	//TODO:a
 	public static void follow(String followee, String follower) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
@@ -414,6 +415,8 @@ public class ZinCyan {
 		ps.setString(2, followee);
 		ps.executeUpdate(); // 명렁어 실행
 		ps.close();
+
+		System.out.println("Inserting Successfully!");
 	}
 
 	public static void unFollow(String followee, String follower) throws SQLException {
@@ -651,7 +654,7 @@ public class ZinCyan {
 
 	}
 
-	public static Boolean isLike(String UID, Integer PID) throws SQLException {
+	public static Boolean isLike(String UID, Integer CID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -663,10 +666,10 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 객체 생성
 
-		String sql = "select count(user_id) from likes where user_id=? and target_id=?;";
+		String sql = "select count(user_id) from likes_comment where user_id=? and target_id=?;";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
-		ps.setInt(2, PID);
+		ps.setInt(2, CID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
 
 		rs.next();
@@ -861,7 +864,6 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 객체 생성
 
-		// TODO: 쿼리 입력
 		String sql = "SELECT count(ID) FROM posts WHERE user_id = (SELECT followee FROM follow WHERE followee = ?)";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
@@ -886,7 +888,6 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 객체 생성
 
-		// TODO: 쿼리 입력
 		String sql = "SELECT ID FROM posts WHERE user_id = (SELECT followee FROM follow WHERE followee = ?)";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
@@ -1059,6 +1060,27 @@ public class ZinCyan {
 		ps.setString(2, UID);
 		ps.executeUpdate(); // 명렁어 실행
 		ps.close();
+	}
+	
+	public static void unLikeComment(String UID, Integer CID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "delete from likes_comment where user_id=? and target_id=?;";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, UID);
+		ps.setInt(2, CID);
+		ps.executeUpdate(); // 명렁어 실행
+		ps.close();
+
 	}
 
 	

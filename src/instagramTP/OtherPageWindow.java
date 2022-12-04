@@ -11,13 +11,14 @@ public class OtherPageWindow extends javax.swing.JDialog implements java.awt.eve
 
 	private static final long serialVersionUID = 1L;
 	private static String userID = null;
+
 	public OtherPageWindow(String UID, String myUID) throws SQLException, IOException {
 		initComponents(UID, myUID);
 	}
 
 	public void initComponents(String UID, String myUID) throws SQLException, IOException {
 
-		userID=UID;
+		userID = UID;
 		scrollPane = new javax.swing.JScrollPane();
 		scrollBackPane = new javax.swing.JPanel();
 		otherDataPanel = new javax.swing.JPanel();
@@ -161,7 +162,7 @@ public class OtherPageWindow extends javax.swing.JDialog implements java.awt.eve
 			scrollBackPane.add(javax.swing.Box.createVerticalStrut(30)); // 패널사이세로여백
 		}
 		scrollBackPane.add(javax.swing.Box.createVerticalStrut(1000)); // 패널사이세로여백
-		
+
 		scrollPane.setViewportView(scrollBackPane);
 
 		// add scrollPane in center
@@ -174,9 +175,7 @@ public class OtherPageWindow extends javax.swing.JDialog implements java.awt.eve
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
 						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(scrollPane)
-				);
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(scrollPane));
 
 	}
 
