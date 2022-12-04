@@ -96,7 +96,6 @@ public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.
 				System.out.println(fileChooser.getSelectedFile().toString());
 				return fileChooser.getSelectedFile().toString();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
