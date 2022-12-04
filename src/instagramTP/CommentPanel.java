@@ -64,7 +64,7 @@ public class CommentPanel extends javax.swing.JPanel implements java.awt.event.A
 			likeBtn.setIcon(heartI_f); // 기본 설정: 이 댓글을 좋아요했으면 heartI_f(꽉찬하트), 아니면 heartI(빈하트)로 setIcon
 			likeBtn.setSelected(true); // 기본 설정: 이 댓글을 좋아요했으면 true, 아니면 false
 		} else {
-			llikeBtn.setIcon(heartI); // 기본 설정: 이 댓글을 좋아요했으면 heartI_f(꽉찬하트), 아니면 heartI(빈하트)로 setIcon
+			likeBtn.setIcon(heartI); // 기본 설정: 이 댓글을 좋아요했으면 heartI_f(꽉찬하트), 아니면 heartI(빈하트)로 setIcon
 			likeBtn.setSelected(false); // 기본 설정: 이 댓글을 좋아요했으면 true, 아니면 false
 		}
 		

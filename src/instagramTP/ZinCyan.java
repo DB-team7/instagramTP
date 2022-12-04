@@ -223,7 +223,7 @@ public class ZinCyan {
 			FileInputStream fin = new FileInputStream(imgfile);
 			PreparedStatement ps = null; // 按眉 积己
 
-			String sql = "update posts set content = ?, file = ? where ID = ?; ";
+			String sql = "UPDATE posts SET content = ?, FILENAME = ?, FILE = ? WHERE ID = ?; ";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, post.getContent());
 			ps.setInt(2, post.getPID());
@@ -281,7 +281,7 @@ public class ZinCyan {
 		rs.next();
 		list.setUserID(rs.getString(1));
 		list.setUserName(rs.getString(2));
-		list.setUserPhoneNum(rs.getInt(3));
+		list.setUserPhoneNum(rs.getString(3));
 		list.setUserEmail(rs.getString(4));
 		rs.close();
 		ps.close();
@@ -622,7 +622,7 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, user.getUserID());
 		ps.setString(2, user.getUserName());
-		ps.setInt(3, user.getUserPhoneNum());
+		ps.setString(3, user.getUserPhoneNum());
 		ps.setString(4, user.getUserEmail());
 		ps.setString(5, user.getUserPassword());
 		ps.executeUpdate(); // 疙贩绢 角青

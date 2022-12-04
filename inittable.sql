@@ -5,9 +5,11 @@ use dmaster;
 CREATE TABLE users (
     ID VARCHAR(20),
     name VARCHAR(20),
-    phone_num INT,
+    phone_num VARCHAR(13),
     email VARCHAR(30),
     password VARCHAR(20),
+    FILENAME VARCHAR(50),
+    FILE MEDIUMBLOB,
     PRIMARY KEY (ID)
 );
 
@@ -47,7 +49,7 @@ CREATE TABLE block (
 ;
 /*댓글 테이블*/
 CREATE TABLE comment (
-    ID INT,
+    ID INT AUTO_INCREMENT,
     user_id VARCHAR(20),
     post_id INT,
     content VARCHAR(100),

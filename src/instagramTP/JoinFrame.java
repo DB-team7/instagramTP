@@ -220,7 +220,7 @@ public class JoinFrame extends JFrame implements ActionListener{
 						User user = new User();
 						user.setUserID(jTextField4.getText()); // ID
 						user.setUserName(jTextField1.getText());// name
-						user.setUserPhoneNum(Integer.parseInt(jTextField2.getText()));// phone_num
+						user.setUserPhoneNum(jTextField2.getText());// phone_num
 						user.setUserEmail(jTextField3.getText());// email
 						user.setUserPassword(jTextField5.getText());// password
 
