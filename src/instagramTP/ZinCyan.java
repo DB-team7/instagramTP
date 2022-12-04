@@ -606,7 +606,7 @@ public class ZinCyan {
 
 	}
 
-	public static void initUser(User user) throws SQLException {
+	public static void initUser(User user, String src) throws SQLException, FileNotFoundException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -615,19 +615,38 @@ public class ZinCyan {
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패");
 		}
+		if (src == null) {
+			PreparedStatement ps = null; // 객체 생성
 
-		PreparedStatement ps = null; // 객체 생성
+			String sql = "insert into users values (?,?,?,?,?,?); ";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getUserID());
+			ps.setString(2, user.getUserName());
+			ps.setString(3, user.getUserPhoneNum());
+			ps.setString(4, user.getUserEmail());
+			ps.setString(5, user.getUserPassword());
+			ps.setString(6, null);
+			ps.executeUpdate(); // 명렁어 실행
+			ps.close();
+			System.out.println("Inserting Successfully!");
+		} else {
+			File imgfile = new File(src);
+			FileInputStream fin = new FileInputStream(imgfile);
+			PreparedStatement ps = null; // 객체 생성
 
-		String sql = "insert into users values (?,?,?,?,?); ";
-		ps = conn.prepareStatement(sql);
-		ps.setString(1, user.getUserID());
-		ps.setString(2, user.getUserName());
-		ps.setString(3, user.getUserPhoneNum());
-		ps.setString(4, user.getUserEmail());
-		ps.setString(5, user.getUserPassword());
-		ps.executeUpdate(); // 명렁어 실행
-		ps.close();
-		System.out.println("Inserting Successfully!");
+			String sql = "insert into users values (?,?,?,?,?,?,?); ";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getUserID());
+			ps.setString(2, user.getUserName());
+			ps.setString(3, user.getUserPhoneNum());
+			ps.setString(4, user.getUserEmail());
+			ps.setString(5, user.getUserPassword());
+			ps.setString(6, user.getUserID());
+			ps.setBinaryStream(7, fin, (int) imgfile.length());// Stream형의 파일 업로드
+			ps.executeUpdate(); // 명렁어 실행
+			ps.close();
+			System.out.println("Inserting Successfully!");
+		}
 
 	}
 

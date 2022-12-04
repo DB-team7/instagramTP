@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 
-public class JoinFrame extends JFrame implements ActionListener{
+public class JoinFrame extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
@@ -39,7 +39,7 @@ public class JoinFrame extends JFrame implements ActionListener{
 		jPanel1.setPreferredSize(new java.awt.Dimension(470, 500));
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
-		jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 0, 18)); 
+		jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 0, 18));
 		jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		jLabel1.setText("join in*gram");
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -202,26 +202,31 @@ public class JoinFrame extends JFrame implements ActionListener{
 					JOptionPane.showMessageDialog(null, "중복 아이디입니다", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
 				} else { // 중복이 아니면 업데이트
 					try {
-						if(jTextField4.getText().equals(""))
-							JOptionPane.showMessageDialog(null, "아이디를 입력해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
-						if(jTextField1.getText().equals(""))
-							JOptionPane.showMessageDialog(null, "이름을 입력해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
-						if(jTextField2.getText().equals(""))
-							JOptionPane.showMessageDialog(null, "전화번호를 입력해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
-						if(jTextField3.getText().equals(""))
-							JOptionPane.showMessageDialog(null, "이메일을 입력해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
-						
+						if (jTextField4.getText().equals(""))
+							JOptionPane.showMessageDialog(null, "아이디를 입력해주세요", "ERROR_MESSAGE",
+									JOptionPane.ERROR_MESSAGE);
+						if (jTextField1.getText().equals(""))
+							JOptionPane.showMessageDialog(null, "이름을 입력해주세요", "ERROR_MESSAGE",
+									JOptionPane.ERROR_MESSAGE);
+						if (jTextField2.getText().equals(""))
+							JOptionPane.showMessageDialog(null, "전화번호를 입력해주세요", "ERROR_MESSAGE",
+									JOptionPane.ERROR_MESSAGE);
+						if (jTextField3.getText().equals(""))
+							JOptionPane.showMessageDialog(null, "이메일을 입력해주세요", "ERROR_MESSAGE",
+									JOptionPane.ERROR_MESSAGE);
+
 						String pattern2 = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$";
 						String str2 = jTextField3.getText();
-						if(Pattern.matches(pattern2, str2)) {
-						    System.out.println("올바른 이메일 형식입니다. ");
-						} else {            
-							JOptionPane.showMessageDialog(null, "올바른 이메일 형식이 아닙니다.", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+						if (Pattern.matches(pattern2, str2)) {
+							System.out.println("올바른 이메일 형식입니다. ");
+						} else {
+							JOptionPane.showMessageDialog(null, "올바른 이메일 형식이 아닙니다.", "ERROR_MESSAGE",
+									JOptionPane.ERROR_MESSAGE);
 						}
 
-
-						if(jTextField5.getText().equals(""))
-							JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+						if (jTextField5.getText().equals(""))
+							JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요", "ERROR_MESSAGE",
+									JOptionPane.ERROR_MESSAGE);
 
 						User user = new User();
 						user.setUserID(jTextField4.getText()); // ID
@@ -230,7 +235,7 @@ public class JoinFrame extends JFrame implements ActionListener{
 						user.setUserEmail(jTextField3.getText());// email
 						user.setUserPassword(jTextField5.getText());// password
 
-						ZinCyan.initUser(user);
+						ZinCyan.initUser(user, null);
 
 						JOptionPane.showMessageDialog(null, "Join successful!");
 						dispose(); // join screen off

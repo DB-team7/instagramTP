@@ -1,5 +1,7 @@
 package instagramTP;
 
+import java.io.InputStream;
+
 public class User {
 
 	private String userID; // ID
@@ -7,6 +9,7 @@ public class User {
 	private String userPhoneNum; // phone_num
 	private String userEmail; // email
 	private String userPassword; // password
+	private InputStream inputStream;
 
 	public String getUserID() {
 		return userID;
@@ -46,5 +49,13 @@ public class User {
 
 	public void setUserPhoneNum(String userPhoneNum) {
 		this.userPhoneNum = userPhoneNum;
+	}
+
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
 	}
 }

@@ -52,13 +52,13 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
 		imageBtn.setBackground(new java.awt.Color(255, 255, 255));
 		imageBtn.setBorder(null);
 		imageBtn.addActionListener(this);
-
+		
+		User thisUser = ZinCyan.getUserByUID(myUID);
+		
 		javax.swing.ImageIcon profileImg = new javax.swing.ImageIcon("images/basicProfilePhoto.png");
 		imageBtn.setIcon(profileImg); // 현재 프로필 사진 뜨게 하기
 
 		MyDataPanel.add(imageBtn);
-
-		User thisUser = ZinCyan.getUserByUID(myUID);
 
 		idLabel.setText(thisUser.getUserName());
 		MyDataPanel.add(idLabel);
