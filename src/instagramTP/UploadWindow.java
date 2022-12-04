@@ -81,7 +81,7 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 	String load() {
 		javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
 		fileChooser.setDialogTitle("파일 불러오기");
-		fileChooser.setFileFilter(new FileNameExtensionFilter("jpg", "png", "jpeg", "bmp")); // 파일필터
+//		fileChooser.setFileFilter(new FileNameExtensionFilter("jpg", "png", "jpeg", "bmp")); // 파일필터
 		fileChooser.setMultiSelectionEnabled(false); // 다중 선택 불가
 		int returnVal = fileChooser.showOpenDialog(this); // show openDialog
 

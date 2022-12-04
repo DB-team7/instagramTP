@@ -119,6 +119,12 @@ public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.
 		}
 
 		if (arg0.getSource() == deleteBtn) { // ªË¡¶
+			try {
+				ZinCyan.delPost(thisPost.getPID());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			dispose(); // √¢¥›±‚
 		}
 	}
