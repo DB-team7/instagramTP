@@ -19,9 +19,9 @@ import com.formdev.flatlaf.FlatClientProperties;
 public class PostPanel extends javax.swing.JPanel implements java.awt.event.ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	private static String postOwnerID = null;
-	private static String myUserID = null;
-	private static Integer postID = null;
+	private String postOwnerID = null;
+	private String myUserID = null;
+	private Integer postID = null;
 
 	public PostPanel(int PID, String myUID) throws SQLException, IOException {
 		initComponents(PID, myUID);
@@ -254,10 +254,10 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		// TODO Auto-generated method stub
 		if (arg0.getSource() == IDBtn) {
 			try {
-				if (postOwnerID.equals(myUserID)) {
-					myPage = new PanelMyPage(myUserID);
-					myPage.setVisible(true);
-				} else {
+				System.out.println("아이디버튼 눌림");
+				System.out.println(postOwnerID);
+				System.out.println(myUserID);
+				if (!postOwnerID.equals(myUserID)) {
 					otherWindow = new OtherPageWindow(postOwnerID, myUserID);
 					otherWindow.setVisible(true);
 				}
@@ -267,9 +267,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 
 			java.awt.EventQueue.invokeLater(new Runnable() {
 				public void run() {
-					if (postOwnerID.equals(myUserID)) {
-						myPage.scrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));
-					} else {
+					if (!postOwnerID.equals(myUserID)) {
 						otherWindow.scrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));
 						otherWindow.setModal(true);
 					}
