@@ -162,7 +162,6 @@ public class ZinCyan {
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패");
 		}
-		
 
 		System.out.println(src);
 
@@ -224,7 +223,7 @@ public class ZinCyan {
 			FileInputStream fin = new FileInputStream(imgfile);
 			PreparedStatement ps = null; // 객체 생성
 
-			String sql = "update posts set content = ?, file = ? where ID = ?; ";
+			String sql = "UPDATE posts SET content = ?, FILENAME = ?, FILE = ? WHERE ID = ?; ";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, post.getContent());
 			ps.setInt(2, post.getPID());
@@ -282,7 +281,7 @@ public class ZinCyan {
 		rs.next();
 		list.setUserID(rs.getString(1));
 		list.setUserName(rs.getString(2));
-		list.setUserPhoneNum(rs.getInt(3));
+		list.setUserPhoneNum(rs.getString(3));
 		list.setUserEmail(rs.getString(4));
 		rs.close();
 		ps.close();
@@ -451,7 +450,7 @@ public class ZinCyan {
 		PreparedStatement ps = null; // 객체 생성
 
 		String sql = "select ID from posts where created_at between date_add(now(), interval -1 week) and now() order by cnt_like desc; ";
-		
+
 		ps = conn.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
 
@@ -623,7 +622,7 @@ public class ZinCyan {
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, user.getUserID());
 		ps.setString(2, user.getUserName());
-		ps.setInt(3, user.getUserPhoneNum());
+		ps.setString(3, user.getUserPhoneNum());
 		ps.setString(4, user.getUserEmail());
 		ps.setString(5, user.getUserPassword());
 		ps.executeUpdate(); // 명렁어 실행
@@ -701,7 +700,7 @@ public class ZinCyan {
 
 	}
 
-	public static Integer[] getUIDByComment(String UID) throws SQLException {
+	public static String getUIDByCommentID(Integer postID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -713,21 +712,52 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 객체 생성
 
-		String sql = "SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC;";
+		String sql = "SELECT user_id FROM comment WHERE ID = ?;";
 		ps = conn.prepareStatement(sql);
-		ps.setString(1, UID);
+		ps.setInt(1, postID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
 
-		Integer numPost = ZinCyan.getPostNum(UID);
-		Integer[] tmp = new Integer[numPost];
-		for (int i = 0; i < numPost; i++) {
-			rs.next();
-			tmp[i] = rs.getInt(1);
-		}
+		String tmp = null;
+		rs.next();
+		tmp = rs.getString(1);
+
 		rs.close();
 		ps.close();
 
 		return tmp;
 
 	}
+
+	public static Comment getCommentbyCID(int CID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "select user_id , content, created_at, cnt_like from comment where ID=?;";
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, CID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+
+		Comment comment = new Comment();
+
+		rs.next();
+		comment.setCID(CID);
+		comment.setUID(rs.getString(1));
+		comment.setContent(rs.getString(2));
+		comment.setCreateDate(rs.getTimestamp(3));
+		comment.setCntLike(rs.getInt(4));
+		rs.close();
+		ps.close();
+
+		return comment;
+
+	}
+
 }
