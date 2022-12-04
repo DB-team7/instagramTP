@@ -112,7 +112,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		likeBtn.setBackground(null);
 		likeBtn.setBorder(null);
 		likeBtn.setPressedIcon(heartI_fp);
-		if (ZinCyan.isLike(postOwnerID, PID)) {
+		if (ZinCyan.isLike(myUID, PID)) {
 			likeBtn.setIcon(heartI_f); // 기본 설정: 이 글을 좋아요했으면 heartI_f(꽉찬하트), 아니면 heartI(빈하트)로 setIcon
 			likeBtn.setSelected(true); // 기본 설정: 이 글을 좋아요했으면 true, 아니면 false
 		} else {
@@ -129,7 +129,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 					likeNumLabel.revalidate();
 					likeNumLabel.repaint();
 					try {
-						ZinCyan.like(postOwnerID, PID);
+						ZinCyan.like(myUID, PID);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -141,7 +141,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 					likeNumLabel.revalidate();
 					likeNumLabel.repaint();
 					try {
-						ZinCyan.unLike(postOwnerID, PID);
+						ZinCyan.unLike(myUID, PID);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -175,7 +175,6 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		commentPane.setBackground(null);
 		commentPane.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, Color.LIGHT_GRAY));
 
-		// TODO: 댓글 기능
 		commentWindowBtn.setBorder(null);
 		commentWindowBtn.setBackground(null);
 		commentWindowBtn.setIcon(commentI);
@@ -315,7 +314,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		}
 
 		if (arg0.getSource() == postCommentBtn) {
-			System.out.println("댓글왜안됨");
+//			System.out.println("댓글왜안됨");
 			Comment comment = new Comment();
 			comment.setUID(myUserID);
 			comment.setPID(postID);
