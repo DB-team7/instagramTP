@@ -81,7 +81,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 			moreBtn.addActionListener(this); // 게시글 수정, 삭제 창. 애초에 본인 게시글에만 이 버튼이 떠야 함
 		}
 
-		// TODO: 이미지 삽입
+
 		java.awt.Image nullImg = new javax.swing.ImageIcon("images/nullImage.png").getImage();
 		if (post.getInputStream() != null) {
 			File tempFile = File.createTempFile(String.valueOf(post.getInputStream().hashCode()), ".tmp");
