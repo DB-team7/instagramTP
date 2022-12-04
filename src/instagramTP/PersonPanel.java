@@ -79,12 +79,10 @@ public class PersonPanel extends javax.swing.JPanel implements java.awt.event.Ac
 
 	@Override
 	public void actionPerformed(java.awt.event.ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		if (arg0.getSource() == IDBtn) {
 			try {
 				otherWindow = new OtherPageWindow(UserID, myUserID);
 			} catch (SQLException | IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			otherWindow.setVisible(true);

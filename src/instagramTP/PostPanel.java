@@ -346,7 +346,6 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 	private javax.swing.JButton postCommentBtn;
 	private javax.swing.JTextArea postTextArea;
 	private OtherPageWindow otherWindow;
-	private PanelMyPage myPage;
 	private CommentWindow cmtWindow;
 	private ModifyWindow mdfyWindow;
 

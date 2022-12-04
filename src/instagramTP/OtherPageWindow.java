@@ -102,7 +102,7 @@ public class OtherPageWindow extends javax.swing.JDialog implements java.awt.eve
 					// follow 상태
 					followToggleBtn.setText("unfollow"); // 이제 팔로우 중이니까 다시 누르면 언팔된다는 뜻
 					try {
-						ZinCyan.unFollow(UID, myUID);
+						ZinCyan.follow(UID, myUID);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -111,7 +111,7 @@ public class OtherPageWindow extends javax.swing.JDialog implements java.awt.eve
 					// unfollow 상태
 					followToggleBtn.setText("follow"); // 이제 언팔 했으니까 다시 누르면 팔로우된다는 뜻
 					try {
-						ZinCyan.follow(UID, myUID);
+						ZinCyan.unFollow(UID, myUID);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
