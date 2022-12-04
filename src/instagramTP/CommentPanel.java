@@ -81,7 +81,12 @@ public class CommentPanel extends javax.swing.JPanel implements java.awt.event.A
 					likeBtn.setIcon(heartI_f); // 좋아요 누른 상태
 					likeBtn.setPressedIcon(heartI_p);
 				} else {
-					ZinCyan.unLikeComment(myUserID, CID);
+					try {
+						ZinCyan.unLikeComment(myUserID, CID);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					likeBtn.setIcon(heartI); // 좋아요 안한 상태
 					likeBtn.setPressedIcon(heartI_fp);
 				}
