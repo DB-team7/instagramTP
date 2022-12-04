@@ -79,12 +79,14 @@ public class PanelSearch extends javax.swing.JPanel {
 
 		scrollBackPane.setBackground(new java.awt.Color(255, 255, 255));
 		scrollBackPane.setLayout(new javax.swing.BoxLayout(scrollBackPane, javax.swing.BoxLayout.Y_AXIS));
-		scrollPane.setViewportView(scrollBackPane);
 
 		// TODO: 검색 결과 구현 (다른 사람 정보)
 		PersonPanel personPanel = new PersonPanel(UID,UID);
 		scrollBackPane.add(personPanel);
+		scrollBackPane.add(javax.swing.Box.createVerticalStrut(1000)); // default blank
 
+		scrollPane.setViewportView(scrollBackPane);
+		
 		jPanel1.add(scrollPane, java.awt.BorderLayout.CENTER);
 
 		// add jPanel1 in center

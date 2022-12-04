@@ -45,7 +45,7 @@ public class FolloweeWindow extends javax.swing.JDialog {
 		infoPanel.setBackground(new java.awt.Color(245, 245, 245));
 		infoPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
-//		infoLabel.setText("116 people are following recyan__"); // ÆÈ·Î¿ì
+		//		infoLabel.setText("116 people are following recyan__"); // ÆÈ·Î¿ì
 		infoLabel.setText(UID + " is following " + Integer.toString(ZinCyan.getFolloweeNum(UID)) + " people"); // ÆÈ·ÎÀ×
 		infoPanel.add(infoLabel);
 
@@ -61,9 +61,23 @@ public class FolloweeWindow extends javax.swing.JDialog {
 			personPanel[i] = new PersonPanel(followees[i], UID);
 			scrollBackPane.add(personPanel[i]);
 		}
+		scrollBackPane.add(javax.swing.Box.createVerticalStrut(1000)); // default blank
 
 		scrollPane.setViewportView(scrollBackPane);
-		getContentPane().add(scrollPane);
+
+		// add scrollPane in center
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(layout.createSequentialGroup()
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(scrollPane, 470, 470, 470)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(scrollPane)
+				);
 
 	}
 

@@ -1,5 +1,7 @@
 package instagramTP;
 
+import java.awt.Color;
+import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,6 +13,8 @@ import java.sql.SQLException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+
+import com.formdev.flatlaf.ui.FlatLineBorder;
 
 public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.ActionListener {
 
@@ -36,7 +40,7 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
 		postNumPanel = new javax.swing.JPanel();
 		postNumLabel = new javax.swing.JLabel();
 
-		setBackground(new java.awt.Color(245, 245, 245));
+		setBackground(new Color(245, 245, 245));
 		setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
 
 		scrollPane.setBorder(null);
@@ -45,18 +49,18 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16); // 스크롤 속도 증가
 		scrollPane.getVerticalScrollBar().setPreferredSize(new java.awt.Dimension(0, 0)); // 스크롤바 숨기기
 
-		ScrollBackPane.setBackground(new java.awt.Color(245, 245, 245));
+		ScrollBackPane.setBackground(new Color(245, 245, 245));
 		ScrollBackPane.setLayout(new javax.swing.BoxLayout(ScrollBackPane, javax.swing.BoxLayout.Y_AXIS));
 
 		// 여백으로 시작
 		ScrollBackPane.add(javax.swing.Box.createVerticalStrut(30)); // 패널사이세로여백
 
 		// 내 정보란
-		MyDataPanel.setBackground(new java.awt.Color(255, 255, 255));
-		MyDataPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+		MyDataPanel.setBackground(new Color(255, 255, 255));
+		MyDataPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(153, 153, 153)));
 
 		imageBtn.setPreferredSize(new java.awt.Dimension(60, 60));
-		imageBtn.setBackground(new java.awt.Color(255, 255, 255));
+		imageBtn.setBackground(new Color(255, 255, 255));
 		imageBtn.setBorder(null);
 		imageBtn.addActionListener(this);
 
@@ -81,7 +85,7 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
 		idLabel.setText(thisUser.getUserName());
 		MyDataPanel.add(idLabel);
 
-		nameLabel.setForeground(new java.awt.Color(142, 142, 142));
+		nameLabel.setForeground(new Color(142, 142, 142));
 		nameLabel.setText(thisUser.getUserID());
 		MyDataPanel.add(nameLabel);
 
@@ -107,8 +111,8 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
 		ScrollBackPane.add(javax.swing.Box.createVerticalStrut(30)); // 패널사이세로여백
 
 		// 게시글 수
-		postNumPanel.setBackground(new java.awt.Color(245, 245, 245));
-		postNumPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+		postNumPanel.setBackground(new Color(245, 245, 245));
+		postNumPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0, 0, 0)));
 
 		postNumLabel.setText(Integer.toString(ZinCyan.getPostNum(myUID)) + " Posts by " + myUID);
 		postNumPanel.add(postNumLabel);
@@ -122,9 +126,11 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
 		for (Integer i = 0; i < ZinCyan.getPostNum(myUID); i++) {
 			// 게시글 post
 			postPanel[i] = new PostPanel(posts[i], myUID);
+			postPanel[i].setBorder(new FlatLineBorder(new Insets(0, 0, 0, 0), Color.LIGHT_GRAY, 1, 30));
 			ScrollBackPane.add(postPanel[i]);
 			ScrollBackPane.add(javax.swing.Box.createVerticalStrut(30)); // 패널사이세로여백
 		}
+		ScrollBackPane.add(javax.swing.Box.createVerticalStrut(1000)); // default blank
 
 		scrollPane.setViewportView(ScrollBackPane);
 

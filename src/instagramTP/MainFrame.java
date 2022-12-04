@@ -15,9 +15,6 @@ import javax.swing.JPanel;
 
 public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static String userID = null;
 
@@ -49,7 +46,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 		homeFeedPane = new PanelHomeFeed(UID);
 		searchPane = new PanelSearch(UID);
 		starFeedPane = new PanelStarFeed(UID);
-		myPagePane = new PanelMyPage(UID);
+//		myPagePane = new PanelMyPage(UID);
 
 		// load images
 		upload = new ImageIcon("images/upload.png").getImage();
@@ -153,7 +150,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 			headerPane.repaint();
 			homeFeedPane.revalidate();
 			homeFeedPane.repaint();
-			getContentPane().add(headerPane, BorderLayout.NORTH); // 버튼 icon 바뀌는 것도 추가 예정
+			getContentPane().add(headerPane, BorderLayout.NORTH);
 			getContentPane().add(homeFeedPane, BorderLayout.CENTER);
 			getContentPane().setVisible(false);
 			homeFeedBtn.setIcon(homeI_f);
@@ -169,7 +166,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 			headerPane.repaint();
 			searchPane.revalidate();
 			searchPane.repaint();
-			getContentPane().add(headerPane, BorderLayout.NORTH); // 버튼 icon 바뀌는 것도 추가 예정
+			getContentPane().add(headerPane, BorderLayout.NORTH);
 			getContentPane().add(searchPane, BorderLayout.CENTER);
 			getContentPane().setVisible(false);
 			homeFeedBtn.setIcon(homeI);
@@ -185,7 +182,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 			headerPane.repaint();
 			starFeedPane.revalidate();
 			starFeedPane.repaint();
-			getContentPane().add(headerPane, BorderLayout.NORTH); // 버튼 icon 바뀌는 것도 추가 예정
+			getContentPane().add(headerPane, BorderLayout.NORTH);
 			getContentPane().add(starFeedPane, BorderLayout.CENTER);
 			getContentPane().setVisible(false);
 			homeFeedBtn.setIcon(homeI);
@@ -201,7 +198,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 			headerPane.repaint();
 			myPagePane.revalidate();
 			myPagePane.repaint();
-			getContentPane().add(headerPane, BorderLayout.NORTH); // 버튼 icon 바뀌는 것도 추가 예정
+			getContentPane().add(headerPane, BorderLayout.NORTH);
 			getContentPane().add(myPagePane, BorderLayout.CENTER);
 			getContentPane().setVisible(false);
 			homeFeedBtn.setIcon(homeI);

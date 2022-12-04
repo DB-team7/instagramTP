@@ -63,7 +63,6 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 
 		setBackground(new java.awt.Color(255, 255, 255));
 		putClientProperty(FlatClientProperties.STYLE, "arc: 30");
-		setBorder(new FlatLineBorder(new Insets(0, 0, 0, 0), Color.LIGHT_GRAY, 1, 30));
 
 		Post post = ZinCyan.getPostbyPID(PID);
 		userID = ZinCyan.getUserNamebyPID(post.getPID());

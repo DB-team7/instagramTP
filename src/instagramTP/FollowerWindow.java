@@ -19,8 +19,6 @@ public class FollowerWindow extends javax.swing.JDialog {
 		infoPanel = new javax.swing.JPanel();
 		infoLabel = new javax.swing.JLabel();
 
-		java.awt.Image nullImg = new javax.swing.ImageIcon("images/nullImage.png").getImage();
-		setIconImage(nullImg); // 프레임바 아이콘 우선 투명으로
 		setSize(600, 600);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -61,9 +59,23 @@ public class FollowerWindow extends javax.swing.JDialog {
 			personPanel[i] = new PersonPanel(followers[i], UID);
 			scrollBackPane.add(personPanel[i]);
 		}
+		scrollBackPane.add(javax.swing.Box.createVerticalStrut(1000)); // default blank
 
 		scrollPane.setViewportView(scrollBackPane);
-		getContentPane().add(scrollPane);
+
+		// add scrollPane in center
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(layout.createSequentialGroup()
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(scrollPane, 470, 470, 470)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(scrollPane)
+				);
 
 	}
 
