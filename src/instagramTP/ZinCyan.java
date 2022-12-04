@@ -982,5 +982,35 @@ public class ZinCyan {
 
 		return tmp;
 	}
+	
+	public static Integer[] getCIDsByPID(Integer PID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "SELECT ID FROM comment WHERE post_id = ?;";
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, PID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+
+		Integer numPost = ZinCyan.getCommentNumByPID(PID);
+		Integer[] tmp = new Integer[numPost];
+		for (int i = 0; i < numPost; i++) {
+			rs.next();
+			tmp[i] = rs.getInt(1);
+		}
+		rs.close();
+		ps.close();
+
+		return tmp;
+
+	}
 
 }

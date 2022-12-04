@@ -52,7 +52,7 @@ public class CommentWindow extends javax.swing.JDialog {
 
 		CommentPanel[] cmtPanel = new CommentPanel[ZinCyan.getCommentNumByPID(PID)];
 		Integer[] comments = new Integer[ZinCyan.getCommentNumByPID(PID)];
-		comments = ZinCyan.getPIDsByUID(myUID);
+		comments = ZinCyan.getCIDsByPID(PID);
 		for (Integer i = 0; i < ZinCyan.getCommentNumByPID(PID); i++) {
 			// °Ô½Ã±Û post
 			cmtPanel[i] = new CommentPanel(comments[i], myUID);
