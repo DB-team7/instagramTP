@@ -53,7 +53,7 @@ CREATE TABLE comment (
     user_id VARCHAR(20),
     post_id INT,
     content VARCHAR(100),
-    created_at DATE,
+    created_at DATETIME,
     like_cnt INT,
     PRIMARY KEY (ID),
     FOREIGN KEY (user_id)
@@ -70,6 +70,15 @@ CREATE TABLE likes (
         REFERENCES users (ID),
     FOREIGN KEY (target_id)
         REFERENCES posts (ID)
+);
+/*댓글　좋아요　테이블*/
+CREATE TABLE likes_comment (
+    target_id INT,
+    user_id VARCHAR(20),
+    FOREIGN KEY (user_id)
+        REFERENCES users (ID),
+    FOREIGN KEY (target_id)
+        REFERENCES comment (ID)
 );
 
 

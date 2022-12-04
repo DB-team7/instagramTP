@@ -1012,5 +1012,54 @@ public class ZinCyan {
 		return tmp;
 
 	}
+	
+	public static Boolean isLikeComment(String UID, Integer CID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("연결 성공");
 
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "select count(user_id) from likes_comment where user_id=? and target_id=?;";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, UID);
+		ps.setInt(2, CID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+
+		rs.next();
+		Integer tmp = rs.getInt(1);
+		rs.close();
+		ps.close();
+		if (tmp == 0) {
+			return false;
+		}
+		return true;
+	}
+	
+	public static void likeComment(String UID, Integer CID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "insert into likes_comment values (?,?);";
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, CID);
+		ps.setString(2, UID);
+		ps.executeUpdate(); // 명렁어 실행
+		ps.close();
+	}
+
+	
 }
