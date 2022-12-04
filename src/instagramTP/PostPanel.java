@@ -89,7 +89,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 			Files.copy(post.getInputStream(), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			Path tempPath = tempFile.toPath();
 
-			nullImg = (new ImageIcon(tempPath.toString()).getImage()).getScaledInstance(205, 205, Image.SCALE_SMOOTH);
+			nullImg = (new ImageIcon(tempPath.toString()).getImage()).getScaledInstance(466, 466, Image.SCALE_SMOOTH);
 		}
 		imagePane = new ImagePanel(nullImg);
 
