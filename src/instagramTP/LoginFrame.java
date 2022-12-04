@@ -108,7 +108,7 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener {
 
 	public static void main(String args[]) {
 
-		// set look&feel
+		// set look&feels
 		FlatLightLaf.registerCustomDefaultsSource("style");
 		try {
 			UIManager.setLookAndFeel(new FlatLightLaf());
