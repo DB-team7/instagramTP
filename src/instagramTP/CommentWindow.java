@@ -53,13 +53,12 @@ public class CommentWindow extends javax.swing.JDialog {
 		CommentPanel[] cmtPanel = new CommentPanel[ZinCyan.getCommentNumByPID(PID)];
 		Integer[] comments = new Integer[ZinCyan.getCommentNumByPID(PID)];
 		comments = ZinCyan.getPIDsByUID(myUID);
-		for (Integer i = 0; i < ZinCyan.getPostNum(myUID); i++) {
+		for (Integer i = 0; i < ZinCyan.getCommentNumByPID(PID); i++) {
 			// 게시글 post
 			cmtPanel[i] = new CommentPanel(comments[i], myUID);
 			scrollBackPane.add(cmtPanel[i]);
 		}
 
-		// 스크롤팬에 컨텐츠가 부족할 때 이상해보이는 거 고칠 예정
 		scrollBackPane.add(javax.swing.Box.createVerticalStrut(500)); // 우선은 여백만으로 해결
 
 		scrollPane.setViewportView(scrollBackPane);
