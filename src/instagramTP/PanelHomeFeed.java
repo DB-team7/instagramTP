@@ -56,11 +56,14 @@ public class PanelHomeFeed extends javax.swing.JPanel {
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
 						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(scrollPane));
-	}
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(scrollPane)
+				);
+	}                
 
-// Variables declaration
+	// Variables declaration
 	private javax.swing.JPanel ScrollBackPane;
 	private javax.swing.JScrollPane scrollPane;
-// End of variables declaration
+	// End of variables declaration
+
 }

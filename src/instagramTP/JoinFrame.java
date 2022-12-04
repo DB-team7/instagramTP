@@ -36,7 +36,7 @@ public class JoinFrame extends JFrame implements ActionListener{
 		jTextField2 = new javax.swing.JTextField();
 		jTextField3 = new javax.swing.JTextField();
 		jTextField4 = new javax.swing.JTextField();
-		jTextField5 = new javax.swing.JTextField();
+		jTextField5 = new javax.swing.JPasswordField();
 		joinButton = new javax.swing.JButton();
 
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -58,7 +58,6 @@ public class JoinFrame extends JFrame implements ActionListener{
 		jPanel1.add(jLabel1, gridBagConstraints);
 
 		// NAME field
-		jTextField1.setFont(new java.awt.Font("¸¼Àº °íµñ", 0, 14)); // NOI18N
 		jTextField1.setText("NAME");
 		jTextField1.setForeground(Color.GRAY);
 		jTextField1.addFocusListener(new FocusListener() { // when start typing, guide disappear
@@ -85,7 +84,6 @@ public class JoinFrame extends JFrame implements ActionListener{
 		jPanel1.add(jTextField1, gridBagConstraints);
 
 		// PHONE NUMBER field
-		jTextField2.setFont(new java.awt.Font("¸¼Àº °íµñ", 0, 14)); // NOI18N
 		jTextField2.setText("PHONE NUMBER");
 		jTextField2.setForeground(Color.GRAY);
 		jTextField2.addFocusListener(new FocusListener() { // when start typing, guide disappear
@@ -112,7 +110,6 @@ public class JoinFrame extends JFrame implements ActionListener{
 		jPanel1.add(jTextField2, gridBagConstraints);
 
 		// EMAIL field
-		jTextField3.setFont(new java.awt.Font("¸¼Àº °íµñ", 0, 14)); // NOI18N
 		jTextField3.setText("EMAIL");
 		jTextField3.setForeground(Color.GRAY);
 		jTextField3.addFocusListener(new FocusListener() { // when start typing, guide disappear
@@ -139,7 +136,6 @@ public class JoinFrame extends JFrame implements ActionListener{
 		jPanel1.add(jTextField3, gridBagConstraints);
 
 		// ID field
-		jTextField4.setFont(new java.awt.Font("¸¼Àº °íµñ", 0, 14)); // NOI18N
 		jTextField4.setText("ID");
 		jTextField4.setForeground(Color.GRAY);
 		jTextField4.addFocusListener(new FocusListener() { // when start typing, guide disappear
@@ -172,7 +168,7 @@ public class JoinFrame extends JFrame implements ActionListener{
 		jTextField5.addFocusListener(new FocusListener() { // when start typing, guide disappear
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (jTextField5.getText().equals("")) {
+				if (new String(jTextField5.getPassword()).equals("")) {
 					jTextField5.setText("PASSWORD");
 					jTextField5.setForeground(Color.GRAY);
 				}
@@ -180,7 +176,7 @@ public class JoinFrame extends JFrame implements ActionListener{
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (jTextField5.getText().equals("PASSWORD")) {
+				if (new String(jTextField5.getPassword()).equals("PASSWORD")) {
 					jTextField5.setText("");
 					jTextField5.setForeground(Color.BLACK);
 				}
@@ -192,7 +188,6 @@ public class JoinFrame extends JFrame implements ActionListener{
 		gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
 		jPanel1.add(jTextField5, gridBagConstraints);
 
-		joinButton.setFont(new java.awt.Font("¸¼Àº °íµñ", 0, 14)); // NOI18N
 		joinButton.setText("Join");
 		joinButton.setPreferredSize(new java.awt.Dimension(200, 30));
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -222,7 +217,7 @@ public class JoinFrame extends JFrame implements ActionListener{
 						user.setUserName(jTextField1.getText());// name
 						user.setUserPhoneNum(jTextField2.getText());// phone_num
 						user.setUserEmail(jTextField3.getText());// email
-						user.setUserPassword(jTextField5.getText());// password
+						user.setUserPassword(new String(jTextField5.getPassword()));// password
 
 						ZinCyan.initUser(user);
 
@@ -248,6 +243,6 @@ public class JoinFrame extends JFrame implements ActionListener{
 	private javax.swing.JTextField jTextField2;
 	private javax.swing.JTextField jTextField3;
 	private javax.swing.JTextField jTextField4;
-	private javax.swing.JTextField jTextField5;
+	private javax.swing.JPasswordField jTextField5;
 	// End of variables declaration
 }

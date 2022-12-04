@@ -1,12 +1,14 @@
 package instagramTP;
 
 import java.awt.Color;
+import java.awt.Insets;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import javax.imageio.ImageIO;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class UploadWindow extends javax.swing.JDialog implements java.awt.event.ActionListener {
 	
@@ -41,9 +43,10 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 		imageBtn.setBorder(null);
 		imageBtn.addActionListener(this);
 
+		contentArea.setLineWrap(true);
+		contentArea.setMargin(new Insets(30, 30, 30, 30));
 		contentArea.setText("Write anything to post...");
 		contentArea.setToolTipText("");
-		contentArea.setLineWrap(true);
 		contentArea.setForeground(Color.GRAY);
 		contentArea.addFocusListener(new FocusListener() { // when start typing, guide disappear
 			@Override
@@ -78,8 +81,7 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 	String load() {
 		javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
 		fileChooser.setDialogTitle("파일 불러오기");
-		// fileChooser.getsetDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);//안됨
-//		fileChooser.setFileFilter(new FileNameExtensionFilter("jpg", "png", "jpeg", "bmp")); // 파일필터
+		fileChooser.setFileFilter(new FileNameExtensionFilter("jpg", "png", "jpeg", "bmp")); // 파일필터
 		fileChooser.setMultiSelectionEnabled(false); // 다중 선택 불가
 		int returnVal = fileChooser.showOpenDialog(this); // show openDialog
 
