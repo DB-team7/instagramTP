@@ -5,8 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
-
 public class ZinCyan {
 	private static String dburl = "jdbc:mysql://localhost/dmaster";
 	private static String dbUser = "root";
@@ -228,6 +226,7 @@ public class ZinCyan {
 			ps.setString(1, post.getContent());
 			ps.setInt(2, post.getPID());
 			ps.setBinaryStream(3, fin, (int) imgfile.length());// Stream형의 파일 업로드
+			ps.setInt(4, post.getPID());
 			ps.executeUpdate(); // 명렁어 실행
 			ps.close();
 			System.out.println("update Successfully!");
@@ -271,7 +270,7 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 객체 생성
 
-		String sql = "select ID, name, phone_num, email from users where ID=?;";
+		String sql = "select ID, name, phone_num, email, FILE from users where ID=?;";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 명렁어 실행
@@ -283,6 +282,7 @@ public class ZinCyan {
 		list.setUserName(rs.getString(2));
 		list.setUserPhoneNum(rs.getString(3));
 		list.setUserEmail(rs.getString(4));
+		list.setInputStream(rs.getBinaryStream(5));
 		rs.close();
 		ps.close();
 
@@ -618,7 +618,7 @@ public class ZinCyan {
 		if (src == null) {
 			PreparedStatement ps = null; // 객체 생성
 
-			String sql = "insert into users values (?,?,?,?,?,?); ";
+			String sql = "insert into users values (?,?,?,?,?,?,?); ";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getUserID());
 			ps.setString(2, user.getUserName());
@@ -626,6 +626,7 @@ public class ZinCyan {
 			ps.setString(4, user.getUserEmail());
 			ps.setString(5, user.getUserPassword());
 			ps.setString(6, null);
+			ps.setString(7, null);
 			ps.executeUpdate(); // 명렁어 실행
 			ps.close();
 			System.out.println("Inserting Successfully!");
@@ -797,4 +798,29 @@ public class ZinCyan {
 		ps.executeUpdate(); // 명렁어 실행
 	}
 
+	public static void modProfilePic(String myUserID, String src) throws FileNotFoundException, SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+		if (src != null) {
+			
+			File imgfile = new File(src);
+			FileInputStream fin = new FileInputStream(imgfile);
+			PreparedStatement ps = null; // 객체 생성
+
+			String sql = "update users set FILE = ?, FILENAME = ? where ID = ? ;";
+			ps = conn.prepareStatement(sql);
+			ps.setBinaryStream(1, fin, (int) imgfile.length());// Stream형의 파일 업로드
+			ps.setString(2, myUserID);
+			ps.setString(3, myUserID);
+			ps.executeUpdate(); // 명렁어 실행
+			ps.close();
+			System.out.println("Inserting Successfully!");
+		}
+	}
 }
