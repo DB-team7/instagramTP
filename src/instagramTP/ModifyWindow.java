@@ -1,5 +1,7 @@
 package instagramTP;
 
+import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,6 +12,8 @@ import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -22,33 +26,35 @@ public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.
 
 	private void initComponents(Integer PID) throws SQLException, IOException {
 
-		// jFileChooser1 = new javax.swing.JFileChooser();
 		jTextField1 = new javax.swing.JTextField();
 		imageBtn = new javax.swing.JButton();
 		modifyBtn = new javax.swing.JButton();
 		deleteBtn = new javax.swing.JButton();
 
 		thisPost = ZinCyan.getPostbyPID(PID);
-		java.awt.Image nullImg = new javax.swing.ImageIcon("images/nullImage.png").getImage();
+		java.awt.Image nullImg = new ImageIcon("images/nullImage.png").getImage();
 		if (thisPost.getInputStream() != null) {
 			File tempFile = File.createTempFile(String.valueOf(thisPost.getInputStream().hashCode()), ".tmp");
 			tempFile.deleteOnExit();
 			Files.copy(thisPost.getInputStream(), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			Path tempPath = tempFile.toPath();
 
-			nullImg = new javax.swing.ImageIcon(tempPath.toString()).getImage();
+			nullImg = new ImageIcon(tempPath.toString()).getImage();
 		}
 
-		setIconImage(nullImg); // 프레임바 아이콘 우선 투명으로
 		setSize(1000, 600);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
 		getContentPane().setBackground(new java.awt.Color(245, 245, 245));
 		getContentPane().setLayout(new java.awt.FlowLayout());
-
-		imageBtn.setText("modify image"); // 원래 업로드 되었던 이미지로 setIcon
+		
+		imageBtn.setIcon(new ImageIcon(nullImg.getScaledInstance(320, 320, Image.SCALE_SMOOTH)));
 		imageBtn.setPreferredSize(new java.awt.Dimension(400, 400));
+		imageBtn.setLayout(new BorderLayout());
+		javax.swing.JLabel lab = new javax.swing.JLabel("modify image");
+		lab.setHorizontalAlignment(SwingConstants.CENTER);
+		imageBtn.add(lab, BorderLayout.SOUTH);
 		imageBtn.setBackground(new java.awt.Color(255, 255, 255));
 		imageBtn.setBorder(null);
 		imageBtn.addActionListener(this);
