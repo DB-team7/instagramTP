@@ -129,7 +129,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 					likeNumLabel.revalidate();
 					likeNumLabel.repaint();
 					try {
-						ZinCyan.like(myUID, PID);
+						ZinCyan.unLike(myUID, PID);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -141,7 +141,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 					likeNumLabel.revalidate();
 					likeNumLabel.repaint();
 					try {
-						ZinCyan.unLike(myUID, PID);
+						ZinCyan.like(myUID, PID);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
