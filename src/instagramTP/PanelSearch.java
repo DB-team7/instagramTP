@@ -1,6 +1,5 @@
 package instagramTP;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -15,8 +14,6 @@ public class PanelSearch extends javax.swing.JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private static String myUserID;
-	private static String quote = null;
-
 	public PanelSearch(String UID) throws SQLException, IOException {
 		initComponents(UID);
 	}
