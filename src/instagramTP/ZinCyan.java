@@ -863,7 +863,7 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 按眉 积己
 
-		String sql = "SELECT count(ID) FROM posts WHERE user_id = (SELECT followee FROM follow WHERE followee = ?)";
+		String sql = "SELECT COUNT(ID) FROM posts WHERE user_id = ANY (SELECT followee FROM follow WHERE follower = ?)";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 疙贩绢 角青
@@ -887,7 +887,7 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 按眉 积己
 
-		String sql = "SELECT ID FROM posts WHERE user_id = (SELECT followee FROM follow WHERE followee = ?)";
+		String sql = "SELECT ID FROM posts WHERE user_id = ANY (SELECT followee FROM follow WHERE follower = ?) ORDER BY created_at DESC;";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, UID);
 		ResultSet rs = ps.executeQuery(); // 疙贩绢 角青

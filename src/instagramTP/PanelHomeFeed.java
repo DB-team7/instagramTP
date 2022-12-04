@@ -60,6 +60,7 @@ public class PanelHomeFeed extends javax.swing.JPanel {
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addComponent(scrollPane)
 				);
+		
 	}                
 
 	// Variables declaration

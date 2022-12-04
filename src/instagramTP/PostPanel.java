@@ -1,7 +1,7 @@
 package instagramTP;
 
 import java.awt.Color;
-import java.awt.Font;
+//import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -172,7 +172,6 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		postTextArea.setBackground(null);
 		postTextArea.setLineWrap(true);
 		postTextArea.setMargin(null);
-		postTextArea.setFont(new Font("µ¸¿ò", Font.PLAIN, 15));
 		postTextArea.setText(post.getContent());
 
 		// commentPane
