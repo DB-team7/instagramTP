@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
@@ -209,6 +210,16 @@ public class JoinFrame extends JFrame implements ActionListener{
 							JOptionPane.showMessageDialog(null, "전화번호를 입력해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
 						if(jTextField3.getText().equals(""))
 							JOptionPane.showMessageDialog(null, "이메일을 입력해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+						
+						String pattern2 = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$";
+						String str2 = jTextField3.getText();
+						if(Pattern.matches(pattern2, str2)) {
+						    System.out.println("올바른 이메일 형식입니다. ");
+						} else {            
+							JOptionPane.showMessageDialog(null, "올바른 이메일 형식이 아닙니다.", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+						}
+
+
 						if(jTextField5.getText().equals(""))
 							JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
 
