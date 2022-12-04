@@ -201,6 +201,17 @@ public class JoinFrame extends JFrame implements ActionListener{
 					JOptionPane.showMessageDialog(null, "중복 아이디입니다", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
 				} else { // 중복이 아니면 업데이트
 					try {
+						if(jTextField4.getText().equals(""))
+							JOptionPane.showMessageDialog(null, "아이디를 입력해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+						if(jTextField1.getText().equals(""))
+							JOptionPane.showMessageDialog(null, "이름을 입력해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+						if(jTextField2.getText().equals(""))
+							JOptionPane.showMessageDialog(null, "전화번호를 입력해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+						if(jTextField3.getText().equals(""))
+							JOptionPane.showMessageDialog(null, "이메일을 입력해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+						if(jTextField5.getText().equals(""))
+							JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+
 						User user = new User();
 						user.setUserID(jTextField4.getText()); // ID
 						user.setUserName(jTextField1.getText());// name
