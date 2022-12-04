@@ -1,6 +1,7 @@
 package instagramTP;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -57,36 +58,38 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
 
 		// 내 정보란
 		MyDataPanel.setBackground(new Color(255, 255, 255));
-		MyDataPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(153, 153, 153)));
+		MyDataPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.GRAY));
 
-		imageBtn.setPreferredSize(new java.awt.Dimension(60, 60));
+//		putClientProperty(FlatClientProperties.STYLE, "arc: 999");	// 동그랗게 만들기는 실패...
+//		imageBtn.setOpaque(false);
+		imageBtn.setPreferredSize(new java.awt.Dimension(32, 32));
 		imageBtn.setBackground(new Color(255, 255, 255));
 		imageBtn.setBorder(null);
 		imageBtn.addActionListener(this);
 
 		User thisUser = ZinCyan.getUserByUID(myUID);
 
-		ImageIcon nullImg = new ImageIcon("images/basicProfilePhoto.png");
+		Image nullImg = new ImageIcon("images/basicProfilePhoto.png").getImage();
 		if (thisUser.getInputStream() != null) {
 			File tempFile = File.createTempFile(String.valueOf(thisUser.getInputStream().hashCode()), ".tmp");
 			tempFile.deleteOnExit();
 			Files.copy(thisUser.getInputStream(), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			Path tempPath = tempFile.toPath();
 
-			nullImg = new ImageIcon(tempPath.toString());
+			nullImg = new ImageIcon(tempPath.toString()).getImage();
 		}
 
-		javax.swing.ImageIcon profileImg = nullImg;
+		ImageIcon profileImg = new ImageIcon(nullImg.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 
 		imageBtn.setIcon(profileImg); // 현재 프로필 사진 뜨게 하기
 
 		MyDataPanel.add(imageBtn);
 
-		idLabel.setText(thisUser.getUserName());
+		idLabel.setText(thisUser.getUserID());
 		MyDataPanel.add(idLabel);
 
 		nameLabel.setForeground(new Color(142, 142, 142));
-		nameLabel.setText(thisUser.getUserID());
+		nameLabel.setText(thisUser.getUserName());
 		MyDataPanel.add(nameLabel);
 
 		followerBtn.setText("follower");

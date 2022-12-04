@@ -46,7 +46,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 		homeFeedPane = new PanelHomeFeed(UID);
 		searchPane = new PanelSearch(UID);
 		starFeedPane = new PanelStarFeed(UID);
-//		myPagePane = new PanelMyPage(UID);
+		myPagePane = new PanelMyPage(UID);
 
 		// load images
 		upload = new ImageIcon("images/upload.png").getImage();

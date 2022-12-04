@@ -5,6 +5,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class PanelSearch extends javax.swing.JPanel {
@@ -12,11 +13,11 @@ public class PanelSearch extends javax.swing.JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public PanelSearch(String UID) throws SQLException {
+	public PanelSearch(String UID) throws SQLException, IOException {
 		initComponents(UID);
 	}
 
-	private void initComponents(String UID) throws SQLException {
+	private void initComponents(String UID) throws SQLException, IOException {
 
 		jPanel1 = new javax.swing.JPanel();
 		jPanel2 = new javax.swing.JPanel();

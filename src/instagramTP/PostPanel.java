@@ -2,7 +2,6 @@ package instagramTP;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.Insets;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
@@ -15,12 +14,11 @@ import java.sql.SQLException;
 import javax.swing.ImageIcon;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.ui.FlatLineBorder;
 
 public class PostPanel extends javax.swing.JPanel implements java.awt.event.ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	private static String userID = null;
+	private static String postOwnerID = null;
 	private static String myUserID = null;
 	private static Integer postID = null;
 
@@ -65,8 +63,22 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		putClientProperty(FlatClientProperties.STYLE, "arc: 30");
 
 		Post post = ZinCyan.getPostbyPID(PID);
-		userID = ZinCyan.getUserNamebyPID(post.getPID());
-		IDBtn.setText(userID);
+		postOwnerID = ZinCyan.getUserNamebyPID(PID);
+		User postOwner = ZinCyan.getUserByUID(postOwnerID);
+		
+		Image img = new ImageIcon("images/basicProfilePhoto.png").getImage();
+		if (postOwner.getInputStream() != null) {
+			File tempFile = File.createTempFile(String.valueOf(postOwner.getInputStream().hashCode()), ".tmp");
+			tempFile.deleteOnExit();
+			Files.copy(postOwner.getInputStream(), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			Path tempPath = tempFile.toPath();
+
+			img = (new ImageIcon(tempPath.toString()).getImage()).getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+		}
+		profileImg = new ImagePanel(img);
+//		profileImg.putClientProperty(FlatClientProperties.STYLE, "arc: 999");	// 동그랗게 만들기 실패...
+		
+		IDBtn.setText(postOwnerID);
 		IDBtn.setBorder(null);
 		IDBtn.setBackground(null);
 		IDBtn.addActionListener(this); // ID 클릭하면 그 사람 페이지로 (OtherPageWindow.java)
@@ -74,7 +86,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		// 본인 계정에서만 뜨게 세팅
 		moreBtn.setBorder(null);
 		moreBtn.setBackground(null);
-		if (userID.equals(myUID)) {
+		if (postOwnerID.equals(myUID)) {
 			moreBtn.setFont(new java.awt.Font("Roboto", 1, 14));
 			moreBtn.setText("...");
 			moreBtn.addActionListener(this); // 게시글 수정, 삭제 창. 애초에 본인 게시글에만 이 버튼이 떠야 함
@@ -98,7 +110,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		likeBtn.setBackground(null);
 		likeBtn.setBorder(null);
 		likeBtn.setPressedIcon(heartI_fp);
-		if (ZinCyan.isLike(userID, PID)) {
+		if (ZinCyan.isLike(postOwnerID, PID)) {
 			likeBtn.setIcon(heartI_f); // 기본 설정: 이 글을 좋아요했으면 heartI_f(꽉찬하트), 아니면 heartI(빈하트)로 setIcon
 			likeBtn.setSelected(true); // 기본 설정: 이 글을 좋아요했으면 true, 아니면 false
 		} else {
@@ -115,7 +127,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 					likeNumLabel.revalidate();
 					likeNumLabel.repaint();
 					try {
-						ZinCyan.like(userID, PID);
+						ZinCyan.like(postOwnerID, PID);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -127,7 +139,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 					likeNumLabel.revalidate();
 					likeNumLabel.repaint();
 					try {
-						ZinCyan.unLike(userID, PID);
+						ZinCyan.unLike(postOwnerID, PID);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -231,6 +243,8 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
 						.addGap(W_GAP, W_GAP, W_GAP)
+						.addComponent(profileImg, 32, 32, 32)
+						.addGap(8, 8, 8)
 						.addComponent(IDBtn)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(moreBtn)
@@ -256,7 +270,8 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
 				.addGroup(layout.createSequentialGroup()
 						.addGap(H_GAP, H_GAP, H_GAP)
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+								.addComponent(profileImg, 32, 32, 32)
 								.addComponent(IDBtn)
 								.addComponent(moreBtn))
 						.addGap(GAP, GAP, GAP)
@@ -276,15 +291,15 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		// TODO Auto-generated method stub
 		if (arg0.getSource() == IDBtn) {
 			try {
-				if (userID.equals(myUserID)) {
+				if (postOwnerID.equals(myUserID)) {
 					myPage = new PanelMyPage(myUserID);
 				} else {
-					otherWindow = new OtherPageWindow(userID, myUserID);
+					otherWindow = new OtherPageWindow(postOwnerID, myUserID);
 				}
 			} catch (SQLException | IOException e) {
 				e.printStackTrace();
 			}
-			if (userID.equals(myUserID)) {
+			if (postOwnerID.equals(myUserID)) {
 				myPage.setVisible(true);
 			} else {
 				otherWindow.setVisible(true);
@@ -292,7 +307,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 
 			java.awt.EventQueue.invokeLater(new Runnable() {
 				public void run() {
-					if (userID.equals(myUserID)) {
+					if (postOwnerID.equals(myUserID)) {
 						myPage.scrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));
 					} else {
 						otherWindow.scrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));
@@ -330,6 +345,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 	}
 
 	// Variables declaration
+	private ImagePanel profileImg;
 	private javax.swing.JPanel commentPane;
 	private javax.swing.JButton commentWindowBtn;
 	private javax.swing.JLabel createdAtLabel;
