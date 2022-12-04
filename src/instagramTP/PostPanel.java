@@ -305,7 +305,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		}
 
 		if (arg0.getSource() == commentWindowBtn) {
-			cmtWindow = new CommentWindow();
+			cmtWindow = new CommentWindow(postID, myUserID);
 			cmtWindow.setVisible(true);
 			java.awt.EventQueue.invokeLater(new Runnable() {
 				public void run() {

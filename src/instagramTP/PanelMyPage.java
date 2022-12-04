@@ -3,6 +3,8 @@ package instagramTP;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.imageio.ImageIO;
+
 public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -58,7 +60,7 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
 
 		User thisUser = ZinCyan.getUserByUID(myUID);
 
-		idLabel.setText(thisUser.getUserID());
+		idLabel.setText(thisUser.getUserName());
 		MyDataPanel.add(idLabel);
 
 		nameLabel.setForeground(new java.awt.Color(142, 142, 142));
@@ -111,18 +113,14 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
 		// add scrollPane in center
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createSequentialGroup()
+		layout.setHorizontalGroup(layout.createSequentialGroup()
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
 						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 				.addComponent(scrollPane, 470, 470, 470)
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				);
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(scrollPane)
-				);
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(scrollPane));
 
 	}
 
@@ -137,15 +135,15 @@ public class PanelMyPage extends javax.swing.JPanel implements java.awt.event.Ac
 
 			if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) { // 파일을 선택하였을 때
 				// 프사 저장 들어가는 부분
-				//                try{
-				//                	java.awt.image.BufferedImage img = ImageIO.read(fileChooser.getSelectedFile());
-				//                	java.awt.Image resizedImage = 
-				//                		    img.getScaledInstance(imageBtn.getWidth(), imageBtn.getHeight(), java.awt.Image.SCALE_SMOOTH);
-				//                    
-				//                } catch (Exception e) {
-				//                    // TODO Auto-generated catch block
-				//                    e.printStackTrace();
-				//                }
+//				try {
+//					java.awt.image.BufferedImage img = ImageIO.read(fileChooser.getSelectedFile());
+//					java.awt.Image resizedImage = img.getScaledInstance(imageBtn.getWidth(), imageBtn.getHeight(),
+//							java.awt.Image.SCALE_SMOOTH);
+//
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 			}
 		}
 
