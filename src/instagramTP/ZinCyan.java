@@ -719,7 +719,7 @@ public class ZinCyan {
 		ps.close();
 
 	}
-
+	
 	public static void initComment(Comment comment) throws SQLException, FileNotFoundException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
@@ -743,6 +743,7 @@ public class ZinCyan {
 		ps.close();
 		System.out.println("Inserting Successfully!");
 	}
+
 
 	public static String getUIDByCommentID(Integer postID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);

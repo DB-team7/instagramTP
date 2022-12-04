@@ -77,7 +77,9 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 			img = (new ImageIcon(tempPath.toString()).getImage()).getScaledInstance(32, 32, Image.SCALE_SMOOTH);
 		}
 		profileImg = new ImagePanel(img);
-//		profileImg.putClientProperty(FlatClientProperties.STYLE, "arc: 999");	// 동그랗게 만들기 실패...
+
+		// profileImg.putClientProperty(FlatClientProperties.STYLE, "arc: 999"); // 동그랗게
+		// 만들기 실패...
 
 		IDBtn.setText(postOwnerID);
 		IDBtn.setBorder(null);
@@ -311,7 +313,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 				}
 			});
 		}
-		
+
 		if (arg0.getSource() == postCommentBtn) {
 			System.out.println("댓글왜안됨");
 			Comment comment = new Comment();
@@ -332,6 +334,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 				e.printStackTrace();
 			}
 		}
+
 	}
 
 	// Variables declaration

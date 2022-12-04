@@ -59,7 +59,8 @@ public class CommentWindow extends javax.swing.JDialog {
 			scrollBackPane.add(cmtPanel[i]);
 		}
 
-		scrollBackPane.add(javax.swing.Box.createVerticalStrut(500)); // 우선은 여백만으로 해결
+		scrollBackPane.add(javax.swing.Box.createVerticalStrut(500)); // default blank
+
 
 		scrollPane.setViewportView(scrollBackPane);
 		getContentPane().add(scrollPane);
