@@ -396,7 +396,7 @@ public class ZinCyan {
 		return true;
 	}
 
-	//TODO:a
+	// TODO:a
 	public static void follow(String followee, String follower) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
@@ -451,7 +451,7 @@ public class ZinCyan {
 		}
 
 		PreparedStatement ps = null; // °´Ã¼ »ý¼º
-
+		//TODO: Äû¸® ¼öÁ¤
 		String sql = "select ID from posts where created_at between date_add(now(), interval -1 week) and now() order by cnt_like desc; ";
 
 		ps = conn.prepareStatement(sql);
@@ -722,7 +722,7 @@ public class ZinCyan {
 		ps.close();
 
 	}
-	
+
 	public static void initComment(Comment comment) throws SQLException, FileNotFoundException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
@@ -746,7 +746,6 @@ public class ZinCyan {
 		ps.close();
 		System.out.println("Inserting Successfully!");
 	}
-
 
 	public static String getUIDByCommentID(Integer postID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
@@ -983,7 +982,7 @@ public class ZinCyan {
 
 		return tmp;
 	}
-	
+
 	public static Integer[] getCIDsByPID(Integer PID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
@@ -1013,7 +1012,7 @@ public class ZinCyan {
 		return tmp;
 
 	}
-	
+
 	public static Boolean isLikeComment(String UID, Integer CID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
@@ -1041,7 +1040,7 @@ public class ZinCyan {
 		}
 		return true;
 	}
-	
+
 	public static void likeComment(String UID, Integer CID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
@@ -1061,7 +1060,7 @@ public class ZinCyan {
 		ps.executeUpdate(); // ¸í··¾î ½ÇÇà
 		ps.close();
 	}
-	
+
 	public static void unLikeComment(String UID, Integer CID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
@@ -1083,5 +1082,4 @@ public class ZinCyan {
 
 	}
 
-	
 }
