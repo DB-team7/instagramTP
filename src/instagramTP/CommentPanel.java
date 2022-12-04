@@ -10,7 +10,7 @@ public class CommentPanel extends javax.swing.JPanel implements java.awt.event.A
 
 	private static final long serialVersionUID = 1L;
 	private static String myUserID = null;
-	private static Integer commentID = null;
+	private Integer commentID = null;
 
 	public CommentPanel(Integer CID, String myUID) throws SQLException {
 		initComponents(CID, myUID);

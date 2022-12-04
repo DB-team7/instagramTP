@@ -10,7 +10,7 @@ import com.formdev.flatlaf.ui.FlatLineBorder;
 public class OtherPageWindow extends javax.swing.JDialog implements java.awt.event.ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	private static String userID = null;
+	private String userID = null;
 
 	public OtherPageWindow(String UID, String myUID) throws SQLException, IOException {
 		initComponents(UID, myUID);
