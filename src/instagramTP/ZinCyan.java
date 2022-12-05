@@ -700,6 +700,14 @@ public class ZinCyan {
 		ps.setString(2, UID);
 		ps.executeUpdate(); // ¸í··¾î ½ÇÇà
 		ps.close();
+		
+		PreparedStatement ps2 = null; // °´Ã¼ »ý¼º
+
+		String sql2 = "UPDATE posts SET cnt_like = cnt_like + 1 WHERE ID = ?;";
+		ps2 = conn.prepareStatement(sql2);
+		ps2.setInt(1, PID);
+		ps2.executeUpdate(); // ¸í··¾î ½ÇÇà
+		ps2.close();
 	}
 
 	public static void unLike(String UID, Integer PID) throws SQLException {
@@ -720,6 +728,14 @@ public class ZinCyan {
 		ps.setInt(2, PID);
 		ps.executeUpdate(); // ¸í··¾î ½ÇÇà
 		ps.close();
+		
+		PreparedStatement ps2 = null; // °´Ã¼ »ý¼º
+
+		String sql2 = "UPDATE posts SET cnt_like = cnt_like - 1 WHERE ID = ?;";
+		ps2 = conn.prepareStatement(sql2);
+		ps2.setInt(1, PID);
+		ps2.executeUpdate(); // ¸í··¾î ½ÇÇà
+		ps2.close();
 
 	}
 
