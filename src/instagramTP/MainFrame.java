@@ -25,7 +25,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
 	public void initComponents(String UID) throws SQLException, IOException {
 		userID = UID;
-		setTitle("In*gram");
+		//		setTitle("In*gram");
 
 		// set minimum size of frame(window)
 		double magn = 1080 / Toolkit.getDefaultToolkit().getScreenSize().getHeight();
@@ -86,7 +86,30 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 		// headerPanel init
 		headerPane.setBackground(Color.WHITE);
 		headerPane.setPreferredSize(new Dimension(1000, 60));
-		headerPane.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 12, 24));
+		//		headerPane.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 12, 24));
+		javax.swing.GroupLayout headerPaneLayout = new javax.swing.GroupLayout(headerPane);
+		headerPane.setLayout(headerPaneLayout);
+		headerPaneLayout
+		.setHorizontalGroup(headerPaneLayout.createSequentialGroup()
+				.addGap(20, 20, 20)
+				.addComponent(jLabel1)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(uploadBtn)
+				.addGap(10, 10, 10)
+				.addComponent(homeFeedBtn)
+				.addGap(10, 10, 10)
+				.addComponent(searchBtn)
+				.addGap(10, 10, 10)
+				.addComponent(starFeedBtn)
+				.addGap(10, 10, 10)
+				.addComponent(myPageBtn)
+				.addGap(20, 20, 20));
+		headerPaneLayout.setVerticalGroup(headerPaneLayout.createSequentialGroup()
+				.addGap(15, 15, 15)
+				.addGroup(headerPaneLayout.createParallelGroup()
+						.addComponent(jLabel1).addComponent(uploadBtn).addComponent(homeFeedBtn)
+						.addComponent(searchBtn).addComponent(starFeedBtn).addComponent(myPageBtn)));
 
 		jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 0, 20));
 		jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -124,12 +147,12 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 		myPageBtn.addActionListener(this);
 
 		// add to headerPanel
-		headerPane.add(jLabel1);
-		headerPane.add(uploadBtn);
-		headerPane.add(homeFeedBtn);
-		headerPane.add(searchBtn);
-		headerPane.add(starFeedBtn);
-		headerPane.add(myPageBtn);
+		//		headerPane.add(jLabel1);
+		//		headerPane.add(uploadBtn);
+		//		headerPane.add(homeFeedBtn);
+		//		headerPane.add(searchBtn);
+		//		headerPane.add(starFeedBtn);
+		//		headerPane.add(myPageBtn);
 
 		// add to MainFrame. 헤더 버튼에 따라 다르게 뜨게. 기본은 homeFeedPane(PanelHomeFeed)
 		getContentPane().add(headerPane, BorderLayout.NORTH);
@@ -198,9 +221,9 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
+				//			} catch (IOException e) {
+				//				// TODO Auto-generated catch block
+				//				e.printStackTrace();
 			}
 			getContentPane().add(starFeedPane, BorderLayout.CENTER);
 			getContentPane().setVisible(false);

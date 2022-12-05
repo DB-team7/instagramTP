@@ -44,6 +44,7 @@ public class PanelHomeFeed extends javax.swing.JPanel {
 			ScrollBackPane.add(postPanel[i]);
 			ScrollBackPane.add(javax.swing.Box.createVerticalStrut(30)); // 패널사이세로여백
 		}
+		ScrollBackPane.add(javax.swing.Box.createVerticalStrut(1000)); // default blank
 
 		scrollPane.setViewportView(ScrollBackPane);
 
