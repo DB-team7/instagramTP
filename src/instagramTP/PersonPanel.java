@@ -49,7 +49,9 @@ public class PersonPanel extends javax.swing.JPanel implements java.awt.event.Ac
 		IDBtn.setText(UID);
 		IDBtn.setBorder(null);
 		IDBtn.setBackground(null);
-		IDBtn.addActionListener(this); // ID 클릭하면 그 사람 페이지로 (OtherPageWindow.java)
+		if (!UserID.equals(myUserID)) {
+			IDBtn.addActionListener(this); // ID 클릭하면 그 사람 페이지로 (OtherPageWindow.java)
+		}
 
 		nameLabel.setText(ZinCyan.getUserNameByUID(UID));
 		nameLabel.setForeground(java.awt.Color.GRAY);
