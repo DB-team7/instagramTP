@@ -452,7 +452,7 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 按眉 积己
 		//TODO: 柠府 荐沥
-		String sql = "select ID from posts where created_at between date_add(now(), interval -1 week) and now() order by cnt_like desc; ";
+		String sql = "SELECT ID FROM posts WHERE created_at BETWEEN DATE_ADD(NOW(), INTERVAL - 1 WEEK) AND NOW() ORDER BY cnt_like DESC; ";
 
 		ps = conn.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery(); // 疙贩绢 角青
@@ -482,7 +482,7 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 按眉 积己
 
-		String sql = "select count(ID) from posts where created_at between date_add(now(), interval -1 week) and now() order by cnt_like desc; ";
+		String sql = "SELECT COUNT(ID) FROM posts WHERE created_at BETWEEN DATE_ADD(NOW(), INTERVAL - 1 WEEK) AND NOW() ORDER BY cnt_like DESC; ";
 		ps = conn.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery(); // 疙贩绢 角青
 		rs.next();
