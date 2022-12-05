@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
 import javax.imageio.ImageIO;
-import javax.swing.border.LineBorder;
+//import javax.swing.border.LineBorder;
 
 public class UploadWindow extends javax.swing.JDialog implements java.awt.event.ActionListener {
 
