@@ -31,7 +31,6 @@ public class OtherPageWindow extends javax.swing.JDialog implements java.awt.eve
 		postNumPanel = new javax.swing.JPanel();
 		postNumLabel = new javax.swing.JLabel();
 		followToggleBtn = new javax.swing.JToggleButton();
-		blockToggleBtn = new javax.swing.JToggleButton();
 
 		setSize(1000, 600);
 		setLocationRelativeTo(null);
@@ -120,23 +119,6 @@ public class OtherPageWindow extends javax.swing.JDialog implements java.awt.eve
 			}
 		});
 		otherDataPanel.add(followToggleBtn);
-
-		blockToggleBtn.setText("block"); // 기본 설정: 이 사람을 블락했으면 unblock, 아니면 block으로 setText
-		blockToggleBtn.setSelected(false); // 기본 설정: 이 사람을 블락했으면 true, 아니면 false
-		blockToggleBtn.addItemListener(new java.awt.event.ItemListener() {
-			@Override
-			public void itemStateChanged(java.awt.event.ItemEvent e) {
-				if (blockToggleBtn.isSelected()) {
-					// block 상태
-					blockToggleBtn.setText("unblock"); // 이제 블락 중이니까 다시 누르면 블락 해제된다는 뜻
-				} else {
-					// unblock(블락안한) 상태
-					blockToggleBtn.setText("follow"); // 이제 블락 해제했으니까 다시 누르면 블락된다는 뜻
-				}
-			}
-		});
-		otherDataPanel.add(blockToggleBtn);
-		// 건너건너 본인 페이지로 연결되었을 때는 애초에 뜨지 않게 하거나 follow,block 버튼이 안보이게 해야 함.
 
 		scrollBackPane.add(otherDataPanel);
 		scrollBackPane.add(javax.swing.Box.createVerticalStrut(30)); // 패널사이세로여백
@@ -227,7 +209,6 @@ public class OtherPageWindow extends javax.swing.JDialog implements java.awt.eve
 	private javax.swing.JLabel postNumLabel;
 	private javax.swing.JPanel postNumPanel;
 	private javax.swing.JToggleButton followToggleBtn;
-	private javax.swing.JToggleButton blockToggleBtn;
 	private javax.swing.JPanel scrollBackPane;
 	public javax.swing.JScrollPane scrollPane;
 	private FollowerWindow flwWindow;
