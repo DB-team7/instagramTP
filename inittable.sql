@@ -37,16 +37,6 @@ CREATE TABLE follow (
         REFERENCES users (ID)
 );
 
-/*차단 테이블*/
-CREATE TABLE block (
-    user_id VARCHAR(20),
-    block_id VARCHAR(20),
-    FOREIGN KEY (user_id)
-        REFERENCES users (ID),
-    FOREIGN KEY (block_id)
-        REFERENCES users (ID)
-)
-;
 /*댓글 테이블*/
 CREATE TABLE comment (
     ID INT AUTO_INCREMENT,
