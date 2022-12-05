@@ -34,7 +34,7 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener {
 		setExtendedState(JFrame.MAXIMIZED_BOTH); // full screen
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setBackground(new java.awt.Color(245, 245, 245));
-		getContentPane().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 80));
+		getContentPane().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
 
 		jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 		jPanel1.setPreferredSize(new java.awt.Dimension(470, 500));
@@ -50,7 +50,7 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener {
 		gridBagConstraints.insets = new java.awt.Insets(0, 0, 40, 0);
 		jPanel1.add(jLabel1, gridBagConstraints);
 
-		id.setText(" ID");
+		id.setText("ID");
 		id.setPreferredSize(new java.awt.Dimension(30, 30));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -116,7 +116,7 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener {
 			System.err.println("Failed to initialize flatlaf");
 		}
 
-		/* Create and display the form */
+		// Create and display the form
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new LoginFrame().setVisible(true);

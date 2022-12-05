@@ -26,7 +26,7 @@ public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.
 
 	private void initComponents(Integer PID) throws SQLException, IOException {
 
-		jTextField1 = new javax.swing.JTextField();
+		jTextField1 = new javax.swing.JTextArea();
 		imageBtn = new javax.swing.JButton();
 		modifyBtn = new javax.swing.JButton();
 		deleteBtn = new javax.swing.JButton();
@@ -48,7 +48,7 @@ public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.
 
 		getContentPane().setBackground(new java.awt.Color(245, 245, 245));
 		getContentPane().setLayout(new java.awt.FlowLayout());
-		
+
 		imageBtn.setIcon(new ImageIcon(nullImg.getScaledInstance(320, 320, Image.SCALE_SMOOTH)));
 		imageBtn.setPreferredSize(new java.awt.Dimension(400, 400));
 		imageBtn.setLayout(new BorderLayout());
@@ -59,6 +59,7 @@ public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.
 		imageBtn.setBorder(null);
 		imageBtn.addActionListener(this);
 
+		jTextField1.setLineWrap(true);
 		jTextField1.setText(thisPost.getContent()); // 원래 업로드 되었던 text로 setText
 		jTextField1.setToolTipText("");
 		jTextField1.setBorder(null);
@@ -108,16 +109,15 @@ public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.
 
 	@Override
 	public void actionPerformed(java.awt.event.ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		if (arg0.getSource() == imageBtn) { // 버튼이자 이미지 보여주는 용도
 			src = load();
 		}
 
 		if (arg0.getSource() == modifyBtn) { // 수정해서 업로드
+			thisPost.setContent(jTextField1.getText());
 			try {
 				ZinCyan.modPost(thisPost, src);
 			} catch (FileNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			dispose(); // 창닫기
@@ -127,7 +127,6 @@ public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.
 			try {
 				ZinCyan.delPost(thisPost.getPID());
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			dispose(); // 창닫기
@@ -137,7 +136,7 @@ public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.
 	// Variables declaration - do not modify
 	// private javax.swing.JFileChooser jFileChooser1;
 	private javax.swing.JButton imageBtn;
-	private javax.swing.JTextField jTextField1;
+	private javax.swing.JTextArea jTextField1;
 	private javax.swing.JButton modifyBtn;
 	private javax.swing.JButton deleteBtn;
 	// End of variables declaration

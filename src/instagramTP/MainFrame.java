@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MainFrame extends JFrame implements java.awt.event.ActionListener {
@@ -37,6 +38,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 		headerPane = new JPanel();
+		jLabel1 = new JLabel();
 		uploadBtn = new JButton();
 		homeFeedBtn = new JButton();
 		searchBtn = new JButton();
@@ -57,10 +59,10 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 		mypage_f = new ImageIcon("images/mypage_filled.png").getImage();
 
 		upload_h = new ImageIcon("images/upload_hovered.png").getImage();
-        home_h = new ImageIcon("images/home_hovered.png").getImage();
-        search_h = new ImageIcon("images/search_hovered.png").getImage();
-        star_h = new ImageIcon("images/star_hovered.png").getImage();
-        mypage_h = new ImageIcon("images/mypage_hovered.png").getImage();
+		home_h = new ImageIcon("images/home_hovered.png").getImage();
+		search_h = new ImageIcon("images/search_hovered.png").getImage();
+		star_h = new ImageIcon("images/star_hovered.png").getImage();
+		mypage_h = new ImageIcon("images/mypage_hovered.png").getImage();
 
 		// image to imageIcon
 		uploadI = new ImageIcon(upload.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
@@ -85,6 +87,10 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 		headerPane.setBackground(Color.WHITE);
 		headerPane.setPreferredSize(new Dimension(1000, 60));
 		headerPane.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 12, 24));
+
+		jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 0, 20));
+		jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		jLabel1.setText("in*gram");
 
 		// header components init // 버튼 색은 이미지 넣기 전에 임시로
 		uploadBtn.setPreferredSize(new Dimension(30, 30));
@@ -118,6 +124,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 		myPageBtn.addActionListener(this);
 
 		// add to headerPanel
+		headerPane.add(jLabel1);
 		headerPane.add(uploadBtn);
 		headerPane.add(homeFeedBtn);
 		headerPane.add(searchBtn);
@@ -126,7 +133,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 
 		// add to MainFrame. 헤더 버튼에 따라 다르게 뜨게. 기본은 homeFeedPane(PanelHomeFeed)
 		getContentPane().add(headerPane, BorderLayout.NORTH);
-		
+
 		homeFeedPane = new PanelHomeFeed(UID);
 		getContentPane().add(homeFeedPane, BorderLayout.CENTER);
 
@@ -228,6 +235,7 @@ public class MainFrame extends JFrame implements java.awt.event.ActionListener {
 	}
 
 	private javax.swing.JPanel headerPane;
+	private javax.swing.JLabel jLabel1;
 	private javax.swing.JButton uploadBtn;
 	private javax.swing.JButton homeFeedBtn;
 	private javax.swing.JButton searchBtn;

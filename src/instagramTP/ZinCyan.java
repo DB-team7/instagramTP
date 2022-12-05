@@ -209,9 +209,9 @@ public class ZinCyan {
 		if (src == null) {
 			PreparedStatement ps = null; // 按眉 积己
 
-			String sql = "update posts set content = ? where ID = ? ;";
+			String sql = "UPDATE posts SET content = ? WHERE ID = ?;";
 			ps = conn.prepareStatement(sql);
-			ps.setString(2, post.getContent());
+			ps.setString(1, post.getContent());
 			ps.setInt(2, post.getPID());
 			ps.executeUpdate(); // 疙贩绢 角青
 			ps.close();
@@ -396,7 +396,7 @@ public class ZinCyan {
 		return true;
 	}
 
-	// TODO:a
+
 	public static void follow(String followee, String follower) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
@@ -451,8 +451,8 @@ public class ZinCyan {
 		}
 
 		PreparedStatement ps = null; // 按眉 积己
-		//TODO: 柠府 荐沥
-		String sql = "SELECT ID FROM posts WHERE created_at BETWEEN DATE_ADD(NOW(), INTERVAL - 1 WEEK) AND NOW() ORDER BY cnt_like DESC; ";
+		
+		String sql = "SELECT ID FROM posts WHERE created_at BETWEEN DATE_ADD(NOW(), INTERVAL - 1 WEEK) AND NOW() ORDER BY cnt_like DESC, created_at DESC; ";
 
 		ps = conn.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery(); // 疙贩绢 角青
@@ -482,7 +482,7 @@ public class ZinCyan {
 
 		PreparedStatement ps = null; // 按眉 积己
 
-		String sql = "SELECT COUNT(ID) FROM posts WHERE created_at BETWEEN DATE_ADD(NOW(), INTERVAL - 1 WEEK) AND NOW() ORDER BY cnt_like DESC; ";
+		String sql = "SELECT COUNT(ID) FROM posts WHERE created_at BETWEEN DATE_ADD(NOW(), INTERVAL - 1 WEEK) AND NOW() ORDER BY cnt_like DESC, created_at DESC; ";
 		ps = conn.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery(); // 疙贩绢 角青
 		rs.next();

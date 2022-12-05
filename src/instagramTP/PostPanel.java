@@ -184,23 +184,35 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		commentWindowBtn.setPressedIcon(commentI_h);
 		commentWindowBtn.addActionListener(this);
 
-		jTextField1.setText("leave a comment...");
+		jTextField1.setText(Integer.toString(ZinCyan.getCommentNumByPID(postID)) + " comments, leave a comment...");
 		jTextField1.setBorder(null);
 		jTextField1.setForeground(Color.GRAY);
 		jTextField1.addFocusListener(new FocusListener() { // when start typing, guide disappear
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (jTextField1.getText().equals("")) {
-					jTextField1.setText("leave a comment...");
+					try {
+						jTextField1.setText(
+								Integer.toString(ZinCyan.getCommentNumByPID(postID)) + " comments, leave a comment...");
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					jTextField1.setForeground(Color.GRAY);
 				}
 			}
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (jTextField1.getText().equals("leave a comment...")) {
-					jTextField1.setText("");
-					jTextField1.setForeground(Color.BLACK);
+				try {
+					if (jTextField1.getText().equals(
+							Integer.toString(ZinCyan.getCommentNumByPID(postID)) + " comments, leave a comment...")) {
+						jTextField1.setText("");
+						jTextField1.setForeground(Color.BLACK);
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});
