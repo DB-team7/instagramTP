@@ -202,43 +202,39 @@ public class JoinFrame extends JFrame implements ActionListener {
 					JOptionPane.showMessageDialog(null, "중복 아이디입니다", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
 				} else { // 중복이 아니면 업데이트
 					try {
+						String pattern2 = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$";
+						String str2 = jTextField3.getText();
 						if (jTextField4.getText().equals(""))
 							JOptionPane.showMessageDialog(null, "아이디를 입력해주세요", "ERROR_MESSAGE",
 									JOptionPane.ERROR_MESSAGE);
-						if (jTextField1.getText().equals(""))
+						else if (jTextField1.getText().equals(""))
 							JOptionPane.showMessageDialog(null, "이름을 입력해주세요", "ERROR_MESSAGE",
 									JOptionPane.ERROR_MESSAGE);
-						if (jTextField2.getText().equals(""))
+						else if (jTextField2.getText().equals(""))
 							JOptionPane.showMessageDialog(null, "전화번호를 입력해주세요", "ERROR_MESSAGE",
 									JOptionPane.ERROR_MESSAGE);
-						if (jTextField3.getText().equals(""))
+						else if (jTextField3.getText().equals(""))
 							JOptionPane.showMessageDialog(null, "이메일을 입력해주세요", "ERROR_MESSAGE",
 									JOptionPane.ERROR_MESSAGE);
-
-						String pattern2 = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$";
-						String str2 = jTextField3.getText();
-						if (Pattern.matches(pattern2, str2)) {
-							System.out.println("올바른 이메일 형식입니다. ");
-						} else {
+						else if (!Pattern.matches(pattern2, str2))
 							JOptionPane.showMessageDialog(null, "올바른 이메일 형식이 아닙니다.", "ERROR_MESSAGE",
 									JOptionPane.ERROR_MESSAGE);
-						}
-
-						if (jTextField5.getText().equals(""))
+						else if (jTextField5.getText().equals(""))
 							JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요", "ERROR_MESSAGE",
 									JOptionPane.ERROR_MESSAGE);
+						else {
+							User user = new User();
+							user.setUserID(jTextField4.getText()); // ID
+							user.setUserName(jTextField1.getText());// name
+							user.setUserPhoneNum(jTextField2.getText());// phone_num
+							user.setUserEmail(jTextField3.getText());// email
+							user.setUserPassword(jTextField5.getText());// password
 
-						User user = new User();
-						user.setUserID(jTextField4.getText()); // ID
-						user.setUserName(jTextField1.getText());// name
-						user.setUserPhoneNum(jTextField2.getText());// phone_num
-						user.setUserEmail(jTextField3.getText());// email
-						user.setUserPassword(jTextField5.getText());// password
+							ZinCyan.initUser(user, null);
 
-						ZinCyan.initUser(user, null);
-
-						JOptionPane.showMessageDialog(null, "Join successful!");
-						dispose(); // join screen off
+							JOptionPane.showMessageDialog(null, "Join successful!");
+							dispose(); // join screen off
+						}
 
 					} catch (Exception e) {
 						e.printStackTrace();
