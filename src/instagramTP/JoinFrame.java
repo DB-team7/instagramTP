@@ -199,28 +199,28 @@ public class JoinFrame extends JFrame implements ActionListener {
 			try {
 				if (ZinCyan.isUser(jTextField4.getText())) {
 					// 중복이 있음
-					JOptionPane.showMessageDialog(null, "중복 아이디입니다", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "ID is already exist", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
 				} else { // 중복이 아니면 업데이트
 					try {
 						String pattern2 = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$";
 						String str2 = jTextField3.getText();
-						if (jTextField4.getText().equals(""))
-							JOptionPane.showMessageDialog(null, "아이디를 입력해주세요", "ERROR_MESSAGE",
+						if (jTextField4.getText().equals("ID"))
+							JOptionPane.showMessageDialog(null, "Please enter your ID", "ERROR_MESSAGE",
 									JOptionPane.ERROR_MESSAGE);
-						else if (jTextField1.getText().equals(""))
-							JOptionPane.showMessageDialog(null, "이름을 입력해주세요", "ERROR_MESSAGE",
+						else if (jTextField1.getText().equals("NAME"))
+							JOptionPane.showMessageDialog(null, "Please enter your name", "ERROR_MESSAGE",
 									JOptionPane.ERROR_MESSAGE);
-						else if (jTextField2.getText().equals(""))
-							JOptionPane.showMessageDialog(null, "전화번호를 입력해주세요", "ERROR_MESSAGE",
+						else if (jTextField2.getText().equals("PHONE NUMBER"))
+							JOptionPane.showMessageDialog(null, "Please enter your mobile number", "ERROR_MESSAGE",
 									JOptionPane.ERROR_MESSAGE);
-						else if (jTextField3.getText().equals(""))
-							JOptionPane.showMessageDialog(null, "이메일을 입력해주세요", "ERROR_MESSAGE",
+						else if (jTextField3.getText().equals("EMAIL"))
+							JOptionPane.showMessageDialog(null, "Please enter your e-mail", "ERROR_MESSAGE",
 									JOptionPane.ERROR_MESSAGE);
 						else if (!Pattern.matches(pattern2, str2))
-							JOptionPane.showMessageDialog(null, "올바른 이메일 형식이 아닙니다.", "ERROR_MESSAGE",
+							JOptionPane.showMessageDialog(null, "Wrong e-mail", "ERROR_MESSAGE",
 									JOptionPane.ERROR_MESSAGE);
-						else if (jTextField5.getText().equals(""))
-							JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요", "ERROR_MESSAGE",
+						else if (jTextField5.getText().equals("PASSWORD"))
+							JOptionPane.showMessageDialog(null, "Please enter your password", "ERROR_MESSAGE",
 									JOptionPane.ERROR_MESSAGE);
 						else {
 							User user = new User();
