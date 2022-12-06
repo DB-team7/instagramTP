@@ -44,7 +44,7 @@ public class FollowerWindow extends javax.swing.JDialog {
 		infoPanel.setBackground(new java.awt.Color(245, 245, 245));
 		infoPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
-		infoLabel.setText(Integer.toString(ZinCyan.getFollowerNum(UID)) + " people are following " + UID); // ÆÈ·Î¿ì
+		infoLabel.setText(Integer.toString(ZinCyan.getFollowerNum(UID)) + " people(s) are following " + UID); // ÆÈ·Î¿ì
 		// infoLabel.setText("recyan__ is following 143 people"); //ÆÈ·ÎÀ×
 		infoPanel.add(infoLabel);
 

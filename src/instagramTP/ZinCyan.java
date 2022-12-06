@@ -290,7 +290,7 @@ public class ZinCyan {
 
 	}
 
-	public static Integer getFolloweeNum(String UID) throws SQLException {
+	public static Integer getFollowerNum(String UID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -314,7 +314,7 @@ public class ZinCyan {
 		return postNumInteger;
 	}
 
-	public static Integer getFollowerNum(String UID) throws SQLException {
+	public static Integer getFolloweeNum(String UID) throws SQLException {
 		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -336,6 +336,62 @@ public class ZinCyan {
 		rs.close();
 		ps.close();
 		return postNumInteger;
+	}
+
+	public static String[] getFollowees(String UID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "select followee from follow where follower = ?;";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, UID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+
+		Integer followeeNum = ZinCyan.getFolloweeNum(UID);
+		String[] tmp = new String[followeeNum];
+		for (int i = 0; i < followeeNum; i++) {
+			rs.next();
+			tmp[i] = rs.getString(1);
+		}
+		rs.close();
+		ps.close();
+		return tmp;
+	}
+
+	public static String[] getFollowers(String UID) throws SQLException {
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("연결 성공");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		}
+
+		PreparedStatement ps = null; // 객체 생성
+
+		String sql = "select follower from follow where followee = ?;";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, UID);
+		ResultSet rs = ps.executeQuery(); // 명렁어 실행
+
+		Integer followerNum = ZinCyan.getFollowerNum(UID);
+		String[] tmp = new String[followerNum];
+		for (int i = 0; i < followerNum; i++) {
+			rs.next();
+			tmp[i] = rs.getString(1);
+		}
+		rs.close();
+		ps.close();
+		return tmp;
 	}
 
 	public static Integer[] getPIDsByUID(String UID) throws SQLException {
@@ -495,62 +551,6 @@ public class ZinCyan {
 
 		return numPost;
 
-	}
-
-	public static String[] getFollowers(String UID) throws SQLException {
-		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			System.out.println("연결 성공");
-
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패");
-		}
-
-		PreparedStatement ps = null; // 객체 생성
-
-		String sql = "select followee from follow where follower = ?;";
-		ps = conn.prepareStatement(sql);
-		ps.setString(1, UID);
-		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-
-		Integer followerNum = ZinCyan.getFollowerNum(UID);
-		String[] tmp = new String[followerNum];
-		for (int i = 0; i < followerNum; i++) {
-			rs.next();
-			tmp[i] = rs.getString(1);
-		}
-		rs.close();
-		ps.close();
-		return tmp;
-	}
-
-	public static String[] getFollowees(String UID) throws SQLException {
-		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			System.out.println("연결 성공");
-
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패");
-		}
-
-		PreparedStatement ps = null; // 객체 생성
-
-		String sql = "select follower from follow where followee = ?;";
-		ps = conn.prepareStatement(sql);
-		ps.setString(1, UID);
-		ResultSet rs = ps.executeQuery(); // 명렁어 실행
-
-		Integer followeeNum = ZinCyan.getFolloweeNum(UID);
-		String[] tmp = new String[followeeNum];
-		for (int i = 0; i < followeeNum; i++) {
-			rs.next();
-			tmp[i] = rs.getString(1);
-		}
-		rs.close();
-		ps.close();
-		return tmp;
 	}
 
 	public static Boolean isUser(String UID) throws SQLException {

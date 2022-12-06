@@ -47,7 +47,7 @@ public class FolloweeWindow extends javax.swing.JDialog {
 		infoPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
 		//		infoLabel.setText("116 people are following recyan__"); // ÆÈ·Î¿ì
-		infoLabel.setText(UID + " is following " + Integer.toString(ZinCyan.getFolloweeNum(UID)) + " people"); // ÆÈ·ÎÀ×
+		infoLabel.setText(UID + " is following " + Integer.toString(ZinCyan.getFolloweeNum(UID)) + " people(s)"); // ÆÈ·ÎÀ×
 		infoPanel.add(infoLabel);
 
 		scrollBackPane.add(infoPanel);
