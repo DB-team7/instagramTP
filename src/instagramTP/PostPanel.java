@@ -335,11 +335,6 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 					try {
 						mdfyWindow = new ModifyWindow(postID);
 						mdfyWindow.setVisible(true);
-						java.awt.EventQueue.invokeLater(new Runnable() {
-							public void run() {
-								mdfyWindow.setModal(true);
-							}
-						});
 					} catch (SQLException | IOException e) {
 						e.printStackTrace();
 					}
