@@ -103,7 +103,7 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 			nullImg = (new ImageIcon(tempPath.toString()).getImage()).getScaledInstance(466, 466, Image.SCALE_SMOOTH);
 			imagePane = new ImagePanel(nullImg);
 		}
-		//		imagePane = new ImagePanel(nullImg);
+		// imagePane = new ImagePanel(nullImg);
 
 		// likePane
 		likePane.setBackground(null);
@@ -224,13 +224,13 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 		javax.swing.GroupLayout commentPaneLayout = new javax.swing.GroupLayout(commentPane);
 		commentPane.setLayout(commentPaneLayout);
 		commentPaneLayout
-		.setHorizontalGroup(commentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-				.addGroup(commentPaneLayout.createSequentialGroup().addGap(W_GAP, W_GAP, W_GAP)
-						.addComponent(commentWindowBtn, 30, 30, 30).addGap(W_GAP, W_GAP, W_GAP)
-						.addComponent(jTextField1, 300, 300, 300)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(postCommentBtn).addGap(W_GAP, W_GAP, W_GAP)));
+				.setHorizontalGroup(commentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+						.addGroup(commentPaneLayout.createSequentialGroup().addGap(W_GAP, W_GAP, W_GAP)
+								.addComponent(commentWindowBtn, 30, 30, 30).addGap(W_GAP, W_GAP, W_GAP)
+								.addComponent(jTextField1, 300, 300, 300)
+								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(postCommentBtn).addGap(W_GAP, W_GAP, W_GAP)));
 		commentPaneLayout.setVerticalGroup(commentPaneLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
 				.addGroup(commentPaneLayout.createSequentialGroup().addGap(GAP, GAP, GAP)
@@ -253,16 +253,16 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 							.addGap(W_GAP, W_GAP, W_GAP))
 					.addGroup(layout.createSequentialGroup().addGap(W_GAP, W_GAP, W_GAP).addComponent(postTextArea)
 							.addGap(W_GAP, W_GAP, W_GAP))
-					.addGroup(layout.createSequentialGroup().addGap(2, 2, 2).addComponent(commentPane).addGap(2, 2, 2)));
+					.addGroup(
+							layout.createSequentialGroup().addGap(2, 2, 2).addComponent(commentPane).addGap(2, 2, 2)));
 			layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
 					.addGroup(layout.createSequentialGroup().addGap(H_GAP, H_GAP, H_GAP)
 							.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
 									.addComponent(profileImg, 32, 32, 32).addComponent(IDBtn).addComponent(moreBtn))
 							.addGap(GAP, GAP, GAP).addComponent(imagePane, 468, 468, 468).addGap(GAP, GAP, GAP)
-							.addComponent(likePane).addGap(GAP, GAP, GAP).addComponent(postTextArea).addGap(GAP, GAP, GAP)
-							.addComponent(commentPane).addGap(H_GAP, H_GAP, H_GAP)));
-		}
-		else {
+							.addComponent(likePane).addGap(GAP, GAP, GAP).addComponent(postTextArea)
+							.addGap(GAP, GAP, GAP).addComponent(commentPane).addGap(H_GAP, H_GAP, H_GAP)));
+		} else {
 			javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 			this.setLayout(layout);
 			layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,14 +275,15 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 							.addGap(W_GAP, W_GAP, W_GAP))
 					.addGroup(layout.createSequentialGroup().addGap(W_GAP, W_GAP, W_GAP).addComponent(likePane)
 							.addGap(W_GAP, W_GAP, W_GAP))
-					.addGroup(layout.createSequentialGroup().addGap(2, 2, 2).addComponent(commentPane).addGap(2, 2, 2)));
+					.addGroup(
+							layout.createSequentialGroup().addGap(2, 2, 2).addComponent(commentPane).addGap(2, 2, 2)));
 			layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
 					.addGroup(layout.createSequentialGroup().addGap(H_GAP, H_GAP, H_GAP)
 							.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
 									.addComponent(profileImg, 32, 32, 32).addComponent(IDBtn).addComponent(moreBtn))
-							.addGap(GAP, GAP, GAP)
-							.addComponent(postTextArea).addGap(GAP, GAP, GAP).addComponent(likePane).addGap(GAP, GAP, GAP)
-							.addComponent(commentPane).addGap(H_GAP, H_GAP, H_GAP)));
+							.addGap(GAP, GAP, GAP).addComponent(postTextArea).addGap(GAP, GAP, GAP)
+							.addComponent(likePane).addGap(GAP, GAP, GAP).addComponent(commentPane)
+							.addGap(H_GAP, H_GAP, H_GAP)));
 		}
 	}
 
@@ -333,11 +334,16 @@ public class PostPanel extends javax.swing.JPanel implements java.awt.event.Acti
 				public void run() {
 					try {
 						mdfyWindow = new ModifyWindow(postID);
+						mdfyWindow.setVisible(true);
+						java.awt.EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								mdfyWindow.setModal(true);
+							}
+						});
 					} catch (SQLException | IOException e) {
 						e.printStackTrace();
 					}
-					mdfyWindow.setVisible(true);
-					mdfyWindow.setModal(true);
+
 				}
 			});
 		}
