@@ -832,7 +832,31 @@ public class ZinCyan {
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패");
 		}
+		
+		PreparedStatement ps4 = null; // 객체 생성
 
+		String sql4 = "DELETE FROM likes_comment WHERE target_id = ANY (SELECT ID FROM comment WHERE post_id = ?);";
+		ps4 = conn.prepareStatement(sql4);
+		ps4.setInt(1, PID);
+		ps4.executeUpdate(); // 명렁어 실행
+		ps4.close();
+		
+		PreparedStatement ps3 = null; // 객체 생성
+
+		String sql3 = "DELETE FROM likes WHERE target_id = ?;";
+		ps3 = conn.prepareStatement(sql3);
+		ps3.setInt(1, PID);
+		ps3.executeUpdate(); // 명렁어 실행
+		ps3.close();
+		
+		PreparedStatement ps2 = null; // 객체 생성
+
+		String sql2 = "DELETE FROM comment WHERE post_id = ?;";
+		ps2 = conn.prepareStatement(sql2);
+		ps2.setInt(1, PID);
+		ps2.executeUpdate(); // 명렁어 실행
+		ps2.close();
+		
 		PreparedStatement ps = null; // 객체 생성
 
 		String sql = "DELETE FROM posts WHERE ID = ?;";

@@ -1,6 +1,7 @@
 package instagramTP;
 
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -26,6 +27,8 @@ public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.
 
 	private void initComponents(Integer PID) throws SQLException, IOException {
 
+		GridBagConstraints gridBagConstraints;
+		jPanel1 = new javax.swing.JPanel();
 		jTextField1 = new javax.swing.JTextArea();
 		imageBtn = new javax.swing.JButton();
 		modifyBtn = new javax.swing.JButton();
@@ -42,12 +45,16 @@ public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.
 			nullImg = new ImageIcon(tempPath.toString()).getImage();
 		}
 
-		setSize(1000, 600);
+		setSize(400, 600);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
 		getContentPane().setBackground(new java.awt.Color(245, 245, 245));
 		getContentPane().setLayout(new java.awt.FlowLayout());
+
+		jPanel1.setBackground(new java.awt.Color(245, 245, 245));
+		jPanel1.setPreferredSize(new java.awt.Dimension(400, 600));
+		jPanel1.setLayout(new java.awt.GridBagLayout());
 
 		imageBtn.setIcon(new ImageIcon(nullImg.getScaledInstance(320, 320, Image.SCALE_SMOOTH)));
 		imageBtn.setPreferredSize(new java.awt.Dimension(400, 400));
@@ -57,25 +64,57 @@ public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.
 		imageBtn.add(lab, BorderLayout.SOUTH);
 		imageBtn.setBackground(new java.awt.Color(255, 255, 255));
 		imageBtn.setBorder(null);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.weightx = 1;
+		gridBagConstraints.weighty = 0.4;
+		gridBagConstraints.gridwidth = 2;
+		gridBagConstraints.fill = GridBagConstraints.BOTH;
+		gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 5);
 		imageBtn.addActionListener(this);
+		jPanel1.add(imageBtn, gridBagConstraints);
 
 		jTextField1.setLineWrap(true);
 		jTextField1.setText(thisPost.getContent()); // 원래 업로드 되었던 text로 setText
 		jTextField1.setToolTipText("");
 		jTextField1.setBorder(null);
-		jTextField1.setPreferredSize(new java.awt.Dimension(400, 400));
+		jTextField1.setPreferredSize(new java.awt.Dimension(400, 100));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.weightx = 1;
+		gridBagConstraints.weighty = 0.1;
+		gridBagConstraints.gridwidth = 2;
+		gridBagConstraints.fill = GridBagConstraints.BOTH;
+		gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 5);
+		jPanel1.add(jTextField1, gridBagConstraints);
 
 		modifyBtn.setText("Modify post"); // modify해서 다시 업로드
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.weightx = 0.5;
+		gridBagConstraints.weighty = 0.05;
+//		gridBagConstraints.fill = GridBagConstraints.BOTH;
+		gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 0);
 		modifyBtn.addActionListener(this);
+		jPanel1.add(modifyBtn, gridBagConstraints);
 
 		deleteBtn.setText("Delete post");
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.weightx = 0.5;
+		gridBagConstraints.weighty = 0.05;
+//		gridBagConstraints.fill = GridBagConstraints.BOTH;
+		gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 0);
 		deleteBtn.addActionListener(this);
+		jPanel1.add(deleteBtn, gridBagConstraints);
 
-		getContentPane().add(imageBtn);
-		getContentPane().add(jTextField1);
-		getContentPane().add(modifyBtn);
-		getContentPane().add(deleteBtn);
+		getContentPane().add(jPanel1);
 
+		setLocationRelativeTo(null);
 		pack();
 	}
 
@@ -136,6 +175,7 @@ public class ModifyWindow extends javax.swing.JDialog implements java.awt.event.
 	// Variables declaration - do not modify
 	// private javax.swing.JFileChooser jFileChooser1;
 	private javax.swing.JButton imageBtn;
+	private javax.swing.JPanel jPanel1;
 	private javax.swing.JTextArea jTextField1;
 	private javax.swing.JButton modifyBtn;
 	private javax.swing.JButton deleteBtn;

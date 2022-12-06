@@ -83,7 +83,7 @@ public class UploadWindow extends javax.swing.JDialog implements java.awt.event.
 			}
 		});
 		contentArea.setBorder(null);
-		contentArea.setPreferredSize(new java.awt.Dimension(400, 200));
+		contentArea.setPreferredSize(new java.awt.Dimension(400, 100));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
